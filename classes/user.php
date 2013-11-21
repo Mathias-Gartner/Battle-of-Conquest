@@ -1,6 +1,8 @@
 <?php
 
-class User extends TORM\Model
+namespace Classes;
+
+class User extends \TORM\Model
 {
   public function getUsername()
   {

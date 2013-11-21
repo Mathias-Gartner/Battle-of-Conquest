@@ -1,6 +1,8 @@
 <?PHP
 
-class Distance extends TORM\Model
+namespace Classes;
+
+class Distance extends \TORM\Model
 {
 	public function setDistricts($districtA, $districtB)
 	{

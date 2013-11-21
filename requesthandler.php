@@ -1,14 +1,30 @@
 <?php
 
-require 'classes/user.php';
-require 'classes/district.php';
-
 class RequestHandler
 {
   public static function handle()
   {
   	TORM\Log::enable(true);
   	
+  	$pageHandler = null;
+  	if (isset($_GET["action"]) )
+  	{
+	  	switch ($_GET["action"])
+	  	{
+	  		case "login":
+	  			$pageHandler = new PageHandlers\LoginPageHandler();
+	  			break;
+	  	}
+  	}
+  	else
+  	{
+  		$pageHandler = new PageHandlers\WelcomePageHandler();
+  	}
+  	
+  	if ($pageHandler != null)
+  		$pageHandler->handle();
+  	
+  	// orm samples
     /* create object
     $user = new User();
     $user->setUsername("admin");
@@ -18,7 +34,7 @@ class RequestHandler
     $user->save();
     /**/
     
-    //* load object
+    /* load object
    	$user = User::find(1);
    	var_dump($user);
    	$collection = $user->districts;

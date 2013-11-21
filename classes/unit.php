@@ -1,6 +1,8 @@
 <?php 
 
-class Unit extends TORM\Model
+namespace Classes;
+
+class Unit extends \TORM\Model
 {
 	public function getUnitName()
 	{

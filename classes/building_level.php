@@ -1,6 +1,8 @@
 <?PHP
 
-class BuildingLevel extends TORM\Model
+namespace Classes;
+
+class BuildingLevel extends \TORM\Model
 {
 	public function getLevel()
 	{

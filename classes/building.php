@@ -1,6 +1,8 @@
 <?PHP
 
-class Building
+namespace Classes;
+
+class Building extends \TORM\Model
 {
 	public function getBuilding()
 	{

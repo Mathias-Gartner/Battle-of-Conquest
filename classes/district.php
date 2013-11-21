@@ -1,6 +1,8 @@
 <?php 
 
-class District extends TORM\Model
+namespace Classes;
+
+class District extends \TORM\Model
 {
 	public function getName()
 	{

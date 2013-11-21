@@ -1,6 +1,8 @@
 <?PHP
 
-class ActiveUnit extends TORM\Model
+namespace Classes;
+
+class ActiveUnit extends \TORM\Model
 {
   public function getAttacker()
 	{
