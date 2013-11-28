@@ -7,11 +7,11 @@ class RequestHandler
   	TORM\Log::enable(true);
   	
   	$pageHandler = null;
-  	if (isset($_GET["action"]) )
+  	if (isset($_GET['action']) )
   	{
-	  	switch ($_GET["action"])
+	  	switch ($_GET['action'])
 	  	{
-	  		case "login":
+	  		case 'login':
 	  			$pageHandler = new PageHandlers\LoginPageHandler();
 	  			break;
 	  	}
@@ -22,15 +22,19 @@ class RequestHandler
   	}
   	
   	if ($pageHandler != null)
-  		$pageHandler->handle();
+  	{
+  		$pageHandler = $pageHandler->handle();
+  		$pageHandler->render();
+  		exit(0);
+		}
   	
   	// orm samples
     /* create object
     $user = new User();
-    $user->setUsername("admin");
+    $user->setUsername('admin');
     $user->setAge(1);
-    $user->mail("admin@localhost.com");
-    $user->setPassword("123456");
+    $user->mail('admin@localhost.com');
+    $user->setPassword('123456');
     $user->save();
     /**/
     
@@ -39,12 +43,12 @@ class RequestHandler
    	var_dump($user);
    	$collection = $user->districts;
    	while (($district = $collection->next()) != NULL)
-   	  echo "<p>".$district->getName()."</p>";
+   	  echo '<p>'.$district->getName().'</p>';
    	/**/
    	
    	/* create object with relation
    	$district = new District();
-   	$district->setName("Entenhausen");
+   	$district->setName('Entenhausen');
    	$district->setPosition(5, 10);
    	$district->setDistrictThreat(2);
    	$district->owner_id = 0; // 0 .. pk of user
@@ -52,7 +56,7 @@ class RequestHandler
    	/**/
    	
    	/* load object with relation
-   	$district = District::first(array("district_name"=>"Entenhausen"));
+   	$district = District::first(array('district_name'=>'Entenhausen'));
    	var_dump($district->owner); // prints user
    	/**/
   }

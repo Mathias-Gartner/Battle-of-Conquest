@@ -111,7 +111,9 @@ class Model {
       $cls  = $cls ? $cls : get_called_class();
       if(array_key_exists($cls,self::$table_name))
          return self::$table_name[$cls];
-      $name = Inflections::pluralize($cls);
+      $namespaces = explode('\\', $cls);
+      $name = $namespaces[max(array_keys($namespaces))];
+      $name = Inflections::pluralize($name);
       if(self::isIgnoringCase())
          $name = strtolower($name);
       return $name;
@@ -509,7 +511,7 @@ class Model {
       // prepared statement
       foreach($attrs as $attr=>$value) 
          array_push($vals,$value);
-var_dump($vals);
+
       $rtn = self::executePrepared($sql,$vals)->rowCount()==1;
       // if inserted
       if($rtn) {
