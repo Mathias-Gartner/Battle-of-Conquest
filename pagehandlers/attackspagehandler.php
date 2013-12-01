@@ -2,11 +2,11 @@
 
 namespace PageHandlers;
 
-class OverviewPageHandler extends PageHandler
+class AttacksPageHandler extends PageHandler
 {
 	public function handle()
 	{
-		$this->setPhpTemplate('overview');
+		$this->setPhpTemplate('attacks');
 	  return $this;
 	}
 }

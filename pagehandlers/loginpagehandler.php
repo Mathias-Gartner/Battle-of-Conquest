@@ -25,7 +25,7 @@ class LoginPageHandler extends PageHandler
       $this->showLoginValidationError();
     }
     
-    $this->setTemplate('login');
+    $this->setPhpTemplate('login');
     return $this;
   }
   
@@ -33,6 +33,11 @@ class LoginPageHandler extends PageHandler
   public function showLoginValidationError()
   {
     $this->setPageData('loginError', true);
+  }
+  
+	public function loginRequired()
+  {
+    return false;
   }
 }
 

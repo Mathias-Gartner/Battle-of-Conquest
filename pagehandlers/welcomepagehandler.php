@@ -6,9 +6,14 @@ class WelcomePageHandler extends PageHandler
 {
 	public function handle()
 	{
-		$this->setTemplate('welcome');
+		$this->setPhpTemplate('welcome');
 	  return $this;
 	}
+	
+	public function loginRequired()
+  {
+    return false;
+  }
 }
 
 ?>
