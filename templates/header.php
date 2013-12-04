@@ -3,14 +3,14 @@
 	<head>
 		<link rel="stylesheet" type="text/css" href="res/main.css" />
 	</head>
-	<body>
-	
-	<div>
-	  <a href="index.php">Welcome</a>
-	  <a href="?action=login">Login</a>
-	  <a href="?action=overview">Overview</a>
-	  <a href="?action=map">Map</a>
-	  <a href="?action=buildings">Buildings</a>
-	  <a href="?action=units">Units</a>
-	  <a href="?action=attacks">Attacks</a>
-  </div>
+  
+  <body class='site'>
+  
+    <div class='head shadow grid outer'>Welcome to Battle of Conquest</div>
+    
+    <div class='nav outer'>
+      <div class='butt shadow grid'>Home</div>
+      <div class='butt shadow grid'>Team</div>
+      <div class='butt shadow grid'>Hilfe</div>
+      <div class='butt shadow grid'>Media</div>
+    </div>
