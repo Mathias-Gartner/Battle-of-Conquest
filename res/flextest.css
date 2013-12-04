@@ -1,0 +1,83 @@
+html {
+    /* Chrome bug in vertical resize, can't use: vh in body only */
+    height: 100%;
+}
+
+.site {
+    font-family: sans-serif;
+    margin: 0;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.site > div {
+    flex-grow: 0;
+    flex-shrink: 0;
+}
+
+.block {
+    box-shadow: 0 0 0 2px black inset;
+}
+
+.grid {
+    margin: 5px;
+}
+
+.head {
+    width: 90%;
+    line-height: 2em;
+    font-size: 2em;
+}
+
+.nav {
+    width: 85%;
+    display: flex;
+    justify-content: space-between;
+}
+
+.nav > div {
+    flex-grow: 1;
+}
+
+.nav > :first-child {
+    margin-left: 0px;
+}
+
+.nav > :last-child {
+    margin-right: 0px;
+}
+
+.butt {
+    line-height: 1.3em;
+    font-size: 1.3em;
+}
+
+.site > .cont {
+    width: 85%;
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.tit {
+    margin: 8px 0 20px 0;
+    line-height: 1.2em;
+    font-size: 1.2em;
+}
+
+.lines {
+    width: 85%;
+    margin: 10px auto 10px auto;
+}
+
+.lines > hr {
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+.foot {
+    width: 90%;
+    font-size: 0.8em;
+}
