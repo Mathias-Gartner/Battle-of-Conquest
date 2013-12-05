@@ -28,7 +28,12 @@ if (isset($_GET['p']))
 	include("pages/home.php");
 }
 ?>
+</div>
 
+<div id="footer">
+	<?php 
+		include("pages/footer");
+	 ?>
 </div>
 </body>
 </html>
