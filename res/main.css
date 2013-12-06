@@ -44,6 +44,8 @@ html {
 
 .nav > div {
   flex-grow: 1;
+  line-height: 1.3em;
+  font-size: 1.3em;
 }
 
 .nav > :first-child {
@@ -52,11 +54,6 @@ html {
 
 .nav > :last-child {
   margin-right: 0px;
-}
-
-.butt {
-  line-height: 1.3em;
-  font-size: 1.3em;
 }
 
 .site > .cont {
@@ -69,16 +66,6 @@ html {
   margin: 8px 0 20px 0;
   line-height: 1.2em;
   font-size: 1.2em;
-}
-
-.lines {
-  margin: 10px auto 10px auto;
-  width: 85%;
-}
-
-.lines > hr {
-  margin-top: 20px;
-  margin-bottom: 20px;
 }
 
 .foot {
