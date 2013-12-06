@@ -68,6 +68,17 @@ html {
   font-size: 1.2em;
 }
 
+.main {
+  display: flex;
+  flex-direction: column;
+}
+
 .foot {
   font-size: 0.8em;
+}
+
+.centered {
+  display: flex;
+  justify-content: center;
+  align-items:center;
 }

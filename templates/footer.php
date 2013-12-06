@@ -1,5 +1,5 @@
 
-   <div class='foot shadow grid outer'>Foot</div>
+   <div class='foot shadow grid outer centered'>Foot</div>
     
   </body>
 </html>
