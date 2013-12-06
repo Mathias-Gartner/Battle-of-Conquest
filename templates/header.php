@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html>
-	<head>
-		<link rel="stylesheet" type="text/css" href="res/main.css" />
-	</head>
+  <head>
+    <link rel="stylesheet" type="text/css" href="res/main.css" />
+  </head>
   
   <body class='site'>
   
@@ -13,4 +13,4 @@
       <div class='shadow grid'>Team</div>
       <div class='shadow grid'>Hilfe</div>
       <div class='shadow grid'>Media</div>
-    </div>
+    </div>      
