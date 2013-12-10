@@ -3,11 +3,46 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>Untitled Document</title>
+<script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
+<script type="application/javascript" src="jquery.imagemapster.min.js"></script>
+<script type="application/javascript">
+function init(){
+$('#boc_open_docks_id').mapster({
+		noHrefIsMask: false,
+        fillColor: 'EBEBEB',
+        fillOpacity: 0.3,
+        mapKey: 'data-group',
+		onClick: function (e) {
+			window.location.href = this.href;
+		}
+    });
+}
+</script>
 </head>
-<body>
+<body onload="init();">
 <div id="map">
-	<img src="BOC_Open_Docks.png" alt="open_docks" name="open_docks" usemap="#open_docks_map"/>
-    
+	<img src="BOC_Open_Docks.png" alt="open_docks" name="open_docks" usemap="#open_docks_map" id="boc_open_docks_id" />
+    <map id="open_docks_map_id" name="open_docks_map">
+    	<area shape="circle" coords="392,345,8" href="#" alt="city" title="city" data-group="city1" />
+        <area shape="circle" coords="395,425,8" href="#" alt="city" title="city" data-group="city2" />
+        <area shape="circle" coords="443,419,8" href="#" alt="city" title="city" data-group="city3" />
+        <area shape="circle" coords="424,454,8" href="#" alt="city" title="city" data-group="city4" />
+        <area shape="circle" coords="402,486,8" href="#" alt="city" title="city" data-group="city5" />
+        <area shape="circle" coords="434,481,8" href="#" alt="city" title="city" data-group="city6" />
+        <area shape="circle" coords="464,456,8" href="#" alt="city" title="city" data-group="city7" />
+        <area shape="circle" coords="491,422,8" href="#" alt="city" title="city" data-group="city8" />
+        <area shape="circle" coords="542,401,8" href="#" alt="city" title="city" data-group="city9" />
+        <area shape="circle" coords="499,374,8" href="#" alt="city" title="city" data-group="city10" />
+        <area shape="circle" coords="478,347,8" href="#" alt="city" title="city" data-group="city11" />
+        <area shape="circle" coords="425,324,8" href="#" alt="city" title="city" data-group="city12" />
+        <area shape="circle" coords="474,310,8" href="#" alt="city" title="city" data-group="city13" />
+        <area shape="circle" coords="507,325,8" href="#" alt="city" title="city" data-group="city14" />
+        <area shape="circle" coords="534,343,8" href="#" alt="city" title="city" data-group="city15" />
+        <area shape="circle" coords="563,361,8" href="#" alt="city" title="city" data-group="city16" />
+        <area shape="circle" coords="464,390,8" href="#" alt="city" title="city" data-group="city17" />
+        <area shape="circle" coords="405,390,8" href="#" alt="city" title="city" data-group="city18" />
+        <area shape="circle" coords="434,362,8" href="#" alt="city" title="city" data-group="city19" />
+    </map>
 </div>
 </body>
 </html>
