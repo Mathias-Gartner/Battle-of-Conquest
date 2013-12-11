@@ -7,14 +7,16 @@
 			  <span class="errorMessage">Login fehlgeschlagen. Benutzername oder Passwort ung&uuml;ltig.</span>
 		  </div>
 		  <?php } ?>
-		  <div>
-			  <input type="text" id="username" name="username" placeholder="Username" />
-		  </div>
-		  <div>
-			  <input type="password" id="password" name="password" placeholder="Passwort" />
-		  </div>
-		  <div>
-			  <input type="submit" id="login" name="login" value="Login" />
+		  <div id="loginFields">
+		    <div>
+			    <input type="text" id="username" name="username" placeholder="Username" />
+		    </div>
+		    <div>
+			    <input type="password" id="password" name="password" placeholder="Passwort" />
+		    </div>
+		    <div>
+			    <input type="submit" id="login" name="login" value="Login" />
+		    </div>
 		  </div>
 	  </form>
   </div>

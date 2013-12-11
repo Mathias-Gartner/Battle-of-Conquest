@@ -80,9 +80,19 @@ html {
 .centered {
   display: flex;
   justify-content: center;
-  align-items:center;
+  align-items: center;
+}
+
+.errorMessage
+{
+  color: red;
 }
 
 #loginBox {
+  margin: auto;
+}
+
+div#loginFields
+{
   margin: auto;
 }
