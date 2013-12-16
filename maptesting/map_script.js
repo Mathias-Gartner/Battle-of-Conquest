@@ -8,4 +8,9 @@ function init(){
 			window.location.href = this.href;
 		}
     });
+	setMyDistrict();
+}
+
+function setMyDistrict(){
+	
 }
