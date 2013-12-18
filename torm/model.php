@@ -269,7 +269,7 @@ class Model {
       return new Collection($builder,$vals,get_called_class());
    }
 
-   private static function makeBuilder() {
+   public static function makeBuilder() {
       $builder = new Builder();
       $builder->table = self::getTableName();
       $builder->order = self::getOrder();

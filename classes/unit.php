@@ -16,7 +16,7 @@ class Unit extends \TORM\Model
 	
 	public function getUnitClass()
 	{
-		return $this->get("unit_class")
+		return $this->get("unit_class");
 	}
 	
 	public function setUnitClass($class)
@@ -56,12 +56,12 @@ class Unit extends \TORM\Model
 	
 	public function getUnitResources()
 	{
-		return this->get("unit_res");
+		return $this->get("unit_res");
 	}
 	
 	public function setUnitResources($resources)
 	{
-		this->set("unit_res", $resources);
+		$this->set("unit_res", $resources);
 	}
 }
 

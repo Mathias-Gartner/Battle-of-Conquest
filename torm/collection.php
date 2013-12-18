@@ -92,6 +92,7 @@ class Collection implements \Iterator {
       $builder = $this->builder;
       $table   = $builder->table;
       $where   = $builder->where;
+      $joins   = $builder->joins;
       $limit   = $builder->limit;
       $offset  = $builder->offset;
 
@@ -100,6 +101,7 @@ class Collection implements \Iterator {
       $builder->fields = $fields;
       $builder->table  = $table;
       $builder->where  = $where;
+      $builder->joins  = $joins;
       $builder->limit  = $limit;
       $builder->offset = $offset;
       return $builder;

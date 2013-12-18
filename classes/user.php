@@ -4,6 +4,11 @@ namespace Classes;
 
 class User extends \TORM\Model
 {
+  public function getUserId()
+  {
+    return $this->get("user_id");
+  }
+
   public function getUsername()
   {
     return $this->get("username");

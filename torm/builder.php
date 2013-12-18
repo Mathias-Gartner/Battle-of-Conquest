@@ -5,6 +5,7 @@ class Builder {
    public $prefix = "select ";
    public $fields = null;
    public $table  = null;
+   public $joins  = null;
    public $where  = null;
    public $limit  = null;
    public $offset = null;
@@ -22,6 +23,9 @@ class Builder {
          array_push($array,$this->fields);
 
       array_push($array," from $escape".$this->table."$escape ");
+
+			if($this->joins)
+				 array_push($array,$this->joins);
 
       if($this->where)
          array_push($array," where ".$this->where);

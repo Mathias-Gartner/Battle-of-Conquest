@@ -37,6 +37,7 @@ class ActiveUnit extends \TORM\Model
 
 ActiveUnit::setTableName("active_units");
 ActiveUnit::belongsTo("district", array("class_name"=>"District", "primary_key"=>"district_id", "foreign_key"=>"district_id"));
+ActiveUnit::hasOne("unit", array("class_name"=>"unit_id", "primary_key"=>"unit_id", "foreign_key"=>"unit_id"));
 ActiveUnit::validates("attacker", array("numericality"=>true));
 ActiveUnit::validates("defender", array("numericality"=>true));
 ActiveUnit::validates("supporter", array("numericality"=>true));

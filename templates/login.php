@@ -9,10 +9,10 @@
 		  <?php } ?>
 		  <div id="loginFields">
 		    <div>
-			    <input type="text" id="username" name="username" placeholder="Username" />
+			    <input type="text" id="username" name="username" placeholder="Username" required autofocus />
 		    </div>
 		    <div>
-			    <input type="password" id="password" name="password" placeholder="Passwort" />
+			    <input type="password" id="password" name="password" placeholder="Passwort" required />
 		    </div>
 		    <div>
 			    <input type="submit" id="login" name="login" value="Login" />

@@ -14,6 +14,7 @@ class LoginPageHandler extends PageHandler
         if ($user->comparePassword($_POST['password']))
         {
           $_SESSION['username'] = $user->getUsername();
+          $_SESSION['userid'] = $user->getUserId();
           // redirect internally
           $overviewPageHandler = new OverviewPageHandler();
           $overviewPageHandler->handle();
