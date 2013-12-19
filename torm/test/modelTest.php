@@ -208,9 +208,29 @@
          $this->assertEquals(TORM\Validation::VALIDATION_UNIQUENESS,$new_user->errors["email"][0]);
       }
 
-      public function testNumericality() {
+      public function testNotANumber() {
          self::$user->level = "one";
          $this->assertFalse(self::$user->isValid());
+      }
+
+      public function testNotANumberWithSpecialChars() {
+         self::$user->level = "$%@";
+         $this->assertFalse(self::$user->isValid());
+      }
+
+      public function testAPositiveNumber() {
+         self::$user->level = 1;
+         $this->assertTrue(self::$user->isValid());
+      }
+
+      public function testANegativeNumber() {
+         self::$user->level = -1;
+         $this->assertTrue(self::$user->isValid());
+      }
+
+      public function testAFloatingPointNumber() {
+         self::$user->level = 1.23;
+         $this->assertTrue(self::$user->isValid());
       }
 
       public function testCantSaveInvalidObject() {
@@ -435,8 +455,8 @@
             $this->assertEquals(0,$user->level);
          }
 
-         $this->assertTrue($user1->save());
-         $this->assertTrue($user2->save());
+         $this->assertTrue($user1->save(true));
+         $this->assertTrue($user2->save(true));
       }
 
       public function testUpdateAttributesOnCollectionWithConditions() {
@@ -451,7 +471,7 @@
             $this->assertEquals("void@gmail.com",$user->email);
             $this->assertEquals(0,$user->level);
          }
-         $this->assertTrue($user1->save());
+         $this->assertTrue($user1->save(true));
       }
 
       public function testPKMethod() {
@@ -695,6 +715,34 @@
 
          foreach($objs as $obj) 
             $this->assertTrue($obj->destroy());
+      }
+
+      public function testOldAttr() {
+         $user = TORM\Factory::build("user");
+         $this->assertTrue($user->save());
+
+         $old_name = $user->name;
+         $new_name = "Dirty Objects";
+
+         $user = User::find($user->id);
+         $user->name = $new_name;
+         $this->assertTrue($user->name_changed);
+         $this->assertEquals($old_name,$user->name_was);
+         $this->assertEquals(array($old_name,$new_name),$user->name_change);
+
+         $this->assertEquals(0,sizeof(array_diff_assoc(array("name"),$user->changed())));
+
+         $changes = $user->changes();
+         $this->assertTrue(array_key_exists("name",$changes));
+         $this->assertEquals(0,sizeof(array_diff_assoc(array($old_name,$new_name),$changes["name"])));
+         $this->assertTrue($user->save());
+
+         $newer_name = "Another dirty object test";
+         $user->name = $newer_name;
+         $this->assertTrue($user->name_changed);
+         $this->assertEquals($new_name,$user->name_was);
+         $this->assertEquals(array($new_name,$newer_name),$user->name_change);
+         $this->assertTrue($user->destroy());
       }
    }
 ?>

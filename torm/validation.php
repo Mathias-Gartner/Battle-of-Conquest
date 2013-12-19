@@ -36,8 +36,7 @@ class Validation {
    }
 
    public static function numericality($cls,$id,$attr,$attr_value,$validation_value,$options) {
-   		//TODO: adapt regex for floats
-      return preg_match("/^[0-9]+$/",trim($attr_value));
+      return preg_match("/^[-\.0-9]+$/",trim($attr_value));
    }
 }
 ?>
