@@ -15,11 +15,11 @@
     <!-- Image Maps for other cities -->
     <map id="open_docks_map_id" name="open_docks_map">
     	<area shape="circle" coords="392,345,8" href="my_district.html" alt="city" title="city" data-group="city1" id="my_district" />
-        <area shape="circle" coords="395,424,8" href="blank_district.html" alt="city" title="city" data-group="city2" />
-        <area shape="circle" coords="443,419,8" href="blank_district.html" alt="city" title="city" data-group="city3" />
-        <area shape="circle" coords="425,453,8" href="blank_district.html" alt="city" title="city" data-group="city4" />
-        <area shape="circle" coords="401,487,8" href="blank_district.html" alt="city" title="city" data-group="city5" />
-        <area shape="circle" coords="433,486,8" href="blank_district.html" alt="city" title="city" data-group="city6" />
+        <area shape="circle" coords="395,424,8" href="blank_district.html" id="1" alt="city" title="city" data-group="city2" />
+        <area shape="circle" coords="443,419,8" href="blank_district.html" id="2" alt="city" title="city" data-group="city3" />
+        <area shape="circle" coords="425,453,8" href="blank_district.html" id="3" alt="city" title="city" data-group="city4" />
+        <area shape="circle" coords="401,487,8" href="blank_district.html" id="4" alt="city" title="city" data-group="city5" />
+        <area shape="circle" coords="433,486,8" href="blank_district.html" id="5" alt="city" title="city" data-group="city6" />
         <area shape="circle" coords="464,456,8" href="blank_district.html" alt="city" title="city" data-group="city7" />
         <area shape="circle" coords="492,422,8" href="blank_district.html" alt="city" title="city" data-group="city8" />
         <area shape="circle" coords="542,401,8" href="blank_district.html" alt="city" title="city" data-group="city9" />
@@ -33,13 +33,8 @@
         <area shape="circle" coords="463,390,8" href="blank_district.html" alt="city" title="city" data-group="city17" />
         <area shape="circle" coords="406,390,8" href="blank_district.html" alt="city" title="city" data-group="city18" />
         <area shape="circle" coords="434,362,8" href="blank_district.html" alt="city" title="city" data-group="city19" />
-    
-     <!-- Image Maps for cities to be attacked -->
-        <area shape="circle" coords="577,304,8" href="attack.html" alt="Angreifen" title="Angreifen" data-group="attack1" />
-        <area shape="circle" coords="545,277,8" href="attack.html" alt="Angreifen" title="Angreifen" data-group="attack2" />
-        <area shape="circle" coords="509,269,8" href="attack.html" alt="Angreifen" title="Angreifen" data-group="attack3" />
     </map>
-    <div id="box" onmouseout="hideBox();"><label class="box_top">City</label><span class="box_bottom">Angreifen</span></div>
+    <div id="box"><label class="box_top">City</label><span class="box_bottom" id="attack_button">Angreifen</span></div>
 </div>
 </body>
 </html>

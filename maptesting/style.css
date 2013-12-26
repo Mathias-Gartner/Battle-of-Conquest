@@ -9,10 +9,12 @@
 	top:10px;
 	left:10px;
 	visibility:hidden;
+	text-align:center;
 }
 
 .box_top{
 	text-align:center;
+	width:100%;
 }
 
 .box_bottom{
