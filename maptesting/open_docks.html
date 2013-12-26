@@ -3,9 +3,10 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>Untitled Document</title>
-<script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
+<script type="application/javascript" src="jquery-1.10.2.min.js"></script>
 <script type="application/javascript" src="jquery.imagemapster.min.js"></script>
 <script type="application/javascript" src="map_script.js"></script>
+<link rel="stylesheet" type="text/css" href="style.css">
 </head>
 <body onload="init();">
 <div id="map">
@@ -38,6 +39,7 @@
         <area shape="circle" coords="545,277,8" href="attack.html" alt="Angreifen" title="Angreifen" data-group="attack2" />
         <area shape="circle" coords="509,269,8" href="attack.html" alt="Angreifen" title="Angreifen" data-group="attack3" />
     </map>
+    <div id="box" onmouseout="hideBox();"><label class="box_top">City</label><span class="box_bottom">Angreifen</span></div>
 </div>
 </body>
 </html>
