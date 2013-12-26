@@ -6,6 +6,9 @@ function init(){
         mapKey: 'data-group',
 		onClick: function (e) {
 			window.location.href = this.href;
+		},
+		onMouseover: function (e) {
+			setShowBox(this);
 		}
     });
 	setMyDistrict();
@@ -13,4 +16,21 @@ function init(){
 
 function setMyDistrict(){
 	
+}
+
+function setShowBox(obj){
+	var position = $(obj).attr('coords').split(',');
+	var x = position[0];
+	var y = position[1];
+	document.getElementById("box").style.top = y+"px";
+	document.getElementById("box").style.left = x+"px";
+	showBox();
+}
+
+function showBox(){
+	document.getElementById("box").style.visibility = "visible";
+}
+
+function hideBox(){
+	document.getElementById("box").style.visibility = "hidden";
 }
