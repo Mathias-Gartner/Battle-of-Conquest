@@ -29,7 +29,7 @@ function setShowBox(obj){
 	document.getElementById("box").style.top = y+"px";
 	document.getElementById("box").style.left = x+"px";
 	$('#attack_button').click(function(event){
-		window.location.href = "attack.php?id=" + obj.id;
+		window.location.href = "attack_form.php?id=" + obj.id;
 	});
 	showBox();
 }

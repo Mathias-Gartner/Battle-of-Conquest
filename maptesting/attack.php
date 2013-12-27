@@ -5,16 +5,7 @@
 </head>
 <body>
 <?PHP
-$id = $_GET['id'];
-echo "Attack City with id " . $id;
-?>
 
-<form action="" method="post">
-Anzahl meiner Einheiten: xx
-<input type="button" value="Erstellen" /><br />
-Anzahl meiner Ressourcen: xx <br />
-<br />
-<input type="submit" value="Attack" />
-</form>
+?>
 </body>
 </html>
