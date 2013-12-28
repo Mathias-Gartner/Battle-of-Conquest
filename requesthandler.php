@@ -2,49 +2,49 @@
 
 class RequestHandler
 {
-  public static function handle()
-  {
-  	TORM\Log::enable(true);
+	public static function handle()
+	{
+		TORM\Log::enable(true);
   	
   	$pageHandler = null;
   	if (isset($_GET['action']) )
   	{
-	  	switch ($_GET['action'])
-	  	{
-	  		case 'login':
-	  			$pageHandler = new PageHandlers\LoginPageHandler();
-	  			break;
-  			case 'overview':
-  			  $pageHandler = new PageHandlers\OverviewPageHandler();
-  			  break;
-			  case 'buildings':
-			    $pageHandler = new Pagehandlers\BuildingsPageHandler();
-			    break;
-		    case 'units':
-		      $pageHandler = new PageHandlers\UnitsPageHandler();
-	        break;
-        case 'attacks':
-          $pageHandler = new PageHandlers\AttacksPageHandler();
-          break;
-        case 'map':
-          $pageHandler = new PageHandlers\MapPageHandler();
-          break;
-	  	}
-  	}
-  	else
-  	{
-  		$pageHandler = new PageHandlers\WelcomePageHandler();
-  	}
-  	
-  	if ($pageHandler != null)
-  	{
-  	  if ($pageHandler->loginRequired() && !SessionUtility::isLoggedIn())
-  	    $pageHandler = new PageHandlers\LoginPageHandler();
-  	    
-  		$pageHandler = $pageHandler->handle();
-  		$pageHandler->render();
-  		exit(0);
+		switch ($_GET['action'])
+		{
+		case 'login':
+			$pageHandler = new PageHandlers\LoginPageHandler();
+			break;
+		case 'overview':
+			$pageHandler = new PageHandlers\OverviewPageHandler();
+			break;
+		case 'buildings':
+			$pageHandler = new Pagehandlers\BuildingsPageHandler();
+			break;
+		case 'units':
+			$pageHandler = new PageHandlers\UnitsPageHandler();
+			break;
+		case 'attacks':
+			$pageHandler = new PageHandlers\AttacksPageHandler();
+			break;
+		case 'map':
+			$pageHandler = new PageHandlers\MapPageHandler();
+			break;
 		}
+	}
+	else
+	{
+		$pageHandler = new PageHandlers\WelcomePageHandler();
+	}
+
+	if ($pageHandler != null)
+	{
+		if ($pageHandler->loginRequired() && !SessionUtility::isLoggedIn())
+			$pageHandler = new PageHandlers\LoginPageHandler();
+
+		$pageHandler = $pageHandler->handle();
+		$pageHandler->render();
+		exit(0);
+	}
   	
   	// orm samples
     /* create object
