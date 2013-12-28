@@ -12,12 +12,16 @@ SET time_zone = "+00:00";
 -- Datenbank: `boc`
 --
 
+-- disable foreign key constraints
+SET foreign_key_checks = 0;
+
 -- --------------------------------------------------------
 
 --
 -- Tabellenstruktur für Tabelle `active_units`
 --
 
+DROP TABLE IF EXISTS `active_units`;
 CREATE TABLE IF NOT EXISTS `active_units` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `district_id` int(11) NOT NULL,
@@ -36,6 +40,7 @@ CREATE TABLE IF NOT EXISTS `active_units` (
 -- Tabellenstruktur für Tabelle `buildings`
 --
 
+DROP TABLE IF EXISTS `buildings`;
 CREATE TABLE IF NOT EXISTS `buildings` (
   `building_id` int(11) NOT NULL AUTO_INCREMENT,
   `building` varchar(32) NOT NULL,
@@ -58,8 +63,9 @@ CREATE TABLE IF NOT EXISTS `buildings` (
 -- Tabellenstruktur für Tabelle `buildings_level`
 --
 
+DROP TABLE IF EXISTS `buildings_level`;
 CREATE TABLE IF NOT EXISTS `buildings_level` (
-  `id` int(11) NOT NULL,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `district_id` int(11) NOT NULL,
   `building_id` int(11) NOT NULL,
   `level` int(11) NOT NULL,
@@ -74,6 +80,7 @@ CREATE TABLE IF NOT EXISTS `buildings_level` (
 -- Tabellenstruktur für Tabelle `distances`
 --
 
+DROP TABLE IF EXISTS `distances`;
 CREATE TABLE IF NOT EXISTS `distances` (
   `distance_id` int(11) NOT NULL AUTO_INCREMENT,
   `district_a` int(11) NOT NULL,
@@ -91,6 +98,7 @@ CREATE TABLE IF NOT EXISTS `distances` (
 -- Tabellenstruktur für Tabelle `districts`
 --
 
+DROP TABLE IF EXISTS `districts`;
 CREATE TABLE IF NOT EXISTS `districts` (
   `district_id` int(11) NOT NULL AUTO_INCREMENT,
   `owner_id` int(11) NOT NULL,
@@ -105,12 +113,73 @@ CREATE TABLE IF NOT EXISTS `districts` (
 -- --------------------------------------------------------
 
 --
+-- Tabellenstruktur für Tabelle `district_status`
+--
+
+DROP TABLE IF EXISTS `district_status`;
+CREATE TABLE IF NOT EXISTS `district_status` (
+  `district_id` int(11) NOT NULL,
+  `resources` int(11) NOT NULL,
+  `moral` float NOT NULL,
+  `people` int(11) NOT NULL,
+  `diseases` float NOT NULL,
+  `luck` float NOT NULL,
+  `units_atk` float NOT NULL,
+  `units_def` float NOT NULL,
+  `move_speed` float NOT NULL,
+  `build_speed` float NOT NULL,
+  `resource_speed` float NOT NULL,
+  `attacker_units` int(11) NOT NULL,
+  `defender_units` int(11) NOT NULL,
+  `supporter_units` int(11) NOT NULL,
+  PRIMARY KEY (`district_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
+-- Tabellenstruktur für Tabelle `district_units`
+--
+
+DROP TABLE IF EXISTS `district_units`;
+CREATE TABLE IF NOT EXISTS `district_units` (
+  `id` int(11) NOT NULL,
+  `unit_id` int(11) NOT NULL,
+  `district_id` int(11) NOT NULL,
+  `count` int(11) NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `unit_id` (`unit_id`),
+  KEY `district_id` (`district_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
 -- Tabellenstruktur für Tabelle `torm_info`
 --
 
+DROP TABLE IF EXISTS `torm_info`;
 CREATE TABLE IF NOT EXISTS `torm_info` (
   `id` int(1) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
+-- Tabellenstruktur für Tabelle `units`
+--
+
+DROP TABLE IF EXISTS `units`;
+CREATE TABLE IF NOT EXISTS `units` (
+  `unit_id` int(11) NOT NULL AUTO_INCREMENT,
+  `unit_name` varchar(32) NOT NULL,
+  `unit_class` varchar(32) NOT NULL,
+  `unit_atk` int(11) NOT NULL,
+  `unit_def` int(11) NOT NULL,
+  `unit_speed` int(11) NOT NULL,
+  `unit_res` int(11) NOT NULL,
+  PRIMARY KEY (`unit_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -176,3 +245,22 @@ ALTER TABLE `distances`
 ALTER TABLE `districts`
   ADD CONSTRAINT `fk_owner` FOREIGN KEY (`owner_id`) REFERENCES `users` (`user_id`);
 
+--
+-- Constraints der Tabelle `district_status`
+--
+ALTER TABLE `district_status`
+  ADD CONSTRAINT `fk_district` FOREIGN KEY (`district_id`) REFERENCES `districts` (`district_id`) ON DELETE CASCADE;
+
+--
+-- Constraints der Tabelle `district_units`
+--
+ALTER TABLE `district_units`
+  ADD CONSTRAINT `district_units_ibfk_1` FOREIGN KEY (`unit_id`) REFERENCES `units` (`unit_id`),
+  ADD CONSTRAINT `district_units_ibfk_2` FOREIGN KEY (`district_id`) REFERENCES `districts` (`district_id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+
+SET foreign_key_checks = 1;
+
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;

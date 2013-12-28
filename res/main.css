@@ -124,10 +124,34 @@ body {
 .centered {
   display: flex;
   justify-content: center;
-  align-items:center;
+  align-items: center;
+}
+
+.box-padding {
+  flex-grow: 1;
+  line-height: 1.3em;
+}
+
+.linkbar {
+  width: 85%;
+  height: 2em;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.errorMessage {
+  color: red;
 }
 
 /*Pages Login*/
 #loginBox {
 
+}
+
+div#loginFields {
+  display: inline-block;
+}
+
+div#loginFields div {
+  margin: auto;
 }

@@ -14,8 +14,7 @@ class OverviewPageHandler extends PageHandler
 	  $builder->joins = 'JOIN district_units ON units.unit_id = district_units.unit_id JOIN districts ON district_units.district_id = districts.district_id';
 	  $units = new \Torm\Collection($builder, array($_SESSION['userid']), '\Classes\Unit');
 	  
-	  //$units = \Classes\User::where(array('owner_id'=>$_SESSION['userid']));
-	  $this->setPageData('unitsCount', $units->count());
+	  $this->setPageData('unitsCount', $units->sum('count'));
 	  
 		$this->setPhpTemplate('overview');
 	  return $this;

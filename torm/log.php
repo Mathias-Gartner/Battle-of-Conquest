@@ -14,6 +14,6 @@ class Log {
 
    public static function log($msg) {
       if(self::$enabled)
-         echo "log: $msg\n";
+         echo "log: $msg<br />\n";
    }
 }

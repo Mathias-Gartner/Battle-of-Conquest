@@ -4,6 +4,11 @@ namespace Classes;
 
 class Unit extends \TORM\Model
 {
+  public function getUnitId()
+  {
+    return $this->get("unit_id");
+  }
+
 	public function getUnitName()
 	{
 		return $this->get("unit_name");
@@ -65,7 +70,8 @@ class Unit extends \TORM\Model
 	}
 }
 
-Unit::setPK("user_id");
+Unit::setPK("unit_id");
+Unit::hasMany("districtUnits", array("class_name"=>"DistrictUnit", "foreign_key"=>"unit_id"));
 Unit::validates("unit_name", array("presence"=>true));
 Unit::validates("unit_class", array("presence"=>true));
 Unit::validates("unit_atk", array("numericality"=>true));

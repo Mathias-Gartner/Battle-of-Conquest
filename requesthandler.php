@@ -29,13 +29,23 @@ class RequestHandler
 			case 'map':
 				$pageHandler = new PageHandlers\MapPageHandler();
 				break;
-			}
-		}
-		else
-		{
-			$pageHandler = new PageHandlers\WelcomePageHandler();
-		}
-
+      case 'prepareAttack':
+        $pageHandler = new PageHandlers\PrepareAttackPageHandler();
+        break;
+  		case 'startAttack':
+          $pageHandler = new PageHandlers\StartAttackPageHandler();
+          break;
+      default:
+    	  	header('HTTP/1.1 404 Not Found');
+    	  	echo '<h1>404 Unkown Action</h1>';
+    	  	break;
+	  	}
+  	}
+  	else
+  	{
+  		$pageHandler = new PageHandlers\WelcomePageHandler();
+  	}
+  	
 		if ($pageHandler != null)
 		{
 			if ($pageHandler->loginRequired() && !SessionUtility::isLoggedIn())
