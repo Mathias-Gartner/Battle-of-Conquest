@@ -2,16 +2,19 @@
 <html>
   <head>
     <link rel="stylesheet" type="text/css" href="res/main.css" />
+    <link rel="stylesheet" type="text/css" href="res/login.css" />
   </head>
   
   <body class='site'>
+    <div class='nav outer' id="navi">
+      <a href="index.php"><div class=' grid centered'>Home</div></a>
+      <a href="?action=overview"><div class=' grid centered'>Overview</div></a>
+      <a href="?action=map"><div class=' grid centered'>Maps</div></a>
+      <a href="?action=buildings"><div class=' grid centered'>Buildings</div></a>
+      <a href="?action=units"><div class=' grid centered'>Units</div></a>
+      <a href="?action=login"><div class=' grid centered'>Login</div></a>
+    </div>
   
-    <div class='head shadow grid outer centered'>Welcome to Battle of Conquest</div>
-    
-    <div class='nav outer'>
-      <div class='shadow grid centered'>Home</div>
-      <div class='shadow grid centered'>Team</div>
-      <div class='shadow grid centered'>Hilfe</div>
-      <div class='shadow grid centered'>Media</div>
-      <div class='shadow grid centered'><a href="?action=login">Login</a></div>
-    </div>      
+  <div class='head grid outer centered'>
+    <span class="logofont">ballte of conquest</span>
+  </div>

@@ -4,11 +4,7 @@ html {
 }
 
 body {
-  background: url('foto/home1.jpg') no-repeat center center fixed;
-  -webkit-background-size: cover;
-  -moz-background-size: cover;
-  -o-background-size: cover;
-  background-size: cover;
+
 }
 
 @font-face {
@@ -18,7 +14,6 @@ body {
 
 .logofont {
   font-family: 'logofont';
-  font-size: 1.7em;
 }
 
 .site {
@@ -28,13 +23,6 @@ body {
   display: flex;
   flex-direction: column;
   align-items: center;
-
-  /*Design1*/
-  width: 980px;
-  background-color: #0B0804;
-  color:#FFB661;
-  margin-left: auto;
-  margin-right: auto;
 }
 
 .site > div {
@@ -66,21 +54,12 @@ body {
 .nav {
   display: flex;
   justify-content: space-between;
-  background: rgba(6,1,1,0.4);
 }
 
-.nav > a {
+.nav > div {
   flex-grow: 1;
   line-height: 2em;
   font-size: 1.3em;
-  width: 100%;
-  color: #E90000;
-  text-decoration: none;
-  /*border: 0.5px solid #FFB661;*/
-}
-
-.nav > a :hover{
-  color: #FFB661;
 }
 
 .nav > :first-child {
@@ -103,18 +82,9 @@ body {
   font-size: 1.2em;
 }
 
-
-/*page home*/
-.home {
+.main {
   display: flex;
   flex-direction: column;
-  background: rgba(6,1,1,0.6);
-  height: 100%;
-}
-
-#welcome {
-  background: rgba(6,1,1,0.6);
-  height: 100%;
 }
 
 .foot {
@@ -127,7 +97,6 @@ body {
   align-items:center;
 }
 
-/*Pages Login*/
 #loginBox {
-
+  margin: auto;
 }
