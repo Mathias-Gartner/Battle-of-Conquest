@@ -1,5 +1,10 @@
 <?php include 'header.php' ?>
 
-<h2>Attacks</h2>
+    <div class='cont shadow grid middle'>
+      <div class='tit shadow centered'>Attacks</div>
+      <div class='main centered'>
+        <p>Attaaack!!!</p>
+      </div>
+    </div>
 
 <?php include 'footer.php' ?>
