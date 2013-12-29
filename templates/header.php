@@ -30,5 +30,5 @@
     </div>
   
   <div class='head grid outer centered'>
-    <span class="logofont">ballte of conquest</span>
+    <span class="logofont">battle of conquest</span>
   </div>

@@ -5,7 +5,7 @@
 <script type="application/javascript" src="res/map_script.js"></script>
 
 <div id="map">
-	<img src="res/BOC_Great_Canyons.png" alt="great_canyons" name="great_canyons" usemap="#great_canyons_map"  id="boc_great_canyons_id" class="boc_mapster"/>
+	<img src="res/BOC_Great_Canyons.png" alt="great_canyons" name="great_canyons" usemap="#great_canyons_map"  id="boc_great_canyons_id" class="boc_mapster mapBoxShadow"/>
     <map id="great_canyons_map" name="great_canyons_map">
     	<area shape="circle" coords="392,345,8" href="#" alt="city" title="city" data-group="city1" />
         <area shape="circle" coords="395,424,8" href="#" alt="city" title="city" data-group="city2" />
@@ -27,6 +27,8 @@
         <area shape="circle" coords="406,390,8" href="#" alt="city" title="city" data-group="city18" />
         <area shape="circle" coords="434,362,8" href="#" alt="city" title="city" data-group="city19" />
     </map>
+    <br />
+    <a href="javascript:history.back()"><< back</a>
 </div>
 
 <?php include "footer.php"; ?>

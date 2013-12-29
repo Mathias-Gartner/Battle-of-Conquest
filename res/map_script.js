@@ -25,7 +25,7 @@ function setMyDistrict(){
 function setShowBox(obj){
 	var position = $(obj).attr('coords').split(',');
 	var x = position[0];
-	var y = position[1];
+	var y = position[1]-580; //image height + box height - delay
 	document.getElementById("box").style.top = y+"px";
 	document.getElementById("box").style.left = x+"px";
 	$('#attack_button').click(function(event){
