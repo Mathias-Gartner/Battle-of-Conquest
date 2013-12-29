@@ -1,5 +1,8 @@
 
-SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET FOREIGN_KEY_CHECKS=0;
+SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
+SET AUTOCOMMIT=0;
+START TRANSACTION;
 SET time_zone = "+00:00";
 
 
@@ -12,26 +15,39 @@ SET time_zone = "+00:00";
 -- Datenbank: `boc`
 --
 
--- disable foreign key constraints
-SET foreign_key_checks = 0;
+-- --------------------------------------------------------
+
+--
+-- Tabellenstruktur für Tabelle `attacks`
+--
+
+DROP TABLE IF EXISTS `attacks`;
+CREATE TABLE IF NOT EXISTS `attacks` (
+  `attack_id` int(11) NOT NULL AUTO_INCREMENT,
+  `source_district_id` int(11) NOT NULL,
+  `target_district_id` int(11) NOT NULL,
+  `battle_time` datetime NOT NULL,
+  PRIMARY KEY (`attack_id`),
+  KEY `source_district_id` (`source_district_id`),
+  KEY `target_district_id` (`target_district_id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=2 ;
 
 -- --------------------------------------------------------
 
 --
--- Tabellenstruktur für Tabelle `active_units`
+-- Tabellenstruktur für Tabelle `attack_units`
 --
 
-DROP TABLE IF EXISTS `active_units`;
-CREATE TABLE IF NOT EXISTS `active_units` (
+DROP TABLE IF EXISTS `attack_units`;
+CREATE TABLE IF NOT EXISTS `attack_units` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `district_id` int(11) NOT NULL,
-  `target_district_id` int(11) NOT NULL,
-  `attacker` int(11) NOT NULL,
-  `defender` int(11) NOT NULL,
-  `supporter` int(11) NOT NULL,
+  `unit_id` int(11) NOT NULL,
+  `attack_id` int(11) NOT NULL,
+  `count` int(11) NOT NULL,
   PRIMARY KEY (`id`),
-  KEY `idx_fk_district_id` (`district_id`),
-  KEY `idx_fk_target_district_id` (`target_district_id`)
+  UNIQUE KEY `unit_attack_unique_index` (`unit_id`,`attack_id`),
+  KEY `unit_id` (`unit_id`),
+  KEY `attack_id` (`attack_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
@@ -72,7 +88,7 @@ CREATE TABLE IF NOT EXISTS `buildings_level` (
   PRIMARY KEY (`id`),
   KEY `idx_fk_district_id` (`district_id`),
   KEY `idx_fk_building_id` (`building_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -148,6 +164,7 @@ CREATE TABLE IF NOT EXISTS `district_units` (
   `district_id` int(11) NOT NULL,
   `count` int(11) NOT NULL,
   PRIMARY KEY (`id`),
+  UNIQUE KEY `district_unit_unique_index` (`unit_id`,`district_id`),
   KEY `unit_id` (`unit_id`),
   KEY `district_id` (`district_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
@@ -179,24 +196,7 @@ CREATE TABLE IF NOT EXISTS `units` (
   `unit_speed` int(11) NOT NULL,
   `unit_res` int(11) NOT NULL,
   PRIMARY KEY (`unit_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
-
--- --------------------------------------------------------
-
---
--- Tabellenstruktur für Tabelle `units`
---
-
-CREATE TABLE IF NOT EXISTS `units` (
-  `unit_id` int(11) NOT NULL AUTO_INCREMENT,
-  `unit_name` varchar(32) NOT NULL,
-  `unit_class` varchar(32) NOT NULL,
-  `unit_atk` int(11) NOT NULL,
-  `unit_def` int(11) NOT NULL,
-  `unit_speed` int(11) NOT NULL,
-  `unit_res` int(11) NOT NULL,
-  PRIMARY KEY (`unit_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=3 ;
 
 -- --------------------------------------------------------
 
@@ -204,6 +204,7 @@ CREATE TABLE IF NOT EXISTS `units` (
 -- Tabellenstruktur für Tabelle `users`
 --
 
+DROP TABLE IF EXISTS `users`;
 CREATE TABLE IF NOT EXISTS `users` (
   `user_id` int(11) NOT NULL AUTO_INCREMENT,
   `username` varchar(32) NOT NULL,
@@ -212,18 +213,25 @@ CREATE TABLE IF NOT EXISTS `users` (
   `password` binary(20) NOT NULL,
   `salt` char(5) NOT NULL,
   PRIMARY KEY (`user_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=2 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=3 ;
 
 --
 -- Constraints der exportierten Tabellen
 --
 
 --
--- Constraints der Tabelle `active_units`
+-- Constraints der Tabelle `attacks`
 --
-ALTER TABLE `active_units`
-  ADD CONSTRAINT `fk_active_unit_district` FOREIGN KEY (`district_id`) REFERENCES `districts` (`district_id`),
-  ADD CONSTRAINT `fk_active_unit_target_district` FOREIGN KEY (`target_district_id`) REFERENCES `districts` (`district_id`);
+ALTER TABLE `attacks`
+  ADD CONSTRAINT `attacks_ibfk_2` FOREIGN KEY (`target_district_id`) REFERENCES `districts` (`district_id`),
+  ADD CONSTRAINT `attacks_ibfk_1` FOREIGN KEY (`source_district_id`) REFERENCES `districts` (`district_id`);
+
+--
+-- Constraints der Tabelle `attack_units`
+--
+ALTER TABLE `attack_units`
+  ADD CONSTRAINT `attack_units_ibfk_2` FOREIGN KEY (`attack_id`) REFERENCES `attacks` (`attack_id`),
+  ADD CONSTRAINT `attack_units_ibfk_1` FOREIGN KEY (`unit_id`) REFERENCES `units` (`unit_id`);
 
 --
 -- Constraints der Tabelle `buildings_level`
@@ -257,9 +265,8 @@ ALTER TABLE `district_status`
 ALTER TABLE `district_units`
   ADD CONSTRAINT `district_units_ibfk_1` FOREIGN KEY (`unit_id`) REFERENCES `units` (`unit_id`),
   ADD CONSTRAINT `district_units_ibfk_2` FOREIGN KEY (`district_id`) REFERENCES `districts` (`district_id`) ON DELETE CASCADE ON UPDATE CASCADE;
-
-
-SET foreign_key_checks = 1;
+SET FOREIGN_KEY_CHECKS=1;
+COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
