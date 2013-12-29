@@ -1,5 +1,7 @@
-<?php include 'header.php' ?>
+<?php include "header.php"; ?>
 
-<h2>Buildings</h2>
+<div id="map">
+	<img src="res/BOC_District_First_Stage.png" alt="my_district" name="my_district" />
+</div>
 
-<?php include 'footer.php' ?>
+<?php include "footer.php"; ?>
