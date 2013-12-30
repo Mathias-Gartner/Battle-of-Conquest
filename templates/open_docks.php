@@ -35,6 +35,9 @@
 
 <script type="application/javascript">
 	init();
+	$('#boc_open_docks_id').click(function(event){
+		hideBox();
+	});
 </script>
 
 <?php include "footer.php"; ?>
