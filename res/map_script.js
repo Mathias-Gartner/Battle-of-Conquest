@@ -8,6 +8,15 @@ function init(){
 			if(this.id=="my_district"){
 				window.location.href = this.href;
 			}else{
+				switch(document.getElementById("attack_button").innerHTML){
+					case 'Erstellen': 
+					document.getElementById("box_label").innerHTML = "Geb&auml;ude";
+					break;
+					
+					case 'Angreifen':
+					document.getElementById("box_label").innerHTML = "City";
+					break;
+				}
 				setShowBox(this);
 			}
 		}
