@@ -9,7 +9,7 @@
     <a href="?action=buildings"><img src="res/flag.png" alt="flag" id="flag" style="position:relative;left:376px;top:-236px;" /></a>
     <!-- Image Maps for other cities -->
     <map id="open_docks_map_id" name="open_docks_map">
-    	<area shape="circle" coords="392,345,8" href="my_district.html" alt="city" id="1" title="city" data-group="city1" id="my_district" />
+    	<area shape="circle" coords="392,345,8" href="index.php?action=buildings" alt="city" id="1" title="city" data-group="city1" id="my_district" />
         <area shape="circle" coords="395,424,8" href="blank_district.html" id="2" alt="city" title="city" data-group="city2" />
         <area shape="circle" coords="443,419,8" href="blank_district.html" id="3" alt="city" title="city" data-group="city3" />
         <area shape="circle" coords="425,453,8" href="blank_district.html" id="4" alt="city" title="city" data-group="city4" />
