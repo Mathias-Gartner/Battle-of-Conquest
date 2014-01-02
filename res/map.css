@@ -1,0 +1,14 @@
+#map {
+	position: relative;
+	top: 10px;
+	padding: 10px;
+}
+
+#map a {
+	text-decoration: none;
+}	
+
+.mapbutton {
+	position: relative;
+	bottom: 20px;
+}
