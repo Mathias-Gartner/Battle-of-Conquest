@@ -29,7 +29,7 @@
         <area shape="circle" coords="406,390,8" href="blank_district.html" id="18"alt="city" title="city" data-group="city18" />
         <area shape="circle" coords="434,362,8" href="blank_district.html" id="19"alt="city" title="city" data-group="city19" />
     </map>
-    <div id="box" class="mapBoxShadow"><label class="box_top">City</label><span class="box_bottom" id="attack_button">Angreifen</span></div>    
+    <div id="box" class="mapBoxShadow"><span class="box_top" id="box_label">City</span><span class="box_bottom" id="attack_button">Angreifen</span></div>    
     <div class='centered'>
       <a href='?action=buildings' class='box-padding'>
         <div class='centered bigbutton' style='height: 2em;'>Meine Stadt</div>

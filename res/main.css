@@ -197,6 +197,11 @@ background: linear-gradient(to bottom,  rgba(61,61,57,1) 0%,rgba(68,31,17,1) 32%
   flex-grow: 1;
   display: flex;
   flex-direction: column;
+  background: rgba(6,1,1,0.7);
+  -webkit-border-radius:20px;
+  -moz-border-radius:20px;
+  border-radius:20px;
+  margin-top:10px;
 }
 
 .tit {
