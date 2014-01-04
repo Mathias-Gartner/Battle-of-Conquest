@@ -46,7 +46,7 @@ abstract class PageHandler
     if ($this->_template != '')
     {
       $PAGEDATA = $pageData;
-      include self::$_baseDir.'templates/'.$this->_template;
+      require self::$_baseDir.'templates/'.$this->_template;
     }
     else if ($this->_message != '')
       echo $this->_message;
