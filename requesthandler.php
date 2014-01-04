@@ -4,10 +4,10 @@ class RequestHandler
 {
 	public static function handle()
 	{
-  	BattleHandler::handlePendingBattles();
-  	
+		BattleHandler::handlePendingBattles();
+
 		TORM\Log::enable(true);
-  	
+
 		$pageHandler = null;
 		if (isset($_GET['action']) )
 		{
@@ -31,23 +31,23 @@ class RequestHandler
 			case 'map':
 				$pageHandler = new PageHandlers\MapPageHandler();
 				break;
-      case 'prepareAttack':
-        $pageHandler = new PageHandlers\PrepareAttackPageHandler();
-        break;
-  		case 'startAttack':
-          $pageHandler = new PageHandlers\StartAttackPageHandler();
-          break;
-      default:
-    	  	header('HTTP/1.1 404 Not Found');
-    	  	echo '<h1>404 Unkown Action</h1>';
-    	  	break;
-	  	}
-  	}
-  	else
-  	{
-  		$pageHandler = new PageHandlers\WelcomePageHandler();
-  	}
-  	
+			case 'prepareAttack':
+				$pageHandler = new PageHandlers\PrepareAttackPageHandler();
+				break;
+			case 'startAttack':
+				$pageHandler = new PageHandlers\StartAttackPageHandler();
+				break;
+			default:
+				header('HTTP/1.1 404 Not Found');
+				echo '<h1>404 Unkown Action</h1>';
+				break;
+			}
+		}
+		else
+		{
+			$pageHandler = new PageHandlers\WelcomePageHandler();
+		}
+
 		if ($pageHandler != null)
 		{
 			if ($pageHandler->loginRequired() && !SessionUtility::isLoggedIn())
@@ -57,7 +57,7 @@ class RequestHandler
 			$pageHandler->render();
 			exit(0);
 		}
-		
+
 		// orm samples
 		/* create object
 		$user = new Classes\User();
@@ -67,15 +67,15 @@ class RequestHandler
 		$user->setPassword('123456');
 		$user->save();
 		/**/
-		
+
 		/* load object
 		$user = Classes\User::find(1);
 		var_dump($user);
 		$collection = $user->districts;
 		while (($district = $collection->next()) != NULL)
-		  echo '<p>'.$district->getName().'</p>';
+		echo '<p>'.$district->getName().'</p>';
 		/**/
-		
+
 		/* create object with relation
 		$district = new Classes\District();
 		$district->setName('Entenhausen');
@@ -84,7 +84,7 @@ class RequestHandler
 		$district->owner_id = 0; // 0 .. pk of user
 		$district->save();
 		/**/
-		
+
 		/* load object with relation
 		$district = Classes\District::first(array('district_name'=>'Entenhausen'));
 		var_dump($district->owner); // prints user
