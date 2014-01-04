@@ -1,0 +1,31 @@
+{
+	"attacks":
+	[
+		<?php
+			$first = true;
+			foreach ($PAGEDATA['attacks'] as $attack)
+			{
+				if ($first) $first = false;
+				else echo ',';
+		?>
+		{
+			"id": <?php echo $attack['id']; ?>,
+			"source":
+			{
+				"id": <?php echo $attack['sourceDistrictId']; ?>,
+				"name": "<?php echo $attack['sourceDistrictName']; ?>"
+			},
+			"target":
+			{
+				"id": <?php echo $attack['targetDistrictId']; ?>,
+				"name": "<?php echo $attack['targetDistrictName']; ?>"
+			},
+			<?php if ($PAGEDATA['current']) { ?>
+			"secondsLeft": <?php echo $attack['secondsLeft']; ?>
+			<?php } else { ?>
+			"attackerWon": <?php if ($attack['attackerWon']) echo "true"; else echo "false"; ?>
+			<?php } ?>
+		}
+		<?php } ?>
+	]
+}

@@ -76,7 +76,8 @@ abstract class PageHandler
   
   protected function setAjaxTemplate($template)
   {
-    $this->setTemlpate($template.'.ajax');
+  	\Torm\Log::enable(false); // to make sure nothing destroys any JSON output
+    $this->setTemplate($template.'.ajax');
   }
   
   protected function setPageData($key, $value)

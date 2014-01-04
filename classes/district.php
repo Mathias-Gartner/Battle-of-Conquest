@@ -4,6 +4,11 @@ namespace Classes;
 
 class District extends \TORM\Model
 {
+	public function getDistrictId()
+	{
+		return $this->get("district_id");
+	}
+
 	public function getName()
 	{
 		return $this->get("district_name");
@@ -58,7 +63,7 @@ District::belongsTo("owner", array("class_name"=>"User", "primary_key"=>"user_id
 District::hasMany("activeUsers", array("class_name"=>"ActiveUser", "foreign_key"=>"district_id"));
 District::hasMany("buildings", array("class_name"=>"BuildingLevel", "foreign_key"=>"district_id"));
 District::hasMany("distances", array("class_name"=>"Distance", "foreign_key"=>"district_a"));
-District::hasMany("districtUnits", array("class_name"=>"DistrictUnit", "foreign_key"=>"district_id"));
+District::hasMany("districtUnits", array("class_name"=>"\Classes\DistrictUnit", "foreign_key"=>"district_id"));
 District::validates("district_name", array("presence"=>true));
 District::validates("position_x", array("numericality"=>true));
 District::validates("position_y", array("numericality"=>true));

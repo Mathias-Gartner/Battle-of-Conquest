@@ -4,6 +4,8 @@ class RequestHandler
 {
 	public static function handle()
 	{
+  	BattleHandler::handlePendingBattles();
+  	
 		TORM\Log::enable(true);
   	
 		$pageHandler = null;
@@ -18,7 +20,7 @@ class RequestHandler
 				$pageHandler = new PageHandlers\OverviewPageHandler();
 				break;
 			case 'buildings':
-				$pageHandler = new Pagehandlers\BuildingsPageHandler();
+				$pageHandler = new PageHandlers\BuildingsPageHandler();
 				break;
 			case 'units':
 				$pageHandler = new PageHandlers\UnitsPageHandler();

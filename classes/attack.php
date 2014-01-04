@@ -4,6 +4,11 @@ namespace Classes;
 
 class Attack extends \TORM\Model
 {
+  public function getAttackId()
+  {
+    return $this->get("attack_id");
+  }
+
   public function getSourceDistrictId()
   {
     return $this->get("source_district_id");
@@ -33,11 +38,33 @@ class Attack extends \TORM\Model
   {
     $this->set("battle_time", $battleTime);
   }
+  
+  public function getBattleOver()
+  {
+  	return $this->get("battle_over");
+  }
+  
+  public function setBattleOver($battleOver)
+  {
+  	$this->set("battle_over", $battleOver);
+  }
+  
+  public function getAttackerWon()
+  {
+  	return $this->get("attacker_won");
+  }
+  
+  public function setAttackerWon($attackerWon)
+  {
+  	$this->set("attacker_won", $attackerWon);
+  }
 }
 
-AttackUnit::setTableName("attacks");
-AttackUnit::belongsTo("sourceDistrict", array("class_name"=>"District", "primary_key"=>"district_id", "foreign_key"=>"source_district_id"));
-AttackUnit::hasOne("targetDistrict", array("class_name"=>"District", "primary_key"=>"district_id", "foreign_key"=>"target_district_id"));
-AttackUnit::validates("battle_time", array("presence"=>true));
+Attack::setPK("attack_id");
+Attack::setTableName("attacks");
+Attack::belongsTo("sourceDistrict", array("class_name"=>"\Classes\District", "primary_key"=>"district_id", "foreign_key"=>"source_district_id"));
+Attack::belongsTo("targetDistrict", array("class_name"=>"\Classes\District", "primary_key"=>"district_id", "foreign_key"=>"target_district_id"));
+Attack::hasMany("attackUnits", array("class_name"=>"\Classes\AttackUnit", "foreign_key"=>"attack_id"));
+Attack::validates("battle_time", array("presence"=>true));
 
 ?>
