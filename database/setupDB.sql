@@ -27,10 +27,12 @@ CREATE TABLE IF NOT EXISTS `attacks` (
   `source_district_id` int(11) NOT NULL,
   `target_district_id` int(11) NOT NULL,
   `battle_time` datetime NOT NULL,
+  `battle_over` tinyint(1) NOT NULL DEFAULT '0',
+  `attacker_won` tinyint(1) DEFAULT NULL,
   PRIMARY KEY (`attack_id`),
   KEY `source_district_id` (`source_district_id`),
   KEY `target_district_id` (`target_district_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=2 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=10 ;
 
 -- --------------------------------------------------------
 
@@ -48,7 +50,7 @@ CREATE TABLE IF NOT EXISTS `attack_units` (
   UNIQUE KEY `unit_attack_unique_index` (`unit_id`,`attack_id`),
   KEY `unit_id` (`unit_id`),
   KEY `attack_id` (`attack_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=2 ;
 
 -- --------------------------------------------------------
 
