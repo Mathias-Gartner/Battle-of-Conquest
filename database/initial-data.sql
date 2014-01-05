@@ -50,7 +50,7 @@ INSERT INTO `torm_info` (`id`) VALUES
 --
 
 INSERT INTO `units` (`unit_id`, `unit_name`, `unit_class`, `unit_atk`, `unit_def`, `unit_speed`, `unit_res`) VALUES
-(1, 'Schwertk√§mpfer', 'Offensiv', 10, 5, 5, 100),
+(1, 'Schwertk‰mpfer', 'Offensiv', 10, 5, 5, 100),
 (2, 'Ritter', 'Offensiv', 15, 8, 20, 250);
 
 --
