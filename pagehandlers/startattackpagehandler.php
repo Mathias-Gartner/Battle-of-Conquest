@@ -60,10 +60,12 @@ class StartAttackPageHandler extends PageHandler
   	{
     	$max = \Classes\DistrictUnit::where(array('district_id'=>$sourceId, 'unit_id'=>$unit['id']))->sum('count');
     	$builder = \Classes\AttackUnit::makeBuilder();
-    	$builder->where = 'attacks.source_district_id = ? and attack_units.unit_id = ?';
+    	$builder->where = 'attacks.battle_over=0 and attacks.source_district_id = ? and attack_units.unit_id = ?';
     	$builder->joins = 'JOIN attacks ON attacks.attack_id = attack_units.attack_id';
     	$active = new \Torm\Collection($builder, array($sourceId, $unit['id']), '\Classes\AttackUnit');
-    	$available = $max - $active->sum('count');
+	    $active = $active->sum('count');
+	    if ($active == null) $active = 0;
+	    $available = $max - $active;
     
     	if ($unit['count'] > $available)
 			{
@@ -91,6 +93,7 @@ class StartAttackPageHandler extends PageHandler
   	// 60 seconds wait for every distance unit
 		$datetime->add(new \DateInterval('PT'.round($distance*60).'S'));
   	$attack->setBattleTime($datetime->format('Y-m-d H:i:s'));
+  	$attack->setBattleOver(false);
   	$attack->save();
 	  
   	foreach ($units as $unit)

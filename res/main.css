@@ -266,4 +266,24 @@ a :hover {
 .box_bottom:active {
 	position:relative;
 	top:1px;
+
+/* page attacks */
+#attacksListContainer {
+	flex-direction: column;
+}
+
+#attacksListContainer div span {
+	font-size: 1.1em;
+	padding: .3em;
+}
+
+#headerLine {
+	display: none;
+	font-size: 1.2em;
+	font-weight: bold;
+}
+
+#noAttacksDiv {
+	font-size: 1.2em;
+	padding: .3em;
 }

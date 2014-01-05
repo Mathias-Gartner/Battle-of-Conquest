@@ -41,6 +41,7 @@ function resultFunction(response)
     if (response.attacks.length < 1)
     {
     	noAttacksDiv.style.display = "block";
+    	attackListDiv.innerHTML = "";
     	return;
     }
     else
@@ -49,9 +50,18 @@ function resultFunction(response)
     for (var i=0; i<response.attacks.length; i++)
     {
 			var lineDiv = document.createElement("div");
+			if (!current)
+			{
+				var timeSpan = document.createElement("span");
+				timeSpan.innerHTML = response.attacks[i].time;
+				lineDiv.appendChild(timeSpan);
+			}
 			var sourceSpan = document.createElement("span");
 			sourceSpan.innerHTML = response.attacks[i].source.name;
 			lineDiv.appendChild(sourceSpan);
+			var arrowSpan = document.createElement("span");
+			arrowSpan.innerHTML = "->";
+			lineDiv.appendChild(arrowSpan);
 			var targetSpan = document.createElement("span");
 			targetSpan.innerHTML = response.attacks[i].target.name;
 			lineDiv.appendChild(targetSpan);
