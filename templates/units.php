@@ -1,5 +1,10 @@
 <?php include 'header.php' ?>
 
-<h2>Units</h2>
+<div class='title flex_centered'>
+	Units
+</div>
+
+<div class='flex_centered' id='units'>
+</div>
 
 <?php include 'footer.php' ?>
