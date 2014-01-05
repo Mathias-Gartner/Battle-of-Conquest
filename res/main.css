@@ -93,16 +93,13 @@ body {
   flex-direction: column;
   align-items: center;
 
-  /*Design1*/
   position: relative;
-  height: 100%;
+  height: auto;
   width: 980px;
   top: -8px;
   color:#FFB661;
   margin-left: auto;
   margin-right: auto;
-  margin-top: 0;
-  margin-bottom : 0;
 }
 
 .site > div {
@@ -110,10 +107,8 @@ body {
 }
 
 .shadow {
-  /*box-shadow: 0 0 0 2px black inset;*/
-  background: none repeat scroll 0 0 rgba(6, 1, 1, 0.4)
+  box-shadow: 0 0 0 2px black inset;
 }
-
 
 .grid {
   margin: 5px;
@@ -121,6 +116,12 @@ body {
 
 .outer {
   width: 90%;
+}
+
+.centered {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .middle {
@@ -131,6 +132,7 @@ body {
   line-height: 2em;
   font-size: 2em;
 }
+
 
 /*Navigation*/
 #navi {
@@ -162,7 +164,7 @@ background: linear-gradient(to bottom,  rgba(61,61,57,1) 0%,rgba(68,31,17,1) 32%
 
 }
 
-a {
+.nav > a {
   position: relative;
   flex-grow: 1;
   line-height: 2em;
@@ -170,7 +172,6 @@ a {
   width: 100%;
   color: #FFB661;
   text-decoration: none;
-  /*border: 0.5px solid #FFB661;*/
 }
 
 .nav > a :hover{
@@ -199,22 +200,18 @@ a {
 .site > .cont {
   flex-grow: 1;
   display: flex;
-  flex-direction: column;
-  background: rgba(6,1,1,0.7);
-  -webkit-border-radius:20px;
-  -moz-border-radius:20px;
-  border-radius:20px;
-  margin-top:10px;
-  margin-bottom:20px;
+flex-direction: column;
 }
 
 .tit {
   line-height: 1.2em;
-  font-size: 1.2em;
+  font-size: 1.5em;
+  font-weight: 300;
+  font-style: bold;
 }
 
-
 /*page home*/
+/*
 .home {
   display: flex;
   flex-direction: column;
@@ -222,27 +219,62 @@ a {
   position: relative;
   top: 10px;
   height: 100%;
-}
+}*/
 
 .content {
-  display: flex;
-  flex-direction: column;
   background: rgba(6,1,1,0.7);
   height: 100%;
+  top: 20px;
+  position: relative;
 }
 
 #welcome {
-
+  height: 100%;
+  padding: 20px;
 }
 
+#welcome > p {
+  text-align: center;
+}
+
+#welcome  a {
+  text-decoration: none;
+  text-transform: none;
+}
+
+/*Footer*/
 .foot {
-  font-size: 0.8em;
+  display: flex;
+  justify-content: space-between;
+  position: relative;
+  top: 30px;
+  background: rgb(6,1,1);
+  width: 88%;
+  height: 40px;
+  clear:left;
+
+  -webkit-border-radius:20px;
+  -moz-border-radius:20px;
+  border-radius:20px;
 }
 
-.centered {
-  display: flex;
-  justify-content: center;
-  align-items: center;
+.foot a {
+  position: relative;
+  flex-grow: 1;
+  line-height: 2em;
+  font-size: 0.9em;
+  width: 100%;
+  color: #FFB661;
+  text-decoration: none;
+}
+
+.foot > a :hover{
+  color: #E90000;
+}
+
+#team >img{
+  position: relative;
+  width: 90%;
 }
 
 .box-padding {
