@@ -37,6 +37,9 @@ class RequestHandler
 			case 'startAttack':
 				$pageHandler = new PageHandlers\StartAttackPageHandler();
 				break;
+			case 'footer':
+				$pageHandler = new PageHandlers\FooterPageHandler();
+				break;
 			default:
 				header('HTTP/1.1 404 Not Found');
 				echo '<h1>404 Unkown Action</h1>';

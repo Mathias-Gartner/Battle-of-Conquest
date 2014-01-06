@@ -28,16 +28,18 @@
 				break;
 			case "imp":
 				echo " <div >
-      		<div class='tit'>Impressum</div>
-    		 <p>Ersteller der Inhalte und Verantwortliche: Markus Krammer</p>
+      		<div class='tit'>Legal notice</div>
+    		 <p>Create of content and person in charge: Markus Krammer</p>
 				<p>FH Technikum<br />
 				2013/2014</p>
-			<h3>Urheberrecht</h3>
-			<p>Die durch den Betreiber dieser Seite erstellten Inhalte und Werke auf diesen Webseiten unterliegen dem deutschen Urheberrecht. S&auml;mtliche Beitr&auml;ge Dritter sind als solche gekennzeichnet. Die Vervielf&auml;ltigung, Bearbeitung, Verbreitung und jede Art der Verwertung au&szlig;erhalb der Grenzen des Urheberrechts bed&uuml;rfen der schriftlichen Zustimmung des jeweiligen Autors bzw. Erstellers. Kopien von diesen Seiten sind nur f&uuml;r den privaten Bereich gestattet, nicht jedoch f&uuml;r kommerzielle Zwecke.</p>
+			<h3>License</h3>
+			<p>This site and the source code behind it are licensed under the General Public License, version 3.
+				The license the can be found <a href='LICENSE'>here</a>. The source code is on <a href='https://github.com/Mathias-Gartner/Battle-of-Conquest'>github</a>.
+			</p>
 		
-			<p>Einer Nutzung der im Impressum ver&ouml;ffentlichten Kontaktdaten durch Dritte zu Werbezwecken wird hiermit ausdr&uuml;cklich widersprochen. Der Betreiber beh&auml;lt sich f&uuml;r den Fall unverlangt zugesandter Werbe- oder Informationsmaterialien ausdr&uuml;cklich rechtliche Schritte vor.</p>
-			<h3>Rechtswirksamkeit dieses Haftungsausschlusses</h3>
-			<p>Sollten einzelne Regelungen oder Formulierungen dieses Haftungsausschlusses unwirksam sein oder werden, bleiben die &uuml;brigen Regelungen in ihrem Inhalt und ihrer G&uuml;ltigkeit hiervon unber&uuml;hrt.</p>
+			<p></p>
+			<h3>Third party content</h3>
+			<p></p>
     		</div> ";
 				break;
 			default:

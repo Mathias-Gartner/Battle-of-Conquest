@@ -9,6 +9,11 @@ class FooterPageHandler extends PageHandler
 		$this->setPhpTemplate('footerpages');
 	  	return $this;
 	}
+	
+	public function loginRequired()
+  {
+    return false;
+  }
 }
 
 ?>
