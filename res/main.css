@@ -315,6 +315,12 @@ html {
 	text-align: center;
 }
 
+#sladi_prepare_attack > p {
+	margin: 20px 0 20px 0;
+	font-size: 1.5em;
+	text-align: center;
+}
+
 #attacksListContainer {
 	flex-direction: column;
 }

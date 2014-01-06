@@ -4,7 +4,7 @@
 	<?php echo 'Prepare the attack on '.$PAGEDATA['targetCityName'].'!'; ?>
 </div>
 
-<div class='flex_vert'>
+<div class='flex_vert' id='sladi_prepare_attack'>
 	<?php if (count($PAGEDATA['units']) == 0) { ?>
 		<p>This city has no units! We are unable to attack, commander!</p>
 		<a href='javascript:history.back();'>Back</a>
