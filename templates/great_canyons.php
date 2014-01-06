@@ -1,6 +1,6 @@
 <?php include "header.php"; ?>
 
-<script src="res/jquery-1.10.1.min.js"></script>
+<script src="res/jquery-1.10.2.min.js"></script>
 <script type="application/javascript" src="res/jquery.imagemapster.min.js"></script>
 <script type="application/javascript" src="res/map_script.js"></script>
 

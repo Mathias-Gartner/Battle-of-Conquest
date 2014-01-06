@@ -4,10 +4,13 @@ class BattleHandler
 {
 	static function handlePendingBattles()
 	{
+		$currentDate = new \DateTime();
+		$currentDate = $currentDate->format('Y-m-d H:i:s');
+	
 		$builder = \Classes\Attack::makeBuilder();
-		$builder->where = 'battle_over = 0';
+		$builder->where = 'battle_over = 0 and battle_time < ?';
 		$builder->order = 'battle_time';
-		$pendingAttacks = new \Torm\Collection($builder, null, '\Classes\Attack');
+		$pendingAttacks = new \Torm\Collection($builder, array($currentDate), '\Classes\Attack');
 
 		// early exit if no battles to handle
 		if ($pendingAttacks->count() < 1)

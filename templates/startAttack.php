@@ -1,12 +1,13 @@
 <?php include 'header.php' ?>
 
   <div class='cont shadow grid middle'>
-    <div class='tit shadow'><?php echo $PAGEDATA['targetCityName']; ?> angreifen!</div>
+    <div class='centered user'><?php echo $PAGEDATA['targetCityName']; ?> angreifen!</div>
     <div>
       <?php if (isset($PAGEDATA['success'])) { ?>
       
         <p>Hauptmann: <span class='quote'>M&auml;nner bereit zum Kampf! Wir greifen an!</span></p>
         <a href="?action=attacks">Weiter</a>
+
       <?php } else {
       
         if (isset($PAGEDATA['notEnoughUnits'])) { ?>
