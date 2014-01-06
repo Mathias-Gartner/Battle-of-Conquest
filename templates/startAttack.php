@@ -7,7 +7,9 @@
 <div class="flex_vert" id="sladi_start_attack">
 	<?php if (isset($PAGEDATA['success'])) { ?>
 		<p><span class='quote'>To battle, and victory!</span></p>
-		<a href="?action=attacks">Next</a>
+		<div>
+			<a href='?action=attacks' class='bigbutton'>Next</a>
+		</div>
 	<?php } else {
 
 	if (isset($PAGEDATA['notEnoughUnits'])) { ?>
@@ -22,5 +24,7 @@
 </div>
 
 <?php } ?>
+
+</div>
 
 <?php include 'footer.php' ?>

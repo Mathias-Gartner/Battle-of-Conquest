@@ -16,7 +16,9 @@
 
 </div>
 
-<div class="flex_centered" id="overview">
+<div class="flex_vert" id="overview">
+
+	<p>
 	You are in control of
 	<?php
 		if ($PAGEDATA['districtsCount'] == 1)
@@ -24,7 +26,8 @@
 		else
 		echo $PAGEDATA['districtsCount'].' cities';
 	?>.
-	<br>
+	</p>
+	
 	You have
 	<?php
 		if ($PAGEDATA['unitsCount'] == 1)
@@ -33,6 +36,8 @@
 		echo $PAGEDATA['unitsCount'].' warriors';
 	?>
 	under your command.
+	</p>
+	
 </div>
 
 <?php include 'footer.php' ?>
