@@ -1,10 +1,8 @@
 <?php include "header.php" ?>
 
-<div class='title flex_centered'>
-	Please login.
-</div>
+<div class='title flex_centered'>Please login.</div>
 
-<div id="loginBox" class='flex_centered'>
+<div id="loginBox" class="flex_centered">
 	<form action="index.php?action=login" method="POST">
 		<?php if (isset($PAGEDATA["loginError"]) && $PAGEDATA["loginError"]) { ?>
 		<div>

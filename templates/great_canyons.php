@@ -6,7 +6,7 @@
 
 <div class='flex_centered title'>Great Canyons</div>
 
-<div id="map">
+<div id="map" class="map">
 	<img src="res/BOC_Great_Canyons.png" alt="great_canyons" name="great_canyons" usemap="#great_canyons_map"  id="boc_great_canyons_id" class="boc_mapster mapBoxShadow"/>
 	<map id="great_canyons_map" name="great_canyons_map">
 		<area shape="circle" coords="392,345,8" href="#" alt="city" title="city" data-group="city1" />

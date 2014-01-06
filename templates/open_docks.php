@@ -6,7 +6,7 @@
 
 <div class='flex_centered title'>Open Docks</div>
 
-<div id="map">
+<div id="map" class="map">
 	<img src="res/BOC_Open_Docks.png" alt="open_docks" name="open_docks" usemap="#open_docks_map" id="boc_open_docks_id" class="boc_mapster mapBoxShadow" />
 	<a href="?action=buildings"><img src="res/flag.png" alt="flag" id="flag" style="position:relative;left:376px;top:-236px;" /></a>
 	

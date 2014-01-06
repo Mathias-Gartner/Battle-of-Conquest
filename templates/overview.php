@@ -4,19 +4,19 @@
 	Welcome <?php echo $_SESSION['username']; ?>!
 </div>
 
-<div class='flex_hor linkbar'>
-
-	<div class='flex_centered'>
-		<a href='?action=buildings' class='bigbutton'>Your City</a>
-	</div>
-
-	<div class='flex_centered' >
-		<a href='?action=map' class='bigbutton'>Show World</a>
-	</div>
-
-</div>
-
 <div class="flex_vert" id="overview">
+
+	<div class='flex_hor linkbar'>
+
+		<div class='flex_centered'>
+			<a href='?action=buildings' class='bigbutton'>Your City</a>
+		</div>
+
+		<div class='flex_centered' >
+			<a href='?action=map' class='bigbutton'>Show World</a>
+		</div>
+
+	</div>
 
 	<p>
 	You are in control of
@@ -28,6 +28,7 @@
 	?>.
 	</p>
 	
+	<p>
 	You have
 	<?php
 		if ($PAGEDATA['unitsCount'] == 1)

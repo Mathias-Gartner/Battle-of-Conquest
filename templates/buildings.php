@@ -4,11 +4,9 @@
 <script type="application/javascript" src="res/jquery.imagemapster.min.js"></script>
 <script type="application/javascript" src="res/map_script.js"></script>
 
-<div class='flex_centered title'>
-	My city
-</div>
+<div class='flex_centered title'>My city</div>
 
-<div id="map">
+<div id="map" class="map">
 	<img src="res/BOC_District_First_Stage.png" id="boc_my_district_id" usemap="#boc_my_district_map" alt="my_district" name="my_district" class="boc_mapster mapBoxShadow" />
     <map name="boc_my_district_map">
     	<area shape="poly" href="blank_district.html" coords="624,99,636,118,609,137,588,131,580,116,595,96" alt="first" title="" data-group="first" />

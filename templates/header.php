@@ -2,10 +2,6 @@
 <html>
 <head>
 	<link rel="stylesheet" type="text/css" href="res/main.css" />
-	<link rel="stylesheet" type="text/css" href="res/welcome.css" />
-	<link rel="stylesheet" type="text/css" href="res/units.css" />
-	<link rel="stylesheet" type="text/css" href="res/map.css" />
-	<link rel="stylesheet" type="text/css" href="res/login.css" />
 </head>
 
 <body class='site text_style flex_vert'>
