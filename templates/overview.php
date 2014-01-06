@@ -1,38 +1,38 @@
 <?php include 'header.php' ?>
 
 <div class='flex_centered title'>
-	Willkommen <?php echo $_SESSION['username']; ?>!
+	Welcome <?php echo $_SESSION['username']; ?>!
 </div>
 
 <div class='flex_hor linkbar'>
 
 	<div class='flex_centered'>
-	<a href='?action=buildings' class='bigbutton'>Meine Stadt</a>
+		<a href='?action=buildings' class='bigbutton'>Your City</a>
 	</div>
 
 	<div class='flex_centered' >
-	<a href='?action=map' class='bigbutton'>Zur Karte</a>
+		<a href='?action=map' class='bigbutton'>Show World</a>
 	</div>
 
 </div>
 
 <div class="flex_centered" id="overview">
-	Du hast derzeit
+	You are in control of
 	<?php
 		if ($PAGEDATA['districtsCount'] == 1)
-		echo 'eine Stadt';
+		echo 'one city';
 		else
-		echo $PAGEDATA['districtsCount'].' St&auml;dte';
+		echo $PAGEDATA['districtsCount'].' cities';
 	?>.
 	<br>
-	Dir stehen insgesamt
+	You have
 	<?php
 		if ($PAGEDATA['unitsCount'] == 1)
-		echo 'eine Einheit';
+		echo 'one warrios unit';
 		else
-		echo $PAGEDATA['unitsCount'].' Einheiten';
+		echo $PAGEDATA['unitsCount'].' warriors';
 	?>
-	f&uuml;r den Kampfeinsatz zur Verf&uuml;gung.
+	under your command.
 </div>
 
 <?php include 'footer.php' ?>

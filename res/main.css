@@ -206,7 +206,82 @@ html {
 	top:1px;
 }
 
+/*Overview, Attack Pages*/
+
+#overview {
+	font-size: 1.2em;
+	padding: 50 50px 0 50px;
+	margin: 30px 0 30px 0;
+}
+
+.bigbutton {
+	-moz-box-shadow:inset 0px 1px 0px 0px #fed897;
+	-webkit-box-shadow:inset 0px 1px 0px 0px #fed897;
+	box-shadow:inset 0px 1px 0px 0px #fed897;
+	background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #ffb561), color-stop(1, #a66923) );
+	background:-moz-linear-gradient( center top, #ffb561 5%, #a66923 100% );
+	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffb561', endColorstr='#a66923');
+	background-color:#ffb561;
+	-webkit-border-top-left-radius:20px;
+	-moz-border-radius-topleft:20px;
+	border-top-left-radius:20px;
+	-webkit-border-top-right-radius:20px;
+	-moz-border-radius-topright:20px;
+	border-top-right-radius:20px;
+	-webkit-border-bottom-right-radius:20px;
+	-moz-border-radius-bottomright:20px;
+	border-bottom-right-radius:20px;
+	-webkit-border-bottom-left-radius:20px;
+	-moz-border-radius-bottomleft:20px;
+	border-bottom-left-radius:20px;
+	text-indent:0;
+	display:block;
+	color:#2A1B0A;
+	font-size:1.7em;
+	font-weight:bold;
+	font-style:normal;
+	height:53px;
+	line-height:53px;
+	width:250px;
+	
+	text-align:center;
+	text-shadow:1px 1px 0px #cd8a15;
+	text-transform: uppercase;
+
+	position: relative;
+	font-family: navifont;
+	margin-right: auto;
+	margin-left: auto;
+}
+
+.bigbutton > div {
+	text-decoration: none !important;
+}
+
+.bigbutton:hover {
+	background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #a66923), color-stop(1, #ffb561) );
+	background:-moz-linear-gradient( center top, #a66923 5%, #ffb561 100% );
+	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#a66923', endColorstr='#ffb561');
+	background-color:#a66923;
+}
+
+.bigbutton:active {
+	position:relative;
+	top:1px;
+}
+
+
+.linkbar {
+	padding: 0 50px 0 50px;
+	margin: 50px 0 50px 0;
+}
+
 /* page attacks */
+
+#sladi_start_attack {
+	margin: 50px 0 50px 0;
+}
+
 #attacksListContainer {
 	flex-direction: column;
 }

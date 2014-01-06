@@ -1,24 +1,26 @@
 <?php include 'header.php' ?>
 
-  <div class='cont shadow grid middle'>
-    <div class='centered user'><?php echo $PAGEDATA['targetCityName']; ?> angreifen!</div>
-    <div>
-      <?php if (isset($PAGEDATA['success'])) { ?>
-      
-        <p>Hauptmann: <span class='quote'>M&auml;nner bereit zum Kampf! Wir greifen an!</span></p>
-        <a href="?action=attacks">Weiter</a>
+<div class='flex_centered title'>
+	Attack on <?php echo $PAGEDATA['targetCityName']; ?>!
+</div>
 
-      <?php } else {
-      
-        if (isset($PAGEDATA['notEnoughUnits'])) { ?>
-          <p>Hauptmann: <span class='quote'>Herr, wir haben nicht so viele M&auml;nner.</span></p>
-        <?php } else if (isset($PAGEDATA['noUnitsSelected'])) { ?>
-          <p>Hauptmann: <span class='quote'>Herr, bitte sagt mir welche Einheiten angreifen sollen.</span></p>
-        <?php } ?>
-        
-        <a href='javascript:history.back();'>Nochmal probieren</a>
-        
-      <?php } ?>
-  </div>
+<div class="flex_vert" id="sladi_start_attack">
+	<?php if (isset($PAGEDATA['success'])) { ?>
+		<p><span class='quote'>To battle, and victory!</span></p>
+		<a href="?action=attacks">Next</a>
+	<?php } else {
+
+	if (isset($PAGEDATA['notEnoughUnits'])) { ?>
+		<p><span class='quote'>We don't have enough warriors, commander.</span></p>
+	<?php } else if (isset($PAGEDATA['noUnitsSelected'])) { ?>
+		<p><span class='quote'>With all due respect commander, you did not select any units.</span></p>
+	<?php } ?>
+</div>
+
+<div>
+	<a href='javascript:history.back();' class='bigbutton'>Try again</a>
+</div>
+
+<?php } ?>
 
 <?php include 'footer.php' ?>
