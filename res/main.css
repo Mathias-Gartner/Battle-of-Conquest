@@ -164,16 +164,19 @@ html {
 }
 
 /* Maps */
-
 .map {
 	/*padding: 24px;*/
-	position: relative;
-	right: 15px;
+	position: relative; /* workaround */
+	right: 15px; /* workaround */
 }
 
 .mapbutton {
 	position: relative;
 	bottom: 20px;
+}
+
+.map > mapbutton {
+	left: 15px; /* workaround */
 }
 
 /* Box district */
@@ -233,7 +236,6 @@ html {
 }
 
 /*Overview, Attack Pages*/
-
 #overview > p {
 	margin: 20px 0 20px 0;
 }
@@ -301,7 +303,6 @@ html {
 }
 
 /* page attacks */
-
 #sladi_start_attack > p {
 	margin: 50px 0 50px 0;
 	font-size: 2em;
@@ -333,7 +334,6 @@ html {
 }
 
 /* login */
-
 #loginBox input{
 	-moz-box-shadow:    0 0 4px 2px rgba(255, 182, 97, 0.5);
     -webkit-box-shadow: 0 0 7px 4px rgba(255, 182, 97, 0.5);
