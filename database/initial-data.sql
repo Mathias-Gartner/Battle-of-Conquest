@@ -67,16 +67,16 @@ INSERT INTO `torm_info` (`id`) VALUES
 --
 
 INSERT INTO `units` (`unit_id`, `unit_name`, `unit_class`, `unit_atk`, `unit_def`, `unit_speed`, `unit_res`) VALUES
-(1, 'Schwertk‰mpfer', 'Offensiv', 10, 5, 5, 100),
-(2, 'Ritter', 'Offensiv', 15, 8, 20, 250);
+(1, 'Swordman', 'Offensiv', 10, 5, 5, 100),
+(2, 'Knight', 'Offensiv', 15, 8, 20, 250);
 
 --
 -- Daten f√ºr Tabelle `users`
 --
 
 INSERT INTO `users` (`user_id`, `username`, `age`, `mail`, `password`, `salt`) VALUES
-(1, 'admin', 1, 'admin@localhost.com', '§!ﬁ:ÅsÑ˜–i¥~Î‡\nn¸', '93439'),
-(2, 'victim', 12, 'test@localhost', '§!ﬁ:ÅsÑ˜–i¥~Î‡\nn¸', '93439');
+(1, 'admin', 1, 'admin@localhost.com', unhex('a421de3a817384f7d069b417197eebe01e0a6efc'), '93439'),
+(2, 'victim', 12, 'test@localhost', unhex('a421de3a817384f7d069b417197eebe01e0a6efc'), '93439');
 SET FOREIGN_KEY_CHECKS=1;
 COMMIT;
 
