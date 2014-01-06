@@ -52,16 +52,21 @@ class PrepareAttackPageHandler extends PageHandler
 		{
 			$max = \Classes\DistrictUnit::where(array('district_id'=>$sourceId, 'unit_id'=>$unit->getUnitId()))->sum('count');
 			$builder = \Classes\AttackUnit::makeBuilder();
-			$builder->where = 'attacks.source_district_id = ? and attack_units.unit_id = ?';
+			$builder->where = 'attacks.battle_over=0 and attacks.source_district_id = ? and attack_units.unit_id = ?';
 			$builder->joins = 'JOIN attacks ON attacks.attack_id = attack_units.attack_id';
 			$active = new \Torm\Collection($builder, array($sourceId, $unit->getUnitId()), '\Classes\AttackUnit');
 			$active = $active->sum('count');
+			if ($active == null) $active = 0;
+			$available = $max - $active;
+
+			if ($available < 1)
+				continue;
 
 			array_push($unitData, array('id'=>$unit->getUnitId(),
 							'name'=>$unit->getUnitName(),
 							'class'=>$unit->getUnitClass(),
-							'max'=>($max - $active)
-						   ));
+							'max'=>($available)
+							 ));
 		}
 		$this->setPageData('units', $unitData);
 

@@ -10,6 +10,7 @@
 		?>
 		{
 			"id": <?php echo $attack['id']; ?>,
+			"time": "<?php echo $attack['battleTime']; ?>",
 			"source":
 			{
 				"id": <?php echo $attack['sourceDistrictId']; ?>,
