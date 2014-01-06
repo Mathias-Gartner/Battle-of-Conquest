@@ -27,8 +27,25 @@ INSERT INTO `attacks` (`attack_id`, `source_district_id`, `target_district_id`, 
 --
 
 INSERT INTO `districts` (`district_id`, `owner_id`, `district_name`, `position_x`, `position_y`, `district_threat`) VALUES
-(1, 1, 'Teststadt', 1, 1, 0),
-(2, 2, 'Zielstadt', 5, 5, 0);
+(1, 1, 'Abadan', 1, 1, 0),
+(2, 2, 'Nahavand', 5, 5, 0),
+(3, 2, 'Varamin', 1, 5, 0),
+(4, 2, 'Parsa', 2, 5, 0),
+(5, 2, 'Qutschan', 3, 5, 0),
+(6, 2, 'Rezaiyeh', 4, 5, 0),
+(7, 2, 'Amol', 5, 1, 0),
+(8, 2, 'Zahedan', 5, 2, 0),
+(9, 2, 'Yazd', 5, 3, 0),
+(10, 2, 'Babol', 5, 4, 0),
+(11, 2, 'Sirdschan', 4, 1, 0),
+(12, 2, 'Zabol', 4, 2, 0),
+(13, 2, 'Ekbatana', 4, 3, 0),
+(14, 2, 'Chark', 4, 4, 0),
+(15, 2, 'Ardakan', 3, 1, 0),
+(16, 2, 'Hamedan', 3, 2, 0),
+(17, 2, 'Teheran', 3, 3, 0),
+(18, 2, 'Damqan', 1, 3, 0),
+(19, 2, 'Kaschan', 2, 3, 0);
 
 --
 -- Daten für Tabelle `district_units`

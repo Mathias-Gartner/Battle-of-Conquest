@@ -14,7 +14,7 @@
         <area shape="poly" coords="578,383,544,365,510,340,477,325,443,296,430,281,414,238,456,229,485,216,510,230,548,230,570,224,593,227,613,214,599,188,572,170,537,159,531,154,534,115,565,117,598,123,635,138,669,167,676,207,676,246,668,294,652,322,626,345,603,364," href="?action=map&terrain=high_cities" alt="high_cities" title="high_cities" data-group="high_cities" />
 	</map>
 	<div class='mapbutton'>
-		<a href='?action=buildings' class='bigbutton'>
+		<a href='?action=buildings' class='bigbutton' style="margin-top:50px">
 			My City
 		</a>
 	</div>
