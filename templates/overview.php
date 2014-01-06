@@ -32,7 +32,7 @@
 	You have
 	<?php
 		if ($PAGEDATA['unitsCount'] == 1)
-		echo 'one warrios unit';
+		echo 'one warrior unit';
 		else
 		echo $PAGEDATA['unitsCount'].' warriors';
 	?>
