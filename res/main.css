@@ -170,12 +170,9 @@ html {
 	right: 15px; /* workaround */
 }
 
-.mapbutton {
+.map > .mapbutton {
 	position: relative;
 	bottom: 20px;
-}
-
-.map > mapbutton {
 	left: 15px; /* workaround */
 }
 
