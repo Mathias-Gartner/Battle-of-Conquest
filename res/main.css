@@ -123,6 +123,10 @@ html {
   border-top-right-radius:20px;
 }
 
+.content > div > p {
+  width: 80%;
+}
+
 .title {
   line-height: 1.2em;
   font-size: 1.5em;
@@ -152,10 +156,6 @@ html {
 
 #footerstuff > .title {
   margin-bottom: 30px;
-}
-
-#footerstuff > p {
-  width: 100%;
 }
 
 .box-padding {
@@ -233,8 +233,13 @@ html {
 }
 
 /*Overview, Attack Pages*/
+#overview > .linkbar {
+	width: 80%;
+}
+
 #overview > p {
 	margin: 20px 0 20px 0;
+	text-align: center;
 }
 
 .bigbutton {
@@ -296,22 +301,22 @@ html {
 
 .linkbar {
 	width: 100%;
-	margin: 20px 0 20px 0;
+	margin: 40px 0 40px 0;
 }
 
 /* page attacks */
 #sladi_start_attack > p {
-	margin: 50px 0 50px 0;
-	font-size: 2em;
+	margin: 20px 0 20px 0;
+	font-size: 1.5em;
 	text-align: center;
-}
-
-#sladi_start_attack > div {
-	margin-top: 50px;
 }
 
 #attacksListContainer {
 	flex-direction: column;
+}
+
+#attacksListContainer > .linkbar {
+	width: 80%;
 }
 
 #attacksListContainer div span {
@@ -328,6 +333,11 @@ html {
 #noAttacksDiv {
 	font-size: 1.2em;
 	padding: .3em;
+}
+
+#noAttacksDiv > div > div {
+	margin: 20px 0 20px 0;
+	font-size: 1.5em;
 }
 
 /* login */
