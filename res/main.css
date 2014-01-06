@@ -72,7 +72,7 @@ html {
 }
 
 .outer {
-  width: 90%;
+  width: 96%;
 }
 
 .middle {
@@ -92,11 +92,12 @@ html {
   height: 70px;
   background: rgb(61,61,57); /* Old browser */
   background: linear-gradient(to bottom,  rgba(61,61,57,1) 0%,rgba(68,31,17,1) 32%,rgba(42,27,10,1) 100%); /* W3C */
-  border-bottom-right-radius:20px;
-  border-bottom-left-radius:20px;
+  border-bottom-right-radius:15px;
+  border-bottom-left-radius:15px;
   font-family: navifont;
   text-transform: uppercase;
   font-weight: 300;
+  z-index: 2;
 }
 
 .nav > a {
@@ -107,12 +108,15 @@ html {
 
 /* Logo */
 .logo {
-  padding: 2px 0 10px 0;
-  margin: 10px 0 10px 0;
+  padding: 25px 0 15px 0;
+  margin: 0 0 10px 0;
   background: rgba(6,1,1,0.8);
   border-radius:20px;
   line-height: 2em;
   font-size: 2em;
+  position: relative;
+  top: -25px;
+  z-index: 1;
 }
 
 /* Content div */
