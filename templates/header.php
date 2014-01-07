@@ -23,4 +23,5 @@
 		<span class="logofont">battle of conquest</span>
 	</div>
 
+	<!-- Start of content div -->
 	<div class='content middle flex_grow'>

@@ -22,9 +22,7 @@ function init(){
 		}
     });
 	setMyDistrict();
-	$('#boc_open_docks_id').click(function(event){
-		hideBox();
-	});
+	$('#boc_open_docks_id').click(function(event){ hideBox(); });
 }
 
 function setMyDistrict(){

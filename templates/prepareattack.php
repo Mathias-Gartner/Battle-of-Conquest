@@ -9,7 +9,7 @@
 		<p>This city has no units! We are unable to attack, commander!</p>
 		<a href='javascript:history.back();'>Back</a>
 	<?php } else { ?>
-		<p><span class='quote'>How many units will you dispatch, commander?</span></p>
+		<p><span class='quote'>How many units will you send to battle, commander?</span></p>
 
 		<form class='flex_vert' action='?action=startAttack' method='POST'>
 			<input type='hidden' name='sourceId' value='<?php echo $PAGEDATA['sourceId']; ?>' />

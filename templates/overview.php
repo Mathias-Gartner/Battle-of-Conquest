@@ -19,24 +19,24 @@
 	</div>
 
 	<p>
-	You are in control of
-	<?php
+		You are in control of
+		<?php
 		if ($PAGEDATA['districtsCount'] == 1)
-		echo 'one city';
+			echo 'one city';
 		else
-		echo $PAGEDATA['districtsCount'].' cities';
-	?>.
+			echo $PAGEDATA['districtsCount'].' cities';
+		?>.
 	</p>
 	
 	<p>
-	You have
-	<?php
+		You have
+		<?php
 		if ($PAGEDATA['unitsCount'] == 1)
-		echo 'one warrior unit';
+			echo 'one warrior unit';
 		else
-		echo $PAGEDATA['unitsCount'].' warriors';
-	?>
-	under your command.
+			echo $PAGEDATA['unitsCount'].' warriors';
+		?>
+		under your command.
 	</p>
 	
 </div>

@@ -139,7 +139,7 @@ html {
 }
 
 .title + div {
-  margin: 10px 40px 50px 40px;
+  margin: 10px 40px 70px 40px;
 }
 
 /* Footer */
@@ -154,37 +154,28 @@ html {
 
 /* Footer-linked */
 #team > img{
-  position: relative;
   width: 90%;
 }
 
-#footerstuff > .title {
-  margin-bottom: 30px;
-}
-
-.box-padding {
-  flex-grow: 1;
-  line-height: 1.3em;
-}
-
 /* Maps */
-.map {
+#map {
 	/*padding: 24px;*/
 	position: relative; /* workaround */
 	right: 15px; /* workaround */
 }
 
-.map > .mapbutton {
+#map > .mapbutton {
 	position: relative;
 	bottom: 20px;
 	left: 15px; /* workaround */
 }
 
-/* Box district */
-.mapBoxShadow{
-  box-shadow: 0 0 7px 4px #000000;
+#map > .linkbar {
+	position: relative; /* workaround */
+	right: 15px; /* workaround */
 }
 
+/* Box district */
 #box{
 	padding:10px 40px; 
 	background:rgba(244, 244, 244, 0.95);
@@ -192,8 +183,12 @@ html {
 	height:50px;
 	border-radius:15px;
 	position:relative;
-	visibility:hidden;
+	visibility: hidden;
 	text-align:center;
+}
+
+.mapBoxShadow{
+	box-shadow: 0 0 7px 4px #000000;
 }
 
 .box_top{

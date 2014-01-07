@@ -8,6 +8,7 @@
 
 <div id="map" class="map">
 	<img src="res/BOC_Great_Canyons.png" alt="great_canyons" name="great_canyons" usemap="#great_canyons_map"  id="boc_great_canyons_id" class="boc_mapster mapBoxShadow"/>
+
 	<map id="great_canyons_map" name="great_canyons_map">
 		<area shape="circle" coords="392,345,8" href="#" alt="city" title="city" data-group="city1" />
 		<area shape="circle" coords="395,424,8" href="#" alt="city" title="city" data-group="city2" />
@@ -32,11 +33,11 @@
 
 	<div class='flex_hor linkbar'>
 		<div class='flex_centered'>
-			<a href='?action=buildings' class='bigbutton'>Your City</a>
+			<a href='?action=buildings' class='bigbutton'>Your city</a>
 		</div>
 
 		<div class='flex_centered'>
-			<a href='javascript:history.back()' class='bigbutton'>To Map</a>
+			<a href='javascript:history.back()' class='bigbutton'>To map</a>
 		</div>
 	</div>
 </div>

@@ -6,7 +6,7 @@
 	<form action="index.php?action=login" method="POST">
 		<?php if (isset($PAGEDATA["loginError"]) && $PAGEDATA["loginError"]) { ?>
 		<div>
-			<span class="errorMessage">Login fehlgeschlagen. Benutzername oder Passwort ung&uuml;ltig.</span>
+			<span class="errorMessage">Login failed. Please check username and password.</span>
 		</div>
 		<?php } ?>
 		<div id="loginFields">
