@@ -1,4 +1,5 @@
 <?php
+date_default_timezone_set("UTC"); // Sladi gets a PHP exeption without this.
 
 require 'configuration.php';
 
