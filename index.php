@@ -1,5 +1,5 @@
 <?php
-date_default_timezone_set("UTC"); // Sladi gets a PHP exeption without this.
+date_default_timezone_set("Europe/Vienna"); // Sladi gets a PHP exeption without this.
 
 require 'configuration.php';
 
