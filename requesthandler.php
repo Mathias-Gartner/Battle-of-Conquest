@@ -6,7 +6,7 @@ class RequestHandler
 	{
 		BattleHandler::handlePendingBattles();
 
-		TORM\Log::enable(true);
+		TORM\Log::enable(false);
 
 		$pageHandler = null;
 		if (isset($_GET['action']) )
