@@ -19,6 +19,7 @@ class BattleHandler
 		while (($attack = $pendingAttacks->next()) != NULL)
 		{
 			$attackUnits = $attack->attackUnits;
+			$sourceUnits = $attack->sourceDistrict->districtUnits;
 			$targetUnits = $attack->targetDistrict->districtUnits;
 			$attackUnitCount = $attackUnits->sum('count')+0;
 			$targetUnitCount = $targetUnits->sum('count')+0;
@@ -44,7 +45,7 @@ class BattleHandler
 				}
 			}
 			
-			while (($unit = $attackUnits->next()) != NULL && $targetUnitCount > 0)
+			while (($unit = $sourceUnits->next()) != NULL && $targetUnitCount > 0)
 			{
 				if ($unit->getCount() <= $targetUnitCount)
 				{
