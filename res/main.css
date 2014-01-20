@@ -364,7 +364,7 @@ html {
 	margin: 3px 0 3px 0;
 }
 
-#loginBox > form > .errorMessage {
+#loginBox > form > div > .errorMessage {
 	display: block;
 	margin-top: 20px;
 }
