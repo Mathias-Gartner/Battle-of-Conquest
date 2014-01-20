@@ -365,5 +365,6 @@ html {
 }
 
 #loginBox > form > .errorMessage {
-	margin-top: 10px;
+	display: block;
+	margin-top: 20px;
 }

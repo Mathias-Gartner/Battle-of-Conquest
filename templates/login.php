@@ -3,7 +3,7 @@
 <div class='title flex_centered'>Please login.</div>
 
 <div id="loginBox" class="flex_centered">
-	<form action="index.php?action=login" method="POST" class="flex_vert flex_centered">
+	<form action="index.php?action=login" method="POST">
 		<div id="loginFields" class='flex_vert'>
 			<input type="text" id="username" name="username" placeholder="Username" required autofocus />
 			<input type="password" id="password" name="password" placeholder="Passwort" required />
