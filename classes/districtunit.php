@@ -4,6 +4,16 @@ namespace Classes;
 
 class DistrictUnit extends \TORM\Model
 {
+	public function setUnitId($unitId)
+	{
+		$this->set("unit_id", $unitId);
+	}
+	
+	public function setDistrictId($districtId)
+	{
+		$this->set("district_id", $districtId);
+	}
+
 	public function getCount()
 	{
 		return $this->get("count");

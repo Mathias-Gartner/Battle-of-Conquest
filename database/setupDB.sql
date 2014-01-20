@@ -136,7 +136,7 @@ CREATE TABLE IF NOT EXISTS `districts` (
 
 DROP TABLE IF EXISTS `district_status`;
 CREATE TABLE IF NOT EXISTS `district_status` (
-  `district_id` int(11) NOT NULL,
+  `district_id` int(11) NOT NULL AUTO_INCREMENT,
   `resources` int(11) NOT NULL,
   `moral` float NOT NULL,
   `people` int(11) NOT NULL,
@@ -161,7 +161,7 @@ CREATE TABLE IF NOT EXISTS `district_status` (
 
 DROP TABLE IF EXISTS `district_units`;
 CREATE TABLE IF NOT EXISTS `district_units` (
-  `id` int(11) NOT NULL,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `unit_id` int(11) NOT NULL,
   `district_id` int(11) NOT NULL,
   `count` int(11) NOT NULL,
