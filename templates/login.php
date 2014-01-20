@@ -3,7 +3,7 @@
 <div class='title flex_centered'>Please login.</div>
 
 <div id="loginBox" class="flex_centered">
-	<form action="index.php?action=login" method="POST">
+	<form action="index.php?action=login" method="POST" class="flex_vert flex_centered">
 		<?php if (isset($PAGEDATA["loginError"]) && $PAGEDATA["loginError"]) { ?>
 		<div>
 			<span class="errorMessage">Login failed. Please check username and password.</span>
