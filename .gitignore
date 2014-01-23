@@ -1,2 +1,4 @@
 .*.swp
-configuration.php
+.project
+.buildpath
+.settings
