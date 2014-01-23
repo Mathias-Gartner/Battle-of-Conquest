@@ -4,10 +4,10 @@
 		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 		<title>Reservierung abschlie&szlig;en</title>
 	</head>
-	<body">
+	<body>
 		<?PHP
             print_r($_GET);
         ?>
-        
+
 	</body>
 </html>
