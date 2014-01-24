@@ -79,9 +79,9 @@ function resultFunction(response)
 			{
 				var attackerWonSpan = document.createElement("span");
 				if (response.attacks[i].attackerWon)
-					attackerWonSpan.innerHTML = "Der Angreifer hat gewonnen";
+					attackerWonSpan.innerHTML = "The attacker won";
 				else
-					attackerWonSpan.innerHTML = "Der Angreifer hat verloren";
+					attackerWonSpan.innerHTML = "The attacker lost";
 					
 				lineDiv.appendChild(attackerWonSpan);
 			}
@@ -148,7 +148,7 @@ function readyStateChangeProxy(ajaxObject, resultFunction)
         }
         else if (ajaxObject.readyState == 4 && ajaxObject.status != 200)
         {
-            alert("HTTP Fehler " + ajaxObject.status + ": " + ajaxObject.responseText);
+            alert("HTTP error " + ajaxObject.status + ": " + ajaxObject.responseText);
         }
     }
 }
