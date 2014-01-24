@@ -9,6 +9,7 @@
 <div id="map" class="map">
 	<img src="res/BOC_Open_Docks.png" alt="open_docks" name="open_docks" usemap="#open_docks_map" id="boc_open_docks_id" class="boc_mapster mapBoxShadow" />
 	<a href="?action=buildings"><img src="res/flag.png" alt="flag" id="flag" style="position:relative;left:376px;top:-236px;" /></a>
+    <input type="hidden" value="a" id="district_ids" />
 	
 	<!-- Image Maps for other cities -->
 	<map id="open_docks_map_id" name="open_docks_map">
@@ -33,7 +34,7 @@
 		<area shape="circle" coords="434,362,8" href="blank_district.html" id="19"alt="city" title="city" data-group="city19" />
 	</map>
 	
-	<div id="box" class="mapBoxShadow"><span class="box_top" id="box_label">City</span><span class="box_bottom" id="attack_button">Attack!</span></div>    
+	<div id="box" class="mapBoxShadow"><div class="box_top" id="box_label"></div><span class="box_bottom" id="attack_button">Attack!</span></div>    
 	
 	<div class='flex_hor linkbar'>	
 		<div class='flex_centered'>

@@ -37,6 +37,9 @@ class RequestHandler
 			case 'startAttack':
 				$pageHandler = new PageHandlers\StartAttackPageHandler();
 				break;
+			case 'cityname':
+				$pageHandler = new PageHandlers\CityNamesPageHandler();
+				break;
 			case 'footer':
 				$pageHandler = new PageHandlers\FooterPageHandler();
 				break;
