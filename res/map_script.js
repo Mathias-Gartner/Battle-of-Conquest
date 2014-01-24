@@ -8,10 +8,9 @@ function init(){
 			if(this.id=="my_district"){
 				window.location.href = this.href;
 			}else{
-				
 				switch(document.getElementById("attack_button").innerHTML){
 					case 'Create': 
-					document.getElementById("box_label").innerHTML = "Geb&auml;ude";
+					document.getElementById("box_label").innerHTML = this.id;
 					break;
 					
 					case 'Attack!':

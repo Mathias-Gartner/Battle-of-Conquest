@@ -9,7 +9,6 @@
 <div id="map" class="map">
 	<img src="res/BOC_Open_Docks.png" alt="open_docks" name="open_docks" usemap="#open_docks_map" id="boc_open_docks_id" class="boc_mapster mapBoxShadow" />
 	<a href="?action=buildings"><img src="res/flag.png" alt="flag" id="flag" style="position:relative;left:376px;top:-236px;" /></a>
-    <input type="hidden" value="a" id="district_ids" />
 	
 	<!-- Image Maps for other cities -->
 	<map id="open_docks_map_id" name="open_docks_map">
