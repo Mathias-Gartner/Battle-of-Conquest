@@ -34,12 +34,14 @@ class BattleHandler
 			{
 				if ($unit->getCount() <= $attackUnitCount)
 				{
-					$unit->destroy();
 					$attackUnitCount = $attackUnitCount - $unit->getCount();
+					$unit->destroy();
 				}
 				else
 				{
-					$unit->setCount($unit->getCount() - $attackUnitCount);
+					$newCount = $unit->getCount() - $attackUnitCount;
+					$attackUnitCount = $attackUnitCount - $unit->getCount();
+					$unit->setCount($newCount);
 					$unit->save();
 					break;
 				}
@@ -47,14 +49,25 @@ class BattleHandler
 			
 			while (($unit = $sourceUnits->next()) != NULL && $targetUnitCount > 0)
 			{
-				if ($unit->getCount() <= $targetUnitCount)
+				$attackUnit = \Classes\AttackUnit::first(array('unit_id'=>$unit->getUnitId(), 'attack_id'=>$attack->getAttackId()));
+				$maxFallen = $targetUnitCount;
+
+				if ($maxFallen == null)
+					$maxFallen = 0;
+
+				if ($maxFallen > $attackUnitCount) // units that weren't attacking cannot die
+					$maxFallen = $attackUnitCount;
+
+				if ($unit->getCount() <= $maxFallen)
 				{
-					$unit->destroy();
 					$targetUnitCount = $targetUnitCount - $unit->getCount();
+					$unit->destroy();
 				}
 				else
 				{
-					$unit->setCount($unit->getCount() - $targetUnitCount);
+					$newCount = $unit->getCount() - $maxFallen;
+					$targetUnitCount = $targetUnitCount - $maxFallen;
+					$unit->setCount($newCount);
 					$unit->save();
 					break;
 				}
