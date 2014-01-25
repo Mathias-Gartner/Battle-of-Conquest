@@ -1,14 +1,25 @@
 <?php
 namespace PageHandlers;
 
+use Classes\BuildingLevel;
 class BuildingsPageHandler extends PageHandler
 {
 
     public function handle()
     {
-        if (isset($_GET['id'])) {
+        if (isset($_GET['id']))
+        {
             return $this->ajaxRequest();
-        } else {
+        }
+        else if (isset($_GET['buildId']))
+        {
+           //$building = new BuildingLevel() ;
+           //$building->save();
+           $this->setPhpTemplate('buildings');
+           return $this;
+        }
+        else
+        {
             $this->setPhpTemplate('buildings');
             return $this;
         }
@@ -19,6 +30,12 @@ class BuildingsPageHandler extends PageHandler
         // get building name from id
         $buildingName = \Classes\Building::find($_GET['id']);
         echo $buildingName->getBuilding();
+        return $this;
+    }
+
+    private function hey()
+    {
+        $this->setPhpTemplate('buildings');
         return $this;
     }
 }

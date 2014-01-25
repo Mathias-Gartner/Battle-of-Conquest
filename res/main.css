@@ -189,6 +189,8 @@ html {
 
 .mapBoxShadow{
 	box-shadow: 0 0 7px 4px #000000;
+	/* stay in front of buildings */
+	z-index: 10;
 }
 
 .box_top{
@@ -366,4 +368,39 @@ html {
 #loginBox > form > div > .errorMessage {
 	display: block;
 	margin-top: 20px;
+}
+
+/* Buildings */
+#building2 {
+	top: -533px;
+	left: 576px;
+}
+
+#building4 {
+	top: -335px;
+	left: 535px;
+}
+
+#building5 {
+	top: -252px;
+	left: -25px;
+}
+
+
+.building_image {
+	height: 70px;
+	width: 70px;
+	background-image: url(rocks.png);
+	background-position: center;
+	/* multiple transition properties breaks image hover? */
+	/*
+	-webkit-transition-property: -webkit-transform, opacity;
+	-webkit-transition-duration: 0.15s;
+	-webkit-transition-timing-function: ease-in;
+	*/
+	background-size: contain;
+	background-repeat: no-repeat;
+	z-index: 9;
+	position: relative;
+	float: left;
 }
