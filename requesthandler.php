@@ -8,51 +8,11 @@ class RequestHandler
 
 		TORM\Log::enable(false);
 
-		$pageHandler = null;
-		if (isset($_GET['action']) )
-		{
-			switch ($_GET['action'])
-			{
-			case 'login':
-				$pageHandler = new PageHandlers\LoginPageHandler();
-				break;
-			case 'overview':
-				$pageHandler = new PageHandlers\OverviewPageHandler();
-				break;
-			case 'buildings':
-				$pageHandler = new PageHandlers\BuildingsPageHandler();
-				break;
-			case 'units':
-				$pageHandler = new PageHandlers\UnitsPageHandler();
-				break;
-			case 'attacks':
-				$pageHandler = new PageHandlers\AttacksPageHandler();
-				break;
-			case 'map':
-				$pageHandler = new PageHandlers\MapPageHandler();
-				break;
-			case 'prepareAttack':
-				$pageHandler = new PageHandlers\PrepareAttackPageHandler();
-				break;
-			case 'startAttack':
-				$pageHandler = new PageHandlers\StartAttackPageHandler();
-				break;
-			case 'cityname':
-				$pageHandler = new PageHandlers\CityNamesPageHandler();
-				break;
-			case 'footer':
-				$pageHandler = new PageHandlers\FooterPageHandler();
-				break;
-			default:
-				header('HTTP/1.1 404 Not Found');
-				echo '<h1>404 Unkown Action</h1>';
-				break;
-			}
-		}
-		else
-		{
-			$pageHandler = new PageHandlers\WelcomePageHandler();
-		}
+		$action = null;
+		if (isset($_GET['action']))
+			$action = $_GET['action'];
+
+		$pageHandler = RequestHandler::getPageHandlerForAction($action);
 
 		if ($pageHandler != null)
 		{
@@ -95,6 +55,59 @@ class RequestHandler
 		$district = Classes\District::first(array('district_name'=>'Entenhausen'));
 		var_dump($district->owner); // prints user
 		/**/
+	}
+	
+	public static function getPageHandlerForAction($action)
+	{
+		$pageHandler = null;
+		if ($action != null)
+		{
+			switch ($action)
+			{
+			case 'login':
+				$pageHandler = new PageHandlers\LoginPageHandler();
+				break;
+			case 'logout':
+				$pageHandler = new PageHandlers\LogoutPageHandler();
+				break;
+			case 'overview':
+				$pageHandler = new PageHandlers\OverviewPageHandler();
+				break;
+			case 'buildings':
+				$pageHandler = new PageHandlers\BuildingsPageHandler();
+				break;
+			case 'units':
+				$pageHandler = new PageHandlers\UnitsPageHandler();
+				break;
+			case 'attacks':
+				$pageHandler = new PageHandlers\AttacksPageHandler();
+				break;
+			case 'map':
+				$pageHandler = new PageHandlers\MapPageHandler();
+				break;
+			case 'prepareAttack':
+				$pageHandler = new PageHandlers\PrepareAttackPageHandler();
+				break;
+			case 'startAttack':
+				$pageHandler = new PageHandlers\StartAttackPageHandler();
+				break;
+			case 'cityname':
+				$pageHandler = new PageHandlers\CityNamesPageHandler();
+				break;
+			case 'footer':
+				$pageHandler = new PageHandlers\FooterPageHandler();
+				break;
+			default:
+				header('HTTP/1.1 404 Not Found');
+				echo '<h1>404 Unkown Action</h1>';
+				break;
+			}
+		}
+		else
+		{
+			$pageHandler = new PageHandlers\WelcomePageHandler();
+		}
+		return $pageHandler;
 	}
 }
 

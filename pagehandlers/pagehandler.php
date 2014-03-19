@@ -29,7 +29,7 @@ abstract class PageHandler
     foreach ($keys as $key)
     {
       $value = $this->_pageData[$key];
-      if (is_string($value))
+      if (is_string($value)) // prevent XSS
         $value = htmlspecialchars($value);
         
       $pageData[$key] = $value;
@@ -107,6 +107,12 @@ abstract class PageHandler
     $text = 'OK';
     switch($this->_returnCode)
     {
+    	case 301:
+    		$text = 'Moved Permanently';
+    		break;
+      case 302:
+        $text = 'Found';
+        break;
       case 400:
         $text = 'Bad Request';
         break;
