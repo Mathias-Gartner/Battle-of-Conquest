@@ -29,7 +29,9 @@ class BuildingsPageHandler extends PageHandler
     {
         // get building name from id
         $buildingName = \Classes\Building::find($_GET['id']);
-        echo $buildingName->getBuilding();
+        if ($buildingName != null)
+	        echo $buildingName->getBuilding();
+	        
         return $this;
     }
 

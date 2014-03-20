@@ -10,8 +10,8 @@
 	<img src="res/BOC_District_Blank.png" id="boc_my_district_id" usemap="#boc_my_district_map" alt="my_district" name="my_district" class="boc_mapster mapBoxShadow" />
     <map name="boc_my_district_map">
     	<area shape="poly" href="blank_district.html" coords="624,99,636,118,609,137,588,131,580,116,595,96" alt="first" title="" id="2" data-group="first" />
-        <area shape="poly" href="blank_district.html" coords="665,303,680,327,657,350,620,349,601,326,622,298" alt="second" title="" id="4" data-group="second" />
-        <area shape="poly" href="blank_district.html" coords="176,381,191,405,168,428,131,427,112,404,133,376" alt="third" title="" id="5" data-group="third" />
+        <area shape="poly" href="blank_district.html" coords="665,303,680,327,657,350,620,349,601,326,622,298" alt="second" title="" id="1" data-group="second" />
+        <area shape="poly" href="blank_district.html" coords="176,381,191,405,168,428,131,427,112,404,133,376" alt="third" title="" id="3" data-group="third" />
     </map>
     <div id="box" class="mapBoxShadow">
     	<span class="box_top" id="box_label"></span>
