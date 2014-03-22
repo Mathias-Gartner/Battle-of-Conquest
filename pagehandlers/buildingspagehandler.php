@@ -30,8 +30,11 @@ class BuildingsPageHandler extends PageHandler
         // get building name from id
         $buildingName = \Classes\Building::find($_GET['id']);
         if ($buildingName != null)
-	        echo $buildingName->getBuilding();
-	        
+        {
+        	$this->setAjaxTemplate('string');
+	        $this->setPageData('value', $buildingName->getBuilding());
+	      }
+	       
         return $this;
     }
 

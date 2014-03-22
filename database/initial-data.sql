@@ -88,6 +88,6 @@ COMMIT;
 -- Daten für Tabelle `buildings`
 --
 
-INSERT INTO `boc`.`buildings` (`building_id`, `building`, `resources`, `moral`, `people`, `diseases`, `luck`, `units_atk`, `units_def`, `move_speed`, `build_speed`, `resource_speed`) VALUES (NULL, 'Armory', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1');
-INSERT INTO `boc`.`buildings` (`building_id`, `building`, `resources`, `moral`, `people`, `diseases`, `luck`, `units_atk`, `units_def`, `move_speed`, `build_speed`, `resource_speed`) VALUES (NULL, 'Hospital', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1');
-INSERT INTO `boc`.`buildings` (`building_id`, `building`, `resources`, `moral`, `people`, `diseases`, `luck`, `units_atk`, `units_def`, `move_speed`, `build_speed`, `resource_speed`) VALUES (NULL, 'Brothel', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1');
+INSERT INTO `buildings` (`building_id`, `building`, `resources`, `moral`, `people`, `diseases`, `luck`, `units_atk`, `units_def`, `move_speed`, `build_speed`, `resource_speed`) VALUES (NULL, 'Armory', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1');
+INSERT INTO `buildings` (`building_id`, `building`, `resources`, `moral`, `people`, `diseases`, `luck`, `units_atk`, `units_def`, `move_speed`, `build_speed`, `resource_speed`) VALUES (NULL, 'Hospital', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1');
+INSERT INTO `buildings` (`building_id`, `building`, `resources`, `moral`, `people`, `diseases`, `luck`, `units_atk`, `units_def`, `move_speed`, `build_speed`, `resource_speed`) VALUES (NULL, 'Brothel', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1');

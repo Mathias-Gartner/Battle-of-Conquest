@@ -20,7 +20,8 @@ class CityNamesPageHandler extends PageHandler
 	{
 		//get district with id
 		$targetDistrict = \Classes\District::find($_GET['id']);
-		echo $targetDistrict->getName();
+		$this->setAjaxTemplate('string');
+		$this->setPageData('value', $targetDistrict->getName());
 		return $this;
 	}
 }
