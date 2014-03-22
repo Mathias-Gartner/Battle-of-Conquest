@@ -2,6 +2,8 @@
 <html>
 <head>
 	<link rel="stylesheet" type="text/css" href="res/main.css" />
+	
+	<title>Battle of Conquest</title>
 </head>
 
 <body class='site text_style flex_vert'>
