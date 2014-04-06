@@ -31,6 +31,7 @@ abstract class PageHandler
       $value = $this->_pageData[$key];
       if (is_string($value)) // prevent XSS
         $value = htmlspecialchars($value);
+      //TODO: htmlspecialchars for arrays
         
       $pageData[$key] = $value;
     }
@@ -56,6 +57,26 @@ abstract class PageHandler
   {
     return true;
   }
+  
+  public function getTemplate()
+	{
+		return $this->_template;
+	}
+	
+	public function getPageDataArray()
+	{
+		return $this->_pageData;
+	}
+	
+	public function getPageData($key)
+	{
+		return $this->_pageData[$key];
+	}
+	
+	public function getReturnCode()
+	{
+		return $this->returnCode;
+	}
   
   // $template must not be user input
   protected function setTemplate($template)
