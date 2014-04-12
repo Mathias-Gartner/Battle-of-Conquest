@@ -16,31 +16,39 @@ class PrepareAttackPageHandler extends PageHandler
 			$targetId = $_GET['targetId'];
 
 		if (!is_numeric($sourceId) || $sourceId <= 0
-			|| !is_numeric($targetId) || $targetId <= 0
-			|| \Classes\District::find($sourceId) == null)
+			|| !is_numeric($targetId) || $targetId <= 0)
 		{
 			$this->setReturnCode(500);
-			echo 'sourceId or targetId not valid';
+			$this->setMessage('sourceId or targetId not valid');
 			return $this;
 		}
 
+    $sourceDistrict = \Classes\District::find($sourceId);
+		if ($sourceDistrict == null)
+		{
+		  $this->setReturnCode(500);
+		  $this->setMessage('sourceId not found');
+		  return $this;
+		}
+		
 		$targetDistrict = \Classes\District::find($targetId);
 		if ($targetDistrict == null)
 		{
 			$this->setReturnCode(500);
-			echo 'targetId not found';
+			$this->setMessage('targetId not found');
 			return $this;
 		}
 		else if ($targetDistrict->getOwnerId() == $_SESSION['userid'])
 		{
 			$this->setReturnCode(500);
-			echo 'you cannot attack your own city';
+			$this->setMessage('you cannot attack your own city');
 			return $this;
 		}
 
 		$this->setPageData('sourceId', $sourceId);
 		$this->setPageData('targetId', $targetId);
 		$this->setPageData('targetCityName', $targetDistrict->getName());
+    $this->setPageData('distanceSeconds', StartAttackPageHandler::getDistanceSeconds($sourceDistrict, $targetDistrict));
 
 		$builder = \Classes\Unit::makeBuilder();
 		$builder->where = 'district_units.district_id=?';
@@ -65,7 +73,8 @@ class PrepareAttackPageHandler extends PageHandler
 			array_push($unitData, array('id'=>$unit->getUnitId(),
 							'name'=>$unit->getUnitName(),
 							'class'=>$unit->getUnitClass(),
-							'max'=>($available)
+							'max'=>($available),
+							'speed'=>$unit->getUnitSpeed()
 							 ));
 		}
 		$this->setPageData('units', $unitData);

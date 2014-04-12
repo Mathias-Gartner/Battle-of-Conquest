@@ -2,6 +2,8 @@
 <html>
 <head>
 	<link rel="stylesheet" type="text/css" href="res/main.css" />
+
+  <script type='application/javascript' src='res/common.js'></script>
 	
 	<title>Battle of Conquest</title>
 </head>
