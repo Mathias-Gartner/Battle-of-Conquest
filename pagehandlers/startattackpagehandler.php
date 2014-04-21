@@ -19,7 +19,7 @@ class StartAttackPageHandler extends PageHandler
         || !is_numeric($targetId) || $targetId <= 0)
   	{
 			$this->setReturnCode(500);
-			echo 'sourceId or targetId not valid';
+			$this->setMessage('sourceId or targetId not valid');
 			return $this;
   	}
   
@@ -28,15 +28,21 @@ class StartAttackPageHandler extends PageHandler
   	if ($targetDistrict == null || $sourceDistrict == null)
   	{
    		$this->setReturnCode(500);
-			echo 'targetId not found';
+			$this->setMessage('targetId not found');
 			return $this;
   	}
-  	else if ($targetDistrict->getOwnerId() == $_SESSION['userid'])
+  	if ($targetDistrict->getOwnerId() == $_SESSION['userid'])
   	{
 			$this->setReturnCode(500);
-			echo 'you cannot attack your own city';
+			$this->setMessage('you cannot attack your own city');
 			return $this;
   	}
+    if ($sourceDistrict->getOwnerId() != $_SESSION['userid'])
+    {
+      $this->setReturnCode(400);
+      $this->setMessage('you can only start attacks from your city');
+      return $this;
+    }
 
   	$this->setPhpTemplate('startAttack');
   	$this->setPageData('targetCityName', $targetDistrict->getName());
@@ -54,7 +60,7 @@ class StartAttackPageHandler extends PageHandler
    		$currentUnitId++;
   	}
   
-  	// TODO: Use SQL Transaction
+  	\TORM\Connection::getConnection()->beginTransaction();
   	$unitCountSum = 0;
   	foreach ($units as $unit)
   	{
@@ -70,6 +76,7 @@ class StartAttackPageHandler extends PageHandler
     	if ($unit['count'] > $available)
 			{
 				$this->setPageData('notEnoughUnits', 1);
+				\TORM\Connection::getConnection()->rollBack();
 				return $this;
 			}
 			$unitCountSum += $unit['count'];
@@ -78,6 +85,7 @@ class StartAttackPageHandler extends PageHandler
   	if ($unitCountSum < 1)
   	{
     	$this->setPageData('noUnitsSelected', 1);
+    	\TORM\Connection::getConnection()->rollBack();
     	return $this;
   	}
   
@@ -85,16 +93,24 @@ class StartAttackPageHandler extends PageHandler
   	$attack->setSourceDistrictId($sourceId);
   	$attack->setTargetDistrictId($targetId);
   
-  	$x = abs($sourceDistrict->getPositionX() - $targetDistrict->getPositionX());
-  	$y = abs($sourceDistrict->getPositionY() - $targetDistrict->getPositionY());
-  	$distance = sqrt($x*$x+$y*$y);
-  
-  	$datetime = new \DateTime();
-  	// 60 seconds wait for every distance unit
-		$datetime->add(new \DateInterval('PT'.round($distance*60).'S'));
-  	$attack->setBattleTime($datetime->format('Y-m-d H:i:s'));
+    $battleTime = $this->getBattleTime($sourceDistrict, $targetDistrict, $units);
+    if ($battleTime == false)
+    {
+      \TORM\Connection::getConnection()->rollBack();
+      $this->setReturnCode(500);
+      $this->setMessage('unit id invalid');
+      return $this;
+    }
+    
+  	$attack->setBattleTime($battleTime);
   	$attack->setBattleOver(false);
-  	$attack->save();
+  	if (!$attack->save())
+  	{
+  	  \TORM\Connection::getConnection()->rollBack();
+  	  $this->setReturnCode(500);
+  	  $this->setMessage('cannot save attack');
+  	  return;
+  	}
 	  
   	foreach ($units as $unit)
   	{
@@ -102,11 +118,49 @@ class StartAttackPageHandler extends PageHandler
     	$attackUnit->setAttackId($attack->getAttackId());
     	$attackUnit->setUnitId($unit['id']);
     	$attackUnit->setCount($unit['count']);
-			$attackUnit->save();
+			if (!$attackUnit->save())
+			{
+			  \TORM\Connection::getConnection()->rollBack();
+			  $this->setReturnCode(500);
+			  $this->setMessage('cannot save AttackUnit');
+			  return;
+			}
 		}
 	  
 		$this->setPageData('success', 1);
+		\TORM\Connection::getConnection()->commit();
 		return $this;
+	}
+	
+	// 60 seconds wait for every distance unit times UnitSpeed multiplier of slowest unit
+	function getBattleTime($sourceDistrict, $targetDistrict, $units)
+	{
+	  $movement = -1;
+	  foreach ($units as $unit)
+	  {
+	    $dbUnit = \Classes\Unit::find($unit['id']);
+	    if ($dbUnit == null)
+	      return false;
+      
+      $mvmt = $dbUnit->getUnitSpeed();
+      if ($movement < 0 || $mvmt < $movement)
+      {
+        $movement = $mvmt;
+      }
+	  }
+	
+	  $seconds = StartAttackPageHandler::getDistanceSeconds($sourceDistrict, $targetDistrict);
+  	$datetime = new \DateTime();
+		$datetime->add(new \DateInterval('PT'.round($seconds*$movement).'S'));
+		return $datetime->format('Y-m-d H:i:s');
+	}
+	
+	static function getDistanceSeconds($sourceDistrict, $targetDistrict)
+	{
+	  $x = abs($sourceDistrict->getPositionX() - $targetDistrict->getPositionX());
+  	$y = abs($sourceDistrict->getPositionY() - $targetDistrict->getPositionY());
+  	$distance = sqrt($x*$x+$y*$y);
+  	return round($distance*60);
 	}
 }
 
