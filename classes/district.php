@@ -24,6 +24,11 @@ class District extends \TORM\Model
 	  return $this->get("owner_id");
 	}
 	
+	public function setOwnerId($id)
+	{
+	  return $this->set("owner_id", $id);
+	}
+	
 	public function getPositionX()
 	{
 		return $this->get("position_x");

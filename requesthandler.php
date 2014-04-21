@@ -70,6 +70,9 @@ class RequestHandler
 			case 'logout':
 				$pageHandler = new PageHandlers\LogoutPageHandler();
 				break;
+			case 'register':
+				$pageHandler = new PageHandlers\RegisterPageHandler();
+				break;
 			case 'overview':
 				$pageHandler = new PageHandlers\OverviewPageHandler();
 				break;

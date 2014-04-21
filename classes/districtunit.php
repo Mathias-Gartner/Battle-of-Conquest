@@ -27,8 +27,8 @@ class DistrictUnit extends \TORM\Model
 
 DistrictUnit::setPK("id");
 DistrictUnit::setTableName("district_units");
-DistrictUnit::belongsTo("district", array("class_name"=>"District", "primary_key"=>"district_id", "foreign_key"=>"district_id"));
-DistrictUnit::hasOne("unit", array("class_name"=>"Unit", "primary_key"=>"unit_id", "foreign_key"=>"unit_id"));
+DistrictUnit::belongsTo("districts", array("class_name"=>"District", "primary_key"=>"district_id", "foreign_key"=>"district_id"));
+DistrictUnit::hasOne("units", array("class_name"=>"Unit", "primary_key"=>"unit_id", "foreign_key"=>"unit_id"));
 DistrictUnit::validates("count", array("numericality"=>true));
 
  ?>
