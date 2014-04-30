@@ -5,8 +5,8 @@ function init(){
         fillOpacity: 0.3,
         mapKey: 'data-group',
 		onClick: function (e) {
-			if(this.id=="my_district"){  // TODO: if clicked on this city circle in open_docs.php, open 'index.php?action=buildings'
-				window.location.href = this.href;
+			if(this.alt=="my_district"){  // TODO: if clicked on this city circle in open_docs.php, open 'index.php?action=buildings'
+				window.location.href = "?action=buildings";
 			}else{
 				var targetId = this.id;
 				switch(document.getElementById("attack_button").innerHTML){ // TODO: id too specific

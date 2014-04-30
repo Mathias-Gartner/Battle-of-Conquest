@@ -404,3 +404,7 @@ html {
 	position: relative;
 	float: left;
 }
+
+.my_district::before{
+	content:url(flag.png);
+}

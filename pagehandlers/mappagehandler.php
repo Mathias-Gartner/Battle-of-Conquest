@@ -8,6 +8,15 @@ class MapPageHandler extends PageHandler
 	{
 		if (isset($_GET['terrain']))
 		{
+			$districts = \Classes\District::where(array('owner_id'=>$_SESSION['userid']));
+			$districtsIDArr = array();
+			
+			foreach($districts as $district){
+				array_push($districtsIDArr, $district->district_id);	
+			}
+			
+	  		$this->setPageData('districtsIDArr', $districtsIDArr);
+			
 			switch($_GET['terrain'])
 			{
 				case 'high_cities':
