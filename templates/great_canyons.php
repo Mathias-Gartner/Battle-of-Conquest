@@ -7,30 +7,47 @@
 <div class='flex_centered title'>Great Canyons</div>
 
 <div id="map" class="map">
-	<img src="res/BOC_Great_Canyons.png" alt="great_canyons" name="great_canyons" usemap="#great_canyons_map"  id="boc_great_canyons_id" class="boc_mapster mapBoxShadow"/>
+	<img src="res/BOC_Great_Canyons.png" alt="great_canyons" name="great_canyons" usemap="#great_canyons_map_id"  id="boc_great_canyons_id" class="boc_mapster mapBoxShadow"/>
 
-	<map id="great_canyons_map" name="great_canyons_map">
-		<area shape="circle" coords="392,345,8" href="#" alt="city" title="city" data-group="city1" />
-		<area shape="circle" coords="395,424,8" href="#" alt="city" title="city" data-group="city2" />
-		<area shape="circle" coords="443,419,8" href="#" alt="city" title="city" data-group="city3" />
-		<area shape="circle" coords="425,453,8" href="#" alt="city" title="city" data-group="city4" />
-		<area shape="circle" coords="401,487,8" href="#" alt="city" title="city" data-group="city5" />
-		<area shape="circle" coords="433,486,8" href="#" alt="city" title="city" data-group="city6" />
-		<area shape="circle" coords="464,456,8" href="#" alt="city" title="city" data-group="city7" />
-		<area shape="circle" coords="492,422,8" href="#" alt="city" title="city" data-group="city8" />
-		<area shape="circle" coords="542,401,8" href="#" alt="city" title="city" data-group="city9" />
-		<area shape="circle" coords="499,374,8" href="#" alt="city" title="city" data-group="city10" />
-		<area shape="circle" coords="478,347,8" href="#" alt="city" title="city" data-group="city11" />
-		<area shape="circle" coords="426,323,8" href="#" alt="city" title="city" data-group="city12" />
-		<area shape="circle" coords="474,311,8" href="#" alt="city" title="city" data-group="city13" />
-		<area shape="circle" coords="507,324,8" href="#" alt="city" title="city" data-group="city14" />
-		<area shape="circle" coords="534,343,8" href="#" alt="city" title="city" data-group="city15" />
-		<area shape="circle" coords="563,361,8" href="#" alt="city" title="city" data-group="city16" />
-		<area shape="circle" coords="463,390,8" href="#" alt="city" title="city" data-group="city17" />
-		<area shape="circle" coords="406,390,8" href="#" alt="city" title="city" data-group="city18" />
-		<area shape="circle" coords="434,362,8" href="#" alt="city" title="city" data-group="city19" />
-	</map>
+	<!-- Image Maps for other cities -->
+    <map id="great_canyons_map_id" name="great_canyons_map">
+    <?php
+		$coordsArr = array("423,354,8","465,250,8","524,326,8","583,385,8","508,382,8","456,425,8","388,414,8","315,434,8","342,376,8","291,324,8","347,286,8","321,253,8","359,253,8","361,187,8","416,165,8","458,199,8","514,230,8","554,271,8","610,295,8","638,329,8","670,364,8","721,351,8","694,333,8","667,294,8","641,253,8","625,221,8","580,225,8","544,194,8","515,166,8","481,133,8","440,112,8","407,90,8","360,77,8","317,86,8","331,140,8","248,157,8","231,269,8","192,208,8","130,249,8","172,300,8","130,358,8","114,414,8","146,443,8","163,403,8","207,412,8","221,470,8","271,492,8","323,494,8","379,502,8","429,487,8","464,251,8","412,293,8","047,298,8","090,335,8","083,375,8");
+		
+		//make areas
+		for($i=0;$i<sizeof($coordsArr);$i++){
+			$id = $i+1;
+			echo "<area shape='circle' coords='" . $coordsArr[$i] . "' id='" . $id . "' title='city' href='blank_district.html' data-group='city" . $id . "' ";
+			if (isset($PAGEDATA['districtsIDArr'])){
+				foreach($PAGEDATA['districtsIDArr'] as $mapid){
+					if($mapid==$id){
+						echo "alt='my_district'";
+						break;
+					}
+				}
+			}
+			echo " />";
+		}
+		
+		echo "</map>";
+		
+		//make flags
+		foreach($PAGEDATA['districtsIDArr'] as $id){
+			$b = $id-1;
+			$size=sizeof($coordsArr);
+			if($b<$size){
+				$x = substr($coordsArr[$b],0,3) -15;
+				$y = substr($coordsArr[$b],4,3) - 30;
+				echo "<a href='?action=buildings' style='position:absolute;z-index:99;left:" . $x . "px;top:" . $y . "px;'><img src='res/flag.png' alt='flag' id='flag' /></a>";
+			}
+		}
+	?>
 
+	<div id="box" class="mapBoxShadow">
+		<div class="box_top" id="box_label"></div>
+		<span class="box_bottom" id="attack_button">Attack!</span>
+	</div>
+    
 	<div class='flex_hor linkbar'>
 		<div class='flex_centered'>
 			<a href='?action=buildings' class='bigbutton'>Your city</a>
@@ -41,5 +58,12 @@
 		</div>
 	</div>
 </div>
+
+<script type="application/javascript">
+	init();
+    $('#boc_great_canyons_id').click(function(event){
+        hideBox();
+    });
+</script>
 
 <?php include "footer.php"; ?>
