@@ -21,6 +21,7 @@
 				"id": <?php echo $attack['targetDistrictId']; ?>,
 				"name": "<?php echo $attack['targetDistrictName']; ?>"
 			},
+			"startTime": new Date("<?php echo $attack['startTime']; ?>"),
 			<?php if ($PAGEDATA['current']) { ?>
 			"secondsLeft": <?php echo $attack['secondsLeft']; ?>
 			<?php } else { ?>

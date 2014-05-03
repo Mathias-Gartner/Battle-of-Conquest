@@ -21,7 +21,8 @@
 			<span></span>
 		</div>
 
-		<div id='noAttacksDiv' style='display:none;'>There have been no attacks.</div>
+		<div id='noAttacksDiv' style='display:none;'>No attacks.</div>
+		<div id='loadingDiv'>Loading...</div>
 		<div id='attackListDiv'>
 
 		</div>

@@ -8,7 +8,7 @@ class BattleHandler
 		$currentDate = $currentDate->format('Y-m-d H:i:s');
 	
 		$builder = \Classes\Attack::makeBuilder();
-		$builder->where = 'battle_over = 0 and battle_time < ?';
+		$builder->where = 'battle_state = 0 and battle_time < ?';
 		$builder->order = 'battle_time';
 		$pendingAttacks = new \Torm\Collection($builder, array($currentDate), '\Classes\Attack');
 
@@ -26,7 +26,7 @@ class BattleHandler
 			$attackerWon = ($attackUnitCount > $targetUnitCount);
 
 			$attack->setAttackerWon($attackerWon);
-			$attack->setBattleOver(true);
+			$attack->setBattleOver();
 			$attack->save();
 			
 			// remove units that died in the battle

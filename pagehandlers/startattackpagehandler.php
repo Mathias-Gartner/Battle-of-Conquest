@@ -92,6 +92,8 @@ class StartAttackPageHandler extends PageHandler
   	$attack = new \Classes\Attack();
   	$attack->setSourceDistrictId($sourceId);
   	$attack->setTargetDistrictId($targetId);
+  	$datetime = new \DateTime();
+		$attack->setStartTime($datetime->format('Y-m-d H:i:s'));
   
     $battleTime = $this->getBattleTime($sourceDistrict, $targetDistrict, $units);
     if ($battleTime == false)
@@ -103,7 +105,7 @@ class StartAttackPageHandler extends PageHandler
     }
     
   	$attack->setBattleTime($battleTime);
-  	$attack->setBattleOver(false);
+  	$attack->setBattleState(0);
   	if (!$attack->save())
   	{
   	  \TORM\Connection::getConnection()->rollBack();

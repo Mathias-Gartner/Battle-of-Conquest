@@ -2,7 +2,7 @@ function formattedTime(totalseconds)
 {
 	var hours = Math.floor(totalseconds/3600);
 	var minutes = Math.floor((totalseconds/60)%60) + "";
-	var seconds = totalseconds%60 + "";
+	var seconds = Math.floor(totalseconds%60) + "";
 	if (minutes.length == 1)
 		minutes = "0" + minutes;
 	if (seconds.length == 1)

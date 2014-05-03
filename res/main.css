@@ -233,6 +233,17 @@ html {
 }
 
 /*Overview, Attack Pages*/
+.tiny {
+	font-size: .5em;
+	text-transform: uppercase;
+}
+
+#attackListDiv div div {
+	line-height: 28px;
+	margin-top: .8em;
+	width: 100%;
+}
+
 #overview > .linkbar {
 	width: 80%;
 }
@@ -298,6 +309,64 @@ html {
 	top:1px;
 }
 
+.secondsLeftLabel {
+  margin-top: -5px;
+  float: right;
+}
+
+.cancelButton {
+  display: inline-block;
+	font-size:1.0em;
+	height:28px;
+	line-height:28px;
+	width:100px;
+	float: right;
+	
+	-webkit-border-top-left-radius:6px;
+	-moz-border-radius-topleft:6px;
+	border-top-left-radius:6px;
+	-webkit-border-top-right-radius:6px;
+	-moz-border-radius-topright:6px;
+	border-top-right-radius:6px;
+	-webkit-border-bottom-right-radius:6px;
+	-moz-border-radius-bottomright:6px;
+	border-bottom-right-radius:6px;
+	-webkit-border-bottom-left-radius:6px;
+	-moz-border-radius-bottomleft:6px;
+	border-bottom-left-radius:6px;
+}
+
+.mouseOverPopup {
+  display: inline;
+  text-align: right;
+  width: 6.2em;
+  max-width: 6.2em;
+  height: 2.8em;
+  padding-top: -0.4em;
+  padding-left: 0.4em;
+  padding-right: 0.4em;
+  background-color: #000000;
+  border-color: #ffffff;
+  border-style: solid;
+  border-radius: 8px;
+  border-width: 2px;
+  margin-right: -.5em;
+  margin-left: auto;
+  line-height: normal;
+  /*box-shadow: 0 0 30px 10px rgba(0,0,0,0.4);*/
+}
+
+.mouseOverPopup span {
+    display: inline-block;
+    margin-top: .2em;
+    margin-bottom: -1em;
+    line-height: 1em;
+}
+
+.mouseOverPopup div {
+    line-height: 0.5 !important;
+    margin-top: 0 !important;
+}
 
 .linkbar {
 	width: 100%;

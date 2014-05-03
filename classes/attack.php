@@ -4,6 +4,13 @@ namespace Classes;
 
 class Attack extends \TORM\Model
 {
+  /*public enum AttackState
+  {
+    Engaging = 0,
+    BattleOver = 1,
+    Cancelled = 2
+  }*/
+
   public function getAttackId()
   {
     return $this->get("attack_id");
@@ -29,6 +36,16 @@ class Attack extends \TORM\Model
     $this->set("target_district_id", $targetDistrictId);
   }
   
+  public function getStartTime()
+  {
+    return $this->get("start_time");
+  }
+  
+  public function setStartTime($startTime)
+  {
+    $this->set("start_time", $startTime);
+  }
+  
   public function getBattleTime()
   {
     return $this->get("battle_time");
@@ -39,14 +56,24 @@ class Attack extends \TORM\Model
     $this->set("battle_time", $battleTime);
   }
   
-  public function getBattleOver()
+  public function getBattleState()
   {
-  	return $this->get("battle_over");
+    return $this->get("battle_state");
   }
   
-  public function setBattleOver($battleOver)
+  public function setBattleState($state)
   {
-  	$this->set("battle_over", $battleOver);
+    return $this->set("battle_state", $state);
+  }
+  
+  public function getBattleOver()
+  {
+  	return $this->getBattleState() == 1;
+  }
+  
+  public function setBattleOver()
+  {
+  	$this->setBattleState(1);
   }
   
   public function getAttackerWon()
@@ -57,6 +84,15 @@ class Attack extends \TORM\Model
   public function setAttackerWon($attackerWon)
   {
   	$this->set("attacker_won", $attackerWon);
+  }
+  
+  public function cancel()
+  {
+    if ($this->getBattleOver())
+      return;
+      
+    $this->setBattleState(2);
+    return $this->save();
   }
 }
 

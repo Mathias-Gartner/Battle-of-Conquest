@@ -60,7 +60,7 @@ function unitNumberChanged()
   {
     var numberField = numberFields[i];
     var id = numberField.name.replace('unit_', '') * 1;
-    if (numberField.value == undefined || numberField.value == null || isNaN(numberField.value) || numberField.value < 1)
+    if (isNaN(numberField.value) || numberField.value < 1)
       continue;
     
     for (var j=0; j<speeds.length; j++)
