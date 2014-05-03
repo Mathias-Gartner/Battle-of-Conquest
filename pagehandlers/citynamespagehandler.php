@@ -20,6 +20,13 @@ class CityNamesPageHandler extends PageHandler
 	{
 		//get district with id
 		$targetDistrict = \Classes\District::find($_GET['id']);
+		if ($targetDistrict == null)
+		{
+			$this->setReturnCode(500);
+			$this->setMessage('District not found');
+			return $this;
+		}
+		
 		$this->setAjaxTemplate('string');
 		$this->setPageData('value', $targetDistrict->getName());
 		return $this;
