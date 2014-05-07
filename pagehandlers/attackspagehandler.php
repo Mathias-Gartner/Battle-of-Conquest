@@ -29,22 +29,22 @@ class AttacksPageHandler extends PageHandler
 		$builder->order = 'battle_time DESC';
 		$builder->limit = 10;
 		$builder->joins = 'JOIN districts ON districts.district_id = attacks.source_district_id';
-		$builder->where = 'districts.owner_id = ? and attacks.battle_state '.($current?'':'!').'= 0';
+		$builder->where = 'districts.owner_id = ?';// and attacks.battle_state '.($current?'':'!').'= 0';
 		$attacks = new \Torm\Collection($builder, array($_SESSION['userid']), '\Classes\Attack');
 
-		$attackData = $this->addAttacks(null, $attacks);
+		$attackData = $this->addAttacks(null, $attacks, false);
 		
 		// inbound attacks
 		$builder->joins = 'JOIN districts ON districts.district_id = attacks.target_district_id';
 		$attacks = new \Torm\Collection($builder, array($_SESSION['userid']), '\Classes\Attack');
-		$attackData = $this->addAttacks($attackData, $attacks);
+		$attackData = $this->addAttacks($attackData, $attacks, true);
 				
 		$this->setPageData('attacks', $attackData);
 		$this->setPageData('current', $current);
 		return $this;
 	}
 	
-	private function addAttacks($array, $collection)
+	private function addAttacks($array, $collection, $incoming)
 	{
 		if ($array == null)
 			$array = array();
@@ -54,11 +54,20 @@ class AttacksPageHandler extends PageHandler
 		while (($attack = $collection->next()) != NULL)
 		{
 			$battleTime = new \DateTime($attack->getBattleTime());
-			$secondsLeft = abs($battleTime->getTimestamp() - $currentDate->getTimestamp());
+			$secondsLeft = 0;
+			if ($attack->isReturning())
+			{
+				$secondsLeft = abs($attack->getReturnTime()->getTimestamp() - $currentDate->getTimestamp());
+			}
+			else
+			{
+				$secondsLeft = abs($battleTime->getTimestamp() - $currentDate->getTimestamp());
+			}
+			
 			// TODO: eager fetching of districts
 			$targetDistrict = $attack->targetDistrict;
 			$sourceDistrict = $attack->sourceDistrict;
-			
+
 			array_push($array, array(
 				'id'=>$attack->getAttackId(),
 				'startTime'=>str_replace(' ', 'T', $attack->getStartTime()),
@@ -67,7 +76,10 @@ class AttacksPageHandler extends PageHandler
 				'targetDistrictName'=>$targetDistrict->getName(),
 				'sourceDistrictId'=>$sourceDistrict->getDistrictId(),
 				'sourceDistrictName'=>$sourceDistrict->getName(),
+				'incoming'=>$incoming,
 				'secondsLeft'=>$secondsLeft,
+				'returning'=>$attack->isReturning(),
+				'completed'=>$attack->isCompleted(),
 				'attackerWon'=>($attack->getAttackerWon() == NULL ? "null" : $attack->getAttackerWon())
 				));
 		}

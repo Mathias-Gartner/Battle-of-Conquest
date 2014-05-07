@@ -6,6 +6,10 @@ class UnitsPageHandler extends PageHandler
 {
 	public function handle()
 	{
+		if (isset($_GET['ajax']))
+		{
+		
+		}
 		$this->setPhpTemplate('units');
 		
 		if (isset($_GET['perform']) && $_GET['perform'] == 'debugAdd')

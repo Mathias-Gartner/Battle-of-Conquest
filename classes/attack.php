@@ -8,7 +8,9 @@ class Attack extends \TORM\Model
   {
     Engaging = 0,
     BattleOver = 1,
-    Cancelled = 2
+    Cancelled = 2,
+    BattleOverUnitsReturned = 3,
+    CancelledUnitsReturned = 4
   }*/
 
   public function getAttackId()
@@ -76,6 +78,11 @@ class Attack extends \TORM\Model
   	$this->setBattleState(1);
   }
   
+  public function isCancelled()
+	{
+		return $this->getBattleState() == 2;
+	}
+  
   public function getAttackerWon()
   {
   	return $this->get("attacker_won");
@@ -90,9 +97,45 @@ class Attack extends \TORM\Model
   {
     if ($this->getBattleOver())
       return;
-      
+
+  	$datetime = new \DateTime();
+    $this->setBattleTime($datetime->format('Y-m-d H:i:s'));
     $this->setBattleState(2);
     return $this->save();
+  }
+  
+  public function getReturnTime()
+  {
+  	$startTime = new \DateTime($this->getStartTime());
+  	$battleTime = new \DateTime($this->getBattleTime());
+  	$travelTime = $startTime->diff($battleTime);
+  	return $battleTime->add($travelTime);
+  }
+  
+  public function isReturning()
+  {
+  	$current = new \DateTime();
+  	$startTime = new \DateTime($this->getStartTime());
+  	$battleTime = new \DateTime($this->getBattleTime());
+  	$travelTime = $startTime->diff($battleTime);
+  	
+  	if ($current < $battleTime)
+  		return false;
+		
+		if ($current > $battleTime->add($travelTime))
+			return false;
+
+		return true;
+  }
+  
+  public function isCompleted()
+  {
+  	$current = new \DateTime();
+  	$battleTime = new \DateTime($this->getBattleTime());
+  	if ($current < $battleTime)
+  		return false;
+  		
+		return !$this->isReturning();
   }
 }
 

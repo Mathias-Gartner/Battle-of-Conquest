@@ -79,53 +79,62 @@ function hideMouseOverPopup(event)
 
 function resultFunction(response)
 {
-    var loadingDiv = document.getElementById("loadingDiv");
-		var noAttacksDiv = document.getElementById("noAttacksDiv");
-    var attackListDiv = document.getElementById("attackListDiv");
-    attackIds = new Array();
-		
-		// prepare in new element for seamless updates
-		var listDiv = document.createElement("div");
-    
-    if (response.attacks.length < 1)
-    {
-    	noAttacksDiv.style.display = "block";
-    	attackListDiv.innerHTML = "";
-    	loadingDiv.style.display = "none";
-    	return;
-    }
-    else
-    	noAttacksDiv.style.display = "none";
-    
-    for (var i=0; i<response.attacks.length; i++)
-    {
-			var lineDiv = document.createElement("div");
-			if (!current)
+  var displayedAttacks = 0;
+  var loadingDiv = document.getElementById("loadingDiv");
+	var noAttacksDiv = document.getElementById("noAttacksDiv");
+  var attackListDiv = document.getElementById("attackListDiv");
+  attackIds = new Array();
+	
+	// prepare in new element for seamless updates
+	var listDiv = document.createElement("div");
+  
+  for (var i=0; i<response.attacks.length; i++)
+  {
+		var lineDiv = document.createElement("div");
+		if (current)
+		{
+			if (response.attacks[i].completed)
+				continue;
+				
+			var stateSpan = document.createElement("span");
+			stateSpan.className = "stateLabel";
+			stateSpan.innerHTML = response.attacks[i].returning ? "Returning" : "Engaging";
+			lineDiv.appendChild(stateSpan);
+		}
+		else
+		{
+			if (!response.attacks[i].completed)
+				continue;
+				
+			var timeSpan = document.createElement("span");
+			timeSpan.innerHTML = response.attacks[i].time;
+			lineDiv.appendChild(timeSpan);
+		}
+		var sourceSpan = document.createElement("span");
+		sourceSpan.innerHTML = response.attacks[i].source.name;
+		lineDiv.appendChild(sourceSpan);
+		var arrowSpan = document.createElement("span");
+		arrowSpan.innerHTML = "->";
+		lineDiv.appendChild(arrowSpan);
+		var targetSpan = document.createElement("span");
+		targetSpan.innerHTML = response.attacks[i].target.name;
+		lineDiv.appendChild(targetSpan);
+		if (response.attacks[i].secondsLeft != undefined)
+		{
+			var secondsLeftSpan = document.createElement("span");
+			secondsLeftSpan.id = "secondsLeft_" + response.attacks[i].id;
+			secondsLeftSpan.className = "secondsLeftLabel";
+			secondsLeftSpan.setAttribute("secondsLeft", response.attacks[i].secondsLeft);
+			secondsLeftSpan.innerHTML = formattedTime(response.attacks[i].secondsLeft);
+			
+			attackIds.push(response.attacks[i].id);
+			
+			if (response.attacks[i].returning)
 			{
-				var timeSpan = document.createElement("span");
-				timeSpan.innerHTML = response.attacks[i].time;
-				lineDiv.appendChild(timeSpan);
+				lineDiv.appendChild(secondsLeftSpan);
 			}
-			var sourceSpan = document.createElement("span");
-			sourceSpan.innerHTML = response.attacks[i].source.name;
-			lineDiv.appendChild(sourceSpan);
-			var arrowSpan = document.createElement("span");
-			arrowSpan.innerHTML = "->";
-			lineDiv.appendChild(arrowSpan);
-			var targetSpan = document.createElement("span");
-			targetSpan.innerHTML = response.attacks[i].target.name;
-			lineDiv.appendChild(targetSpan);
-			if (response.attacks[i].secondsLeft != undefined)
+			else
 			{
-				var secondsLeftSpan = document.createElement("span");
-				secondsLeftSpan.id = "secondsLeft_" + response.attacks[i].id;
-				secondsLeftSpan.className = "secondsLeftLabel";
-				secondsLeftSpan.setAttribute("secondsLeft", response.attacks[i].secondsLeft);
-				secondsLeftSpan.innerHTML = formattedTime(response.attacks[i].secondsLeft);
-				
-				//lineDiv.appendChild(secondsLeftSpan);
-				attackIds.push(response.attacks[i].id);
-				
 				var cancelButton = document.createElement("a");
 				cancelButton.className = "cancelButton bigbutton";
 				cancelButton.id = "cancelButton_" + response.attacks[i].id;
@@ -135,7 +144,7 @@ function resultFunction(response)
 				cancelButton.onmouseover = showMouseOverPopup;
 				lineDiv.appendChild(cancelButton);
 				lineDiv.appendChild(secondsLeftSpan);
-								
+							
 				var returnTimePopup = document.createElement("div");
 				returnTimePopup.id = "returnTimeDiv_" + response.attacks[i].id;
 				returnTimePopup.className = "mouseOverPopup";
@@ -146,24 +155,35 @@ function resultFunction(response)
 				returnTimePopup.startTime = response.attacks[i].startTime;
 				lineDiv.appendChild(returnTimePopup);
 			}
-			else if (response.attacks[i].attackerWon != undefined)
-			{
-				var attackerWonSpan = document.createElement("span");
-				if (response.attacks[i].attackerWon)
-					attackerWonSpan.innerHTML = "The attacker won";
-				else
-					attackerWonSpan.innerHTML = "The attacker lost";
-					
-				lineDiv.appendChild(attackerWonSpan);
-			}
-			
-		  
-			listDiv.appendChild(lineDiv);
+		}
+		else if (response.attacks[i].attackerWon != undefined)
+		{
+			var attackerWonSpan = document.createElement("span");
+			if (response.attacks[i].attackerWon)
+				attackerWonSpan.innerHTML = "The attacker won";
+			else
+				attackerWonSpan.innerHTML = "The attacker lost";
+				
+			lineDiv.appendChild(attackerWonSpan);
 		}
 		
-		loadingDiv.style.display = "none";
-		attackListDiv.innerHTML = "";
-		attackListDiv.appendChild(listDiv);
+	  displayedAttacks++;
+		listDiv.appendChild(lineDiv);
+	}
+	
+  if (displayedAttacks < 1)
+  {
+  	noAttacksDiv.style.display = "block";
+  	attackListDiv.innerHTML = "";
+  	loadingDiv.style.display = "none";
+  	return;
+  }
+  else
+  	noAttacksDiv.style.display = "none";
+	
+	loadingDiv.style.display = "none";
+	attackListDiv.innerHTML = "";
+	attackListDiv.appendChild(listDiv);
 }
 
 function updateSecondsLeft(id)

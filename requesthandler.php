@@ -5,6 +5,7 @@ class RequestHandler
 	public static function handle()
 	{
 		BattleHandler::handlePendingBattles();
+		BattleHandler::handleReturningAttacks();
 
 		TORM\Log::enable(false);
 
