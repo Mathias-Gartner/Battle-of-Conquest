@@ -29,7 +29,7 @@ function init(){
 			}
 		}
     });
-	$('#boc_open_docks_id').click(function(event){ hideBox(); });
+	$('.bocMapImage').click(function(event){ hideBox(); });
 }
 
 function setCityNameByID(id)

@@ -185,6 +185,7 @@ html {
 	position:relative;
 	visibility: hidden;
 	text-align:center;
+	z-index:99;
 }
 
 .mapBoxShadow{
