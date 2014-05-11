@@ -287,17 +287,23 @@ TRUNCATE TABLE `users`;
 INSERT INTO `users` (`user_id`, `username`, `age`, `mail`, `password`, `salt`) VALUES
 (1, 'admin', 1, 'admin@localhost.com', unhex('a421de3a817384f7d069b417197eebe01e0a6efc'), '93439'),
 (2, 'victim', 12, 'test@localhost', unhex('a421de3a817384f7d069b417197eebe01e0a6efc'), '93439');
+
+--
+-- Daten fÃ¼r Tabelle `buildings`
+--
+
+TRUNCATE TABLE `buildings`;
+
+INSERT INTO `buildings` (`building_id`, `building`, `resources`, `moral`, `people`, `diseases`, `luck`, `units_atk`, `units_def`, `move_speed`, `build_speed`, `resource_speed`)
+VALUES (1, 'Armory', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1');
+INSERT INTO `buildings` (`building_id`, `building`, `resources`, `moral`, `people`, `diseases`, `luck`, `units_atk`, `units_def`, `move_speed`, `build_speed`, `resource_speed`)
+VALUES (2, 'Hospital', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1');
+INSERT INTO `buildings` (`building_id`, `building`, `resources`, `moral`, `people`, `diseases`, `luck`, `units_atk`, `units_def`, `move_speed`, `build_speed`, `resource_speed`)
+VALUES (3, 'Brothel', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1');
+
 SET FOREIGN_KEY_CHECKS=1;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
-
---
--- Daten fÃ¼r Tabelle `buildings`
---
-
-INSERT INTO `buildings` (`building_id`, `building`, `resources`, `moral`, `people`, `diseases`, `luck`, `units_atk`, `units_def`, `move_speed`, `build_speed`, `resource_speed`) VALUES (NULL, 'Armory', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1');
-INSERT INTO `buildings` (`building_id`, `building`, `resources`, `moral`, `people`, `diseases`, `luck`, `units_atk`, `units_def`, `move_speed`, `build_speed`, `resource_speed`) VALUES (NULL, 'Hospital', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1');
-INSERT INTO `buildings` (`building_id`, `building`, `resources`, `moral`, `people`, `diseases`, `luck`, `units_atk`, `units_def`, `move_speed`, `build_speed`, `resource_speed`) VALUES (NULL, 'Brothel', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1');
