@@ -441,21 +441,20 @@ html {
 }
 
 /* Buildings */
-#building2 {
-	top: -533px;
-	left: 576px;
-}
-
-#building4 {
+#building1 {
 	top: -335px;
-	left: 535px;
+	left: 604px;
 }
 
-#building5 {
+#building2 {
+	top: -543px;
+	left: 502px;
+}
+
+#building3 {
 	top: -252px;
 	left: -25px;
 }
-
 
 .building_image {
 	height: 70px;
