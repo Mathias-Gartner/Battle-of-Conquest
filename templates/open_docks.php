@@ -4,7 +4,10 @@
 <script type="application/javascript" src="res/jquery.imagemapster.min.js"></script>
 <script type="application/javascript" src="res/map_script.js"></script>
 
-<div class='flex_centered title'>Open Docks</div>
+<article id="home" class="panel">
+	<header>
+		<h2>Open Docks</h2>
+	</header>
 
 <div id="map" class="map">
 	<img src="res/BOC_Open_Docks.png" alt="open_docks" name="open_docks" usemap="#boc_map" class="boc_mapster mapBoxShadow bocMapImage" />
@@ -58,7 +61,7 @@
 			<a href='javascript:history.back()' class='bigbutton'>To Map</a>
 		</div>
 	</div>
-</div>
+</article>
 
 
 <script type="application/javascript">

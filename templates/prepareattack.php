@@ -1,8 +1,11 @@
 <?php include 'header.php' ?>
 
-<div class='flex_centered title'>
+<article id="welcome" class="panel" >
+      <header>
+        <h2>
 	<?php echo 'Prepare the attack on '.$PAGEDATA['targetCityName'].'!'; ?>
-</div>
+        </h2>
+      </header>
 
 <div class='flex_vert' id='sladi_prepare_attack'>
 	<?php if (count($PAGEDATA['units']) == 0) { ?>
@@ -30,7 +33,7 @@
 		</form>
 	<?php } ?>
 </div>
-
+</article>
 <script type='application/javascript'>
 
 var speeds = ([

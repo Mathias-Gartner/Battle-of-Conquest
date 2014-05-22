@@ -4,7 +4,10 @@
 <script type="application/javascript" src="res/jquery.imagemapster.min.js"></script>
 <script type="application/javascript" src="res/map_script.js"></script>
 
-<div class='flex_centered title'>High cities</div>
+<article id="welcome" class="panel" >
+			<header>
+				<h2>High cities</h2>
+			</header>
 
 <div id="map" class="map">
 	<img src="res/BOC_High Cities.png" alt="high_cities" name="high_cities" usemap="#boc_map" class="boc_mapster mapBoxShadow bocMapImage"/>
@@ -61,7 +64,7 @@
 		</div>
 	</div>
 </div>
-
+</article>
 
 <script type="application/javascript">
 	init();

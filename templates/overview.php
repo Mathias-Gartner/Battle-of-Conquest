@@ -4,9 +4,9 @@
 	Welcome <?php echo $_SESSION['username']; ?>!
 </div>
 
-<div class="flex_vert" id="overview">
+ <article id="home" class="panel">
 
-	<div class='flex_hor linkbar'>
+	<div class='linkbar'>
 
 		<div class='flex_centered'>
 			<a href='?action=buildings' class='bigbutton'>Your City</a>
@@ -38,7 +38,6 @@
 		?>
 		under your command.
 	</p>
-	
-</div>
+</article>
 
 <?php include 'footer.php' ?>
