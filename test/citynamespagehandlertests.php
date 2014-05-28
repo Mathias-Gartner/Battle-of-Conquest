@@ -3,8 +3,7 @@
 include_once 'basetest.php';
 //include_once '../pagehandlers/citynamespagehandler.php';
 
-class CityNamesPageHandlerTests extends BaseTest
-{
+class CityNamesPageHandlerTests extends \BaseTest {
 	public function testInvalidNoId()
 	{
 		$ph = new \PageHandlers\CityNamesPageHandler();
