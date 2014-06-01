@@ -6,7 +6,7 @@
 
 <article id="welcome" class="panel" >
 			<header>
-				<h2>Great Canyons</h2>
+				<h2 class='flex_centered'>Great Canyons</h2>
 			</header>
 	<div id="map" class="map">
 		<img src="res/BOC_Great_Canyons.png" alt="great_canyons" name="great_canyons" usemap="#boc_map" class="boc_mapster mapBoxShadow bocMapImage"/>

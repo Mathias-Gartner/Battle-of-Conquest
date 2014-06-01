@@ -2,7 +2,7 @@
 
 <article id="login" class="panel">
 	<header>
-		<h2>Please login!</h2>
+		<h2 class='flex_centered'>Please login!</h2>
 	</header>
 
 	<div id="loginBox">

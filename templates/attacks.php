@@ -4,7 +4,7 @@
 
 	<article id="home" class="panel">
 		<header>
-			<h2>Overview of your attacks</h2>
+			<h2 class='flex_centered'>Overview of your attacks</h2>
 		</header>	
 	    
 		<div id="attacksListContainer">

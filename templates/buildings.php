@@ -6,7 +6,7 @@
 
  <article id="home" class="panel">
         <header>
-            <h3>My city!</h3>
+            <h2 class='flex_centered'>My city!</h2>
         </header>
 
         <div id="map" class="map">

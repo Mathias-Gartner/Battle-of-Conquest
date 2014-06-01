@@ -23,8 +23,41 @@
   justify-content: center;
   align-items: center;
 }
-	*
-	{
+
+.flex_centered a {
+	text-align: center;
+	text-decoration: none;
+}
+
+/*Big button*/
+.bigbutton {
+	display:block;
+	height:73px;
+	line-height:73px;
+	width:250px;
+	border-radius: 17px;
+
+	margin: 10px;
+	margin-right: auto;
+	margin-left: auto;
+	color: #000;
+	font-size:1.7em;
+	font-weight:bold;
+	font-style:normal;
+	background: url('images/bb.jpg') center center;
+	background-size: cover;
+	
+}
+
+
+.bigbutton:hover{
+	background: url('images/bb1.jpg') center center;
+	background-size: cover;
+	color: #C27F32;
+	font-size:1.8em;
+}
+
+	*{
 		-moz-box-sizing: border-box;
 		-webkit-box-sizing: border-box;
 		-o-box-sizing: border-box;

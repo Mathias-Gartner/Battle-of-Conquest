@@ -6,7 +6,7 @@
 
 <article id="home" class="panel">
 	<header>
-		<h2>Open Docks</h2>
+		<h2 class='flex_centered'>Open Docks</h2>
 	</header>
 
 <div id="map" class="map">

@@ -2,8 +2,7 @@
 
 <article id="home" class="panel">
         <header>
-            <h3 class='flex_centered'>units</h3>
-            <h4 class='flex_centered'>Build units</h4>
+            <h2 class='flex_centered'>Build units</h2>
         </header>
 
 		<div>
@@ -16,7 +15,7 @@
 					<option value='<?php echo $city['id']; ?>'><?php echo $city['name']; ?></option>
 				<?php } ?>
 				</select>
-				<input type='submit' value='Add 10 units' />
+				<input type='submit' class="bigbutton" value='Add 10 units' />
 			</form>
 		</div>
 	</article>

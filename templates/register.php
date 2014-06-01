@@ -2,7 +2,7 @@
 
 <article id="home" class="panel">
 	<header>
-		<h2>Enter your credentials here.</h2>
+		<h2 class='flex_centered'>Enter your credentials here.</h2>
 	</header>
 	<div id="loginBox">
 		<form action="index.php?action=register" method="POST">
