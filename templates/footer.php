@@ -7,6 +7,7 @@
 						<li><a href="?action=footer&foot=team">Team</a></li>
 						<li><a href="?action=footer&foot=help">Help</a></li>
 						<li><a href="?action=footer&foot=imp">Impressum</a></li>
+                        <li><a href="?action=logout">Logout</a></li>
 					</ul>
 				</div>
 		</div>

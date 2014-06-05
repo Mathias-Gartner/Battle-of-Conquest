@@ -41,8 +41,8 @@
 			$b = $id-1;
 			$size=sizeof($coordsArr);
 			if($b<$size){
-				$x = substr($coordsArr[$b],0,3) -15;
-				$y = substr($coordsArr[$b],4,3) - 30;
+				$x = substr($coordsArr[$b],0,3) -15+59;
+				$y = substr($coordsArr[$b],4,3) - 30+155;
 				echo "<a href='?action=buildings' style='position:absolute;z-index:99;left:" . $x . "px;top:" . $y . "px;'><img src='res/flag.png' alt='flag' id='flag' /></a>";
 			}
 		}

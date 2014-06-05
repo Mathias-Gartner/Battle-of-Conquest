@@ -1,5 +1,68 @@
 @charset 'UTF-8';
 
+<!-- added by markus -->
+.errorMessage {
+  color: red;
+}
+/* Box district */
+#box{
+	padding:10px 40px; 
+	background:rgba(244, 244, 244, 0.95);
+	width:150px;
+	height:92px;
+	border-radius:15px;
+	position:relative;
+	visibility: hidden;
+	text-align:center;
+	z-index:99;
+}
+
+.mapBoxShadow{
+	box-shadow: 0 0 7px 4px #000000;
+	/* stay in front of buildings */
+	z-index: 10;
+}
+
+.box_top{
+	
+}
+
+.box_bottom{
+	margin-top:5px;
+	margin-left:-24px;
+	text-align:center;
+}
+
+.box_bottom {
+	box-shadow:inset 0px 1px 0px 0px #ffffff;
+	background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #f9f9f9), color-stop(1, #e9e9e9) );
+	background:-moz-linear-gradient( center top, #f9f9f9 5%, #e9e9e9 100% );
+	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#f9f9f9', endColorstr='#e9e9e9');
+	background-color:#f9f9f9;
+	border-radius:10px;
+	text-indent:0;
+	border:1px solid #dcdcdc;
+	display:inline-block;
+	color:#666666;
+	font-family:Arial;
+	font-size:15px;
+	font-weight:bold;
+	font-style:normal;
+	height:30px;
+	line-height:30px;
+	width:100px;
+	text-decoration:none;
+	text-align:center;
+	text-shadow:1px 1px 0px #ffffff;
+	cursor:pointer;
+}
+
+.box_bottom:active {
+	position:relative;
+	top:1px;
+}
+<!-- /added by markus -->
+
 @font-face{
 	font-family:'FontAwesome';
 	src:url('font/fontawesome-webfont.eot?v=4.0.1');
