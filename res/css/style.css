@@ -1,6 +1,6 @@
 @charset 'UTF-8';
 
-<!-- added by markus -->
+/* added by markus */
 .errorMessage {
   color: red;
 }
@@ -61,7 +61,7 @@
 	position:relative;
 	top:1px;
 }
-<!-- /added by markus -->
+/* /added by markus */
 
 @font-face{
 	font-family:'FontAwesome';
