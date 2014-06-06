@@ -63,6 +63,47 @@
 }
 /* /added by markus */
 
+/* for sladi */
+/* Buildings */
+#building1 {
+	top: -335px;
+	left: 604px;
+}
+
+#building2 {
+	top: -543px;
+	left: 502px;
+}
+
+#building3 {
+	top: -252px;
+	left: -25px;
+}
+
+.building_image {
+	height: 70px;
+	width: 70px;
+	background-image: url(rocks.png);
+	background-position: center;
+	/* multiple transition properties breaks image hover? */
+	/*
+	-webkit-transition-property: -webkit-transform, opacity;
+	-webkit-transition-duration: 0.15s;
+	-webkit-transition-timing-function: ease-in;
+	*/
+	background-size: contain;
+	background-repeat: no-repeat;
+	z-index: 9;
+	position: relative;
+	float: left;
+}
+
+.my_district::before{
+	content:url(flag.png);
+}
+
+/* /for sladi */
+
 @font-face{
 	font-family:'FontAwesome';
 	src:url('font/fontawesome-webfont.eot?v=4.0.1');

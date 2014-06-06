@@ -7,5 +7,5 @@ $con = new PDO('mysql:host=localhost;dbname=boc', 'boc', 'asd');
 TORM\Connection::setConnection($con);
 TORM\Connection::setDriver('mysql');
 
-PageHandlers\PageHandler::setBaseDir('C:/inetpub/wwwroot/boc/');
+PageHandlers\PageHandler::setBaseDir('D:/xampp/htdocs/ITP/Battle-of-Conquest/');
 ?>
