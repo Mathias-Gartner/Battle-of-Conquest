@@ -14,7 +14,9 @@
       if (isset($_SESSION['username'])) {
         echo ('<a href="?action=attacks">Attacks</a>');
         echo ('<a href="?action=map">Maps</a>');
-        echo ('<a href="?action=buildings">Buildings</a>');
+        echo ('<a href="?action=buildings&district=');
+        echo getStartDistrict();
+        echo ('">Buildings</a>');
         echo ('<a href="?action=units">Units</a>');
         echo ('<a href = "?action=overview">Overview</a>');
       } else {
