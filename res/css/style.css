@@ -66,24 +66,24 @@
 /* for sladi */
 /* Buildings */
 #building1 {
-	top: -335px;
+	top: -345px;
 	left: 604px;
 }
 
 #building2 {
-	top: -543px;
-	left: 502px;
+	top: -572px;
+	left: 505px;
 }
 
 #building3 {
-	top: -252px;
+	top: -269px;
 	left: -25px;
 }
 
 .building_image {
 	height: 70px;
 	width: 70px;
-	background-image: url(rocks.png);
+	background-image: url(../rocks.png);
 	background-position: center;
 	/* multiple transition properties breaks image hover? */
 	/*

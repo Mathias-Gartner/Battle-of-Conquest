@@ -7,10 +7,7 @@ use Classes\BuildingLevel;
 class BuildingsPageHandler extends PageHandler {
 
   public function handle() {
-    if (isset($_GET['district'])) {
-      $this->districtID = $_GET['district'];
-    }
-    if (isset($_GET['id'])) {
+    if (isset($_GET['id']) || isset($_POST['district'])) {
       $this->setAjaxTemplate('string');
       $this->ajaxRequest();
     } else {
@@ -18,11 +15,9 @@ class BuildingsPageHandler extends PageHandler {
     }
     return $this;
   }
-  
-  private $districtID = 0;
 
   private function ajaxRequest() {
-    if (isset($_GET['list'])) {
+    if (isset($_POST['district'])) {
       $this->getBuiltBuildings();
     } else if (isset($_GET['build'])) {
       $this->build();
@@ -34,17 +29,18 @@ class BuildingsPageHandler extends PageHandler {
 
   private function getBuiltBuildings() {
     $result = array();
-    $buildings = \Classes\BuildingLevel::where(array('district_id' => $this->$districtID));
+    $buildings = \Classes\BuildingLevel::where(array('district_id' => $_POST['district']));
     if (null != $buildings) {
       while (null != ($building = $buildings->next())) {
         array_push($result, array(
             'district' => $building->getDistrict(),
-            'building' => $building->getBuilding()));
+            'building' => $building->getBuilding(),
+            'level' => $building->getLevel()));
       }
     }
-    $this->setPageData('value', json_encode($array));
+    $this->setPageData('value', json_encode($result));
   }
-
+  
   private function build() {
     $buildingTest = \Classes\BuildingLevel::where(array('building_id' => $_GET['id']));
     if (0 == $buildingTest->count()) {
@@ -55,6 +51,8 @@ class BuildingsPageHandler extends PageHandler {
       $save = $building->save();
       if (1 != $save) {
         $this->setPageData('value', 'err');
+      } else {
+        $this->setPageData('value', 'ok');
       }
     } else {
       $this->setPageData('value', 'false');

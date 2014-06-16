@@ -21,22 +21,18 @@ function init() {
 }
 
 function loadBuildings() {
-  var url = 'index.php?action=buildings&list=true&id=0';
-  var xmlhttp = new XMLHttpRequest();
-  xmlhttp.open('GET', url, true);
-  xmlhttp.onreadystatechange = function() {
-    if (xmlhttp.readyState === 4) {
-      var response = xmlhttp.responseText;
-      if ('err' === response) {
-        var image = document.getElementById('building' + id);
-        hideBuilding(image);
-      } else if ('false' === response) {
-        // already built, how to disable one area onlick?
-      }
-      hideBox();
+  var currentDistrict = $('#map').data('district');
+  $.ajax({
+    url: 'index.php?action=buildings',
+    type: 'post',
+    data: {district: currentDistrict},
+    success: function(response) {
+      alert("success:" + response + ":END");
+    },
+    error: function(response) {
+      alert("failure:");
     }
-  };
-  xmlhttp.send();
+  });
 }
 
 function createBuilding(id) {
