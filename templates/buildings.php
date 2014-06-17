@@ -27,6 +27,12 @@
       <area id="1" shape="poly" href="blank_district.html" coords="665,303,680,327,657,350,620,349,601,326,622,298" />
       <area id="3" shape="poly" href="blank_district.html" coords="176,381,191,405,168,428,131,427,112,404,133,376" />
     </map>
+    <!--    
+    <div id="box" class="mapBoxShadow">
+      <span class="box_top" id="box_label"></span>
+      <span class="box_bottom" id="build_button">Create</span>
+    </div>
+    -->
     <div id="building1" class="building_image"></div>
     <div id="building2" class="building_image"></div>
     <div id="building3" class="building_image"></div>
