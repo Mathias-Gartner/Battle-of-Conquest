@@ -7,8 +7,7 @@ use Classes\BuildingLevel;
 class BuildingsPageHandler extends PageHandler {
 
   public function handle() {
-    if (isset($_GET['id']) || isset($_POST['district'])) {
-      $this->setAjaxTemplate('string');
+    if (isset($_POST['districtID'])) {
       $this->ajaxRequest();
     } else {
       $this->setPhpTemplate('buildings');
@@ -17,55 +16,78 @@ class BuildingsPageHandler extends PageHandler {
   }
 
   private function ajaxRequest() {
-    if (isset($_POST['district'])) {
-      $this->getBuiltBuildings();
-    } else if (isset($_GET['build'])) {
-      $this->build();
+    if (isset($_POST['loadBuildings'])) {
+      $this->sendBuiltBuildings($_POST['districtID']);
+    } else if (isset($_POST['loadCityName'])) {
+      $this->sendDistrictName($_POST['districtID']);
+//    } else if (isset($_POST['getAllBuildingNames'])) {
+//      $this->setAjaxTemplate('json');
+//      $this->getAllBuildingNames();
+//    } else if (isset($_POST['getName'])) {
+//      $this->setAjaxTemplate('string');
+//      $this->setPageData('value', $this->getBuildingName($_POST['buildingID']));
+    } else if (isset($_POST['build']) && isset($_POST['buildingID'])) {
+      $this->build($_POST['districtID']);
     } else {
-      $this->getName();
+      $this->getBuildingName();
     }
     return $this;
   }
 
-  private function getBuiltBuildings() {
-    $result = array();
-    $buildings = \Classes\BuildingLevel::where(array('district_id' => $_POST['district']));
-    if (null != $buildings) {
-      while (null != ($building = $buildings->next())) {
-        array_push($result, array(
-            'district' => $building->getDistrict(),
-            'building' => $building->getBuilding(),
-            'level' => $building->getLevel()));
-      }
-    }
-    $this->setPageData('value', json_encode($result));
+//  private function getAllBuildingNames() {
+//    $result = array();
+//    $buildings = \Classes\Building::all();
+//    if (null != $buildings) {
+//      while (null != ($building = $buildings->next())) {
+//        array_push($result, array('buildingName' => $building->getBuilding()));
+//      }
+//    }
+//    $this->setPageData('value', $result);
+//  }
+  
+  private function sendDistrictName($districtID) {
+    $this->setAjaxTemplate('string');
+    
+    $district = \Classes\District::find($districtID);
+    $name = $district->getName();
+    $this->setPageData('value', $name);
   }
   
-  private function build() {
-    $buildingTest = \Classes\BuildingLevel::where(array('building_id' => $_GET['id']));
-    if (0 == $buildingTest->count()) {
-      $building = new BuildingLevel();
-      $building->setDistrict(1);
-      $building->setBuilding($_GET['id']);
-      $building->setLevel(1);
-      $save = $building->save();
-      if (1 != $save) {
-        $this->setPageData('value', 'err');
-      } else {
-        $this->setPageData('value', 'ok');
+  private function sendBuiltBuildings($districtID) {
+    $this->setAjaxTemplate('json');
+    $result = array();
+
+    $buildingLevel = \Classes\BuildingLevel::where(array('district_id' => $districtID));
+    if (null != $buildingLevel) {
+      while (null != ($building = $buildingLevel->next())) {
+        $buildingID = $building->getBuilding();
+        array_push($result, array(
+            'buildingID' => $buildingID,
+            'level' => $building->getLevel(),
+            'buildingName' => $this->getBuildingName($buildingID)));
       }
-    } else {
-      $this->setPageData('value', 'false');
     }
+
+    $this->setPageData('value', $result);
   }
 
-  private function getName() {
-    $buildingName = \Classes\Building::find($_GET['id']);
-    if (null != $buildingName) {
-      $this->setPageData('value', $buildingName->getBuilding());
+  private function getBuildingName($buildingID) {
+    $building = \Classes\Building::find($buildingID);
+    return $building->getBuilding();
+  }
+
+  private function build($districtID) {
+    $this->setAjaxTemplate('string');
+
+    $buildingID = $_POST['buildingID'];
+    $buildingTest = \Classes\BuildingLevel::where(array('building_id' => $buildingID));
+    if (0 == $buildingTest->count()) {
+      $building = new BuildingLevel();
+      $building->setDistrict($districtID);
+      $building->setBuilding($buildingID);
+      $building->setLevel(1);
+      $save = $building->save();
     }
   }
 
 }
-
-?>
