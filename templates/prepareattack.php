@@ -49,7 +49,7 @@ var speeds = ([
     "speed": <?php echo $unit['speed']; ?>
   }
   <?php } ?>
-]); 
+]);
 
 function unitNumberChanged()
 {
@@ -58,14 +58,14 @@ function unitNumberChanged()
   var span = document.getElementById('distanceLabel');
   var numberFields = document.getElementsByClassName('unitNumber');
   var speed = -1;
-  
+
   for (var i=0; i<numberFields.length; i++)
   {
     var numberField = numberFields[i];
     var id = numberField.name.replace('unit_', '') * 1;
     if (isNaN(numberField.value) || numberField.value < 1)
       continue;
-    
+
     for (var j=0; j<speeds.length; j++)
     {
       if (speeds[j].unitId == id)
@@ -86,7 +86,7 @@ function unitNumberChanged()
   else
   {
     p.style = '';
-    span.innerHTML = formattedTime(distanceSeconds * speed);
+    span.innerHTML = formattedTime(distanceSeconds / speed);
   }
 }
 
