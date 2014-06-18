@@ -82,7 +82,13 @@ class BuildingsPageHandler extends PageHandler {
 
   private function build($districtID) {
     $buildingID = $_POST['buildingID'];
-    $buildingTest = \Classes\BuildingLevel::where(array('building_id' => $buildingID));
+
+    $builder = \Classes\BuildingLevel::makeBuilder();
+    $builder->limit = 2;
+    $builder->where = 'building_id = ? AND district_id = ?';
+    $buildingTest = new \Torm\Collection(
+            $builder, array($buildingID, $districtID), '\Classes\BuildingLevel');
+
     if (0 == $buildingTest->count()) {
       $building = new BuildingLevel();
       $building->setDistrict($districtID);
