@@ -14,8 +14,8 @@
          class="boc_mapster mapBoxShadow" />
     <map id="map"
     <?php
-    if (isset($_GET['district'])) {
-      $districtID = $_GET['district'];
+    if (isset($_GET['mapid'])) {
+      $districtID = $_GET['mapid'];
     } else {
       $districtID = 1;
     }
