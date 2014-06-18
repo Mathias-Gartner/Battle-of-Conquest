@@ -42,7 +42,7 @@
 				if($b<$size && $b>0){
 					$x = substr($coordsArr[$b],0,3) -15+59;
 					$y = substr($coordsArr[$b],4,3) - 30+155;
-					echo "<a href='?action=buildings' style='position:absolute;z-index:99;left:" . $x . "px;top:" . $y . "px;'><img src='res/flag.png' alt='flag' id='flag' /></a>";
+					echo "<a href='?action=buildings&mapid=" . $id . "' style='position:absolute;z-index:99;left:" . $x . "px;top:" . $y . "px;'><img src='res/flag.png' alt='flag' id='flag' /></a>";
 				}
 			}
 		?>
