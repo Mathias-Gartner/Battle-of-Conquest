@@ -20,39 +20,43 @@ class BuildingsPageHandler extends PageHandler {
       $this->sendBuiltBuildings($_POST['districtID']);
     } else if (isset($_POST['loadCityName'])) {
       $this->sendDistrictName($_POST['districtID']);
-//    } else if (isset($_POST['getAllBuildingNames'])) {
-//      $this->setAjaxTemplate('json');
-//      $this->getAllBuildingNames();
+    } else if (isset($_POST['getAllBuildings'])) {
+      $this->sendAllBuildings();
+    } else if (isset($_POST['build']) && isset($_POST['buildingID'])) {
+      $this->build($_POST['districtID']);
 //    } else if (isset($_POST['getName'])) {
 //      $this->setAjaxTemplate('string');
 //      $this->setPageData('value', $this->getBuildingName($_POST['buildingID']));
-    } else if (isset($_POST['build']) && isset($_POST['buildingID'])) {
-      $this->build($_POST['districtID']);
-    } else {
-      $this->getBuildingName();
+//    } else {
+//      $this->getBuildingName();
     }
     return $this;
   }
 
-//  private function getAllBuildingNames() {
-//    $result = array();
-//    $buildings = \Classes\Building::all();
-//    if (null != $buildings) {
-//      while (null != ($building = $buildings->next())) {
-//        array_push($result, array('buildingName' => $building->getBuilding()));
-//      }
-//    }
-//    $this->setPageData('value', $result);
-//  }
-  
+  private function sendAllBuildings() {
+    $this->setAjaxTemplate('json');
+    $result = array();
+
+    $buildings = \Classes\Building::all();
+    if (null != $buildings) {
+      while (null != ($building = $buildings->next())) {
+        array_push($result, array(
+            'buildingID' => $building->getBuildingID(),
+            'buildingName' => $building->getBuildingName()));
+      }
+    }
+
+    $this->setPageData('value', $result);
+  }
+
   private function sendDistrictName($districtID) {
     $this->setAjaxTemplate('string');
-    
+
     $district = \Classes\District::find($districtID);
     $name = $district->getName();
     $this->setPageData('value', $name);
   }
-  
+
   private function sendBuiltBuildings($districtID) {
     $this->setAjaxTemplate('json');
     $result = array();
@@ -60,7 +64,7 @@ class BuildingsPageHandler extends PageHandler {
     $buildingLevel = \Classes\BuildingLevel::where(array('district_id' => $districtID));
     if (null != $buildingLevel) {
       while (null != ($building = $buildingLevel->next())) {
-        $buildingID = $building->getBuilding();
+        $buildingID = $building->getBuildingID();
         array_push($result, array(
             'buildingID' => $buildingID,
             'level' => $building->getLevel(),
@@ -73,18 +77,16 @@ class BuildingsPageHandler extends PageHandler {
 
   private function getBuildingName($buildingID) {
     $building = \Classes\Building::find($buildingID);
-    return $building->getBuilding();
+    return $building->getBuildingName();
   }
 
   private function build($districtID) {
-    $this->setAjaxTemplate('string');
-
     $buildingID = $_POST['buildingID'];
     $buildingTest = \Classes\BuildingLevel::where(array('building_id' => $buildingID));
     if (0 == $buildingTest->count()) {
       $building = new BuildingLevel();
       $building->setDistrict($districtID);
-      $building->setBuilding($buildingID);
+      $building->setBuildingID($buildingID);
       $building->setLevel(1);
       $save = $building->save();
     }

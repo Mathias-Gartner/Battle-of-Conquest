@@ -4,12 +4,17 @@ namespace Classes;
 
 class Building extends \TORM\Model
 {
-	public function getBuilding()
+	public function getBuildingID()
+	{
+		return $this->get("building_id");
+	}
+    
+	public function getBuildingName()
 	{
 		return $this->get("building");
 	}
 
-	public function setBuilding($building)
+	public function setBuildingName($building)
 	{
 		$this->set("building", $building);
 	}

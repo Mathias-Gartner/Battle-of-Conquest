@@ -12,11 +12,11 @@ class BuildingLevel extends \TORM\Model {
     return $this->set("district_id", $id);
   }
 
-  public function getBuilding() {
+  public function getBuildingID() {
     return $this->get("building_id");
   }
   
-  public function setBuilding($id) {
+  public function setBuildingID($id) {
     return $this->set("building_id", $id);
   }
 

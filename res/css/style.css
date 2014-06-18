@@ -77,7 +77,30 @@ div#building3 {
 	left: -25px;
 }
 
-.building_image {
+div#buildMenu {
+  position: absolute;
+  height: 62px;
+  width: 260px;
+  float: left;
+  top: 200px;
+  left: 200px;
+  visibility: hidden;
+  background-color: white;
+  border-radius: 15px;
+  z-index: 10;
+}
+
+div#buildMenu > select, span#buildButton {
+  position: relative;
+  left: 30px;
+  top: 10px;
+}
+
+div#buildMenu > span#buildButton {
+  left: 60px;
+}
+
+div.building_image {
 	height: 70px;
 	width: 70px;
 	background-image: url(../rocks.png);
