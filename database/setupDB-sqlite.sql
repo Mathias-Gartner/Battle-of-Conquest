@@ -48,6 +48,23 @@ CREATE TABLE IF NOT EXISTS `attack_units` (
 -- --------------------------------------------------------
 
 --
+-- Tabellenstruktur für Tabelle `defending_units`
+--
+
+DROP TABLE IF EXISTS `defending_units`;
+CREATE TABLE IF NOT EXISTS `defending_units` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `unit_id` int(11) NOT NULL,
+  `attack_id` int(11) NOT NULL,
+  `count` int(11) NOT NULL,
+  PRIMARY KEY (`id`),
+  FOREIGN KEY (`attack_id`) REFERENCES `attacks` (`attack_id`),
+  FOREIGN KEY (`unit_id`) REFERENCES `units` (`unit_id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=2 ;
+
+-- --------------------------------------------------------
+
+--
 -- Tabellenstruktur für Tabelle `buildings`
 --
 
@@ -117,24 +134,27 @@ DROP TABLE IF EXISTS `districts`;
 CREATE TABLE IF NOT EXISTS `districts` (
   `district_id` int(11) NOT NULL,
   `owner_id` int(11) NOT NULL,
+  `terrain_id` int(11) NOT NULL,
   `district_name` varchar(32) NOT NULL,
   `position_x` int(11) NOT NULL,
   `position_y` int(11) NOT NULL,
   `district_threat` tinyint(4) NOT NULL,
   PRIMARY KEY (`district_id`),
-  FOREIGN KEY (`owner_id`) REFERENCES `users` (`user_id`)
+  FOREIGN KEY (`owner_id`) REFERENCES `users` (`user_id`),
+  FOREIGN KEY (`terrain_id`) REFERENCES `terrain` (`terrain_id`)
   -- KEY `owner_id` (`owner_id`)
 ) ;
 
 -- --------------------------------------------------------
 
 --
--- Tabellenstruktur für Tabelle `district_status`
+-- Tabellenstruktur für Tabelle `terrain`
 --
 
-DROP TABLE IF EXISTS `district_status`;
-CREATE TABLE IF NOT EXISTS `district_status` (
-  `district_id` int(11) NOT NULL,
+DROP TABLE IF EXISTS `terrain`;
+CREATE TABLE IF NOT EXISTS `terrain` (
+  `terrain_id` int(11) NOT NULL,
+  `terrain_name` varchar(50) NOT NULL,
   `resources` int(11) NOT NULL,
   `moral` float NOT NULL,
   `people` int(11) NOT NULL,
@@ -145,11 +165,7 @@ CREATE TABLE IF NOT EXISTS `district_status` (
   `move_speed` float NOT NULL,
   `build_speed` float NOT NULL,
   `resource_speed` float NOT NULL,
-  `attacker_units` int(11) NOT NULL,
-  `defender_units` int(11) NOT NULL,
-  `supporter_units` int(11) NOT NULL,
-  PRIMARY KEY (`district_id`),
-  FOREIGN KEY (`district_id`) REFERENCES `districts` (`district_id`) ON DELETE CASCADE
+  PRIMARY KEY (`terrain_id`)
 ) ;
 
 -- --------------------------------------------------------

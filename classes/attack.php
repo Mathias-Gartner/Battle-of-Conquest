@@ -143,7 +143,8 @@ Attack::setPK("attack_id");
 Attack::setTableName("attacks");
 Attack::belongsTo("sourceDistrict", array("class_name"=>"\Classes\District", "primary_key"=>"district_id", "foreign_key"=>"source_district_id"));
 Attack::belongsTo("targetDistrict", array("class_name"=>"\Classes\District", "primary_key"=>"district_id", "foreign_key"=>"target_district_id"));
-Attack::hasMany("attackUnits", array("class_name"=>"\Classes\AttackUnit", "foreign_key"=>"attack_id"));
+Attack::hasMany("attackUnits", array("class_name"=>"\Classes\AttackingUnit", "foreign_key"=>"attack_id"));
+Attack::hasMany("defendUnits", array("class_name"=>"\Classes\DefendingUnit", "foreign_key"=>"attack_id"));
 Attack::validates("battle_time", array("presence"=>true));
 
 ?>

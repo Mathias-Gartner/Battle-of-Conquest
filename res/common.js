@@ -18,7 +18,7 @@ function readyStateChangeProxy(ajaxObject, resultFunction)
         {
             var result;
             if (ajaxObject.responseText.length > 0)
-                result = eval("(" + ajaxObject.responseText + ")");
+                result = JSON.parse(ajaxObject.responseText);
             resultFunction(result);
         }
         else if (ajaxObject.readyState == 4 && ajaxObject.status != 200)

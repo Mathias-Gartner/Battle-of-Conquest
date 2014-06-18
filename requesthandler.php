@@ -57,7 +57,7 @@ class RequestHandler
 		var_dump($district->owner); // prints user
 		/**/
 	}
-	
+
 	public static function getPageHandlerForAction($action)
 	{
 		$pageHandler = null;
@@ -85,6 +85,9 @@ class RequestHandler
 				break;
 			case 'attacks':
 				$pageHandler = new PageHandlers\AttacksPageHandler();
+				break;
+			case 'battlereport':
+				$pageHandler = new PageHandlers\BattleReportPageHandler();
 				break;
 			case 'map':
 				$pageHandler = new PageHandlers\MapPageHandler();

@@ -13,7 +13,7 @@ function refresh()
 		showCurrent();
 	else
 		showPast();
-		
+
 	setTimeout(refresh, 30000);
 }
 
@@ -21,7 +21,7 @@ function showCurrent()
 {
   if (!current)   // only show loading when changing displays
     showLoading();
-    
+
 	current = true;
 	ajaxRequest("index.php?action=attacks&list=current");
 }
@@ -30,7 +30,7 @@ function showPast()
 {
   if (current)   // only show loading when changing displays
     showLoading();
-    
+
 	current = false;
 	ajaxRequest("index.php?action=attacks&list=past");
 }
@@ -45,16 +45,25 @@ function showLoading()
   loadingDiv.style.display = "block";
 }
 
+function showReport(event)
+{
+	var id = event.target.id.replace("reportButton_", "");
+	if (isNaN(id) || id < 0)
+		return false;
+
+	window.location.href = "index.php?action=battlereport&attackId=" + id;
+}
+
 function cancelAttack(event)
 {
   var id = event.target.id.replace("cancelButton_", "");
   if (isNaN(id) || id < 0)
     return false;
-  
+
   var xmlhttp = new XMLHttpRequest();
   xmlhttp.open("GET", "index.php?action=attacks&cancelId="+id, true);
   xmlhttp.send();
-  
+
   setTimeout(function(){ refresh() }, 1000);
   return false;
 }
@@ -64,11 +73,11 @@ function showMouseOverPopup(event)
   var id = event.target.id.replace("cancelButton_", "");
   if (isNaN(id) || id < 0)
     return false;
-  
+
   var popup = document.getElementById("returnTimeDiv_"+id);
   if (popup != null)
     popup.style.display = "block";
-    
+
   return false;
 }
 
@@ -84,10 +93,10 @@ function resultFunction(response)
 	var noAttacksDiv = document.getElementById("noAttacksDiv");
   var attackListDiv = document.getElementById("attackListDiv");
   attackIds = new Array();
-	
+
 	// prepare in new element for seamless updates
 	var listDiv = document.createElement("div");
-  
+
   for (var i=0; i<response.attacks.length; i++)
   {
 		var lineDiv = document.createElement("div");
@@ -95,7 +104,7 @@ function resultFunction(response)
 		{
 			if (response.attacks[i].completed)
 				continue;
-				
+
 			var stateSpan = document.createElement("span");
 			stateSpan.className = "stateLabel";
 			stateSpan.innerHTML = response.attacks[i].returning ? "Returning" : "Engaging";
@@ -105,7 +114,7 @@ function resultFunction(response)
 		{
 			if (!response.attacks[i].completed)
 				continue;
-				
+
 			var timeSpan = document.createElement("span");
 			timeSpan.innerHTML = response.attacks[i].time;
 			lineDiv.appendChild(timeSpan);
@@ -126,9 +135,9 @@ function resultFunction(response)
 			secondsLeftSpan.className = "secondsLeftLabel";
 			secondsLeftSpan.setAttribute("secondsLeft", response.attacks[i].secondsLeft);
 			secondsLeftSpan.innerHTML = formattedTime(response.attacks[i].secondsLeft);
-			
+
 			attackIds.push(response.attacks[i].id);
-			
+
 			if (response.attacks[i].returning)
 			{
 				lineDiv.appendChild(secondsLeftSpan);
@@ -144,7 +153,7 @@ function resultFunction(response)
 				cancelButton.onmouseover = showMouseOverPopup;
 				lineDiv.appendChild(cancelButton);
 				lineDiv.appendChild(secondsLeftSpan);
-							
+
 				var returnTimePopup = document.createElement("div");
 				returnTimePopup.id = "returnTimeDiv_" + response.attacks[i].id;
 				returnTimePopup.className = "mouseOverPopup";
@@ -163,14 +172,22 @@ function resultFunction(response)
 				attackerWonSpan.innerHTML = "The attacker won";
 			else
 				attackerWonSpan.innerHTML = "The attacker lost";
-				
+
 			lineDiv.appendChild(attackerWonSpan);
+
+			var cancelButton = document.createElement("a");
+			cancelButton.className = "cancelButton bigbutton";
+			cancelButton.id = "reportButton_" + response.attacks[i].id;
+			cancelButton.innerHTML = "Report";
+			cancelButton.href = "#";
+			cancelButton.onclick = showReport;
+			lineDiv.appendChild(cancelButton);
 		}
-		
+
 	  displayedAttacks++;
 		listDiv.appendChild(lineDiv);
 	}
-	
+
   if (displayedAttacks < 1)
   {
   	noAttacksDiv.style.display = "block";
@@ -180,7 +197,7 @@ function resultFunction(response)
   }
   else
   	noAttacksDiv.style.display = "none";
-	
+
 	loadingDiv.style.display = "none";
 	attackListDiv.innerHTML = "";
 	attackListDiv.appendChild(listDiv);
@@ -205,7 +222,7 @@ function updateSecondsLeft(id)
 				refresh();
 			}
 		}
-		
+
 		var returnTimePopup = document.getElementById("returnTimeDiv_" + attackIds[i]);
 		if (returnTimePopup)
 		{
@@ -213,7 +230,7 @@ function updateSecondsLeft(id)
 			returnTimePopup.innerHTML += "</span>" + returnTimeLabel;
 		}
 	}
-	
+
 	setTimeout(function () { updateSecondsLeft(id); }, 1000);
 }
 

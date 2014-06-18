@@ -16,16 +16,28 @@ SET time_zone = "+00:00";
 --
 
 --
--- Daten fÃ¼r Tabelle `attacks`
+-- Daten für Tabelle `attacks`
 --
 
 TRUNCATE TABLE `attacks`;
 
-INSERT INTO `attacks` (`attack_id`, `source_district_id`, `target_district_id`, `battle_time`) VALUES
-(1, 1, 2, '2013-12-28 15:57:41');
+INSERT INTO `attacks` (`attack_id`, `source_district_id`, `target_district_id`, `start_time`, `battle_time`, `battle_state`, `attacker_won`) VALUES
+(1, 1, 2, '2013-12-28 15:43:11', '2013-12-28 15:57:41', 3, 1);
+
 
 --
--- Daten fÃ¼r Tabelle `districts`
+-- Daten für Tabelle `terrains`
+--
+
+TRUNCATE TABLE `terrains`;
+
+INSERT INTO `boc`.`terrain` (`terrain_id`, `terrain_name`, `resources`, `moral`, `people`, `diseases`, `luck`, `units_atk`, `units_def`, `move_speed`, `build_speed`, `resource_speed`) VALUES
+ ('1', 'Open Docks', '0', '20', '5', '0', '10', '10', '5', '-5', '0', '0'),
+ ('2', 'Great Canyons', '-10', '-10', '-10', '10', '20', '10', '25', '-15', '10', '0'),
+ ('3', 'High Cities', '15', '10', '10', '-10', '10', '10', '10', '15', '-10', '0');
+
+--
+-- Daten für Tabelle `districts`
 --
 
 TRUNCATE TABLE `districts`;
@@ -250,7 +262,7 @@ INSERT INTO `districts` (`owner_id`, `district_name`, `position_x`, `position_y`
 (1, 'Czech Republic', 1, 3, 0);
 
 --
--- Daten fÃ¼r Tabelle `district_units`
+-- Daten für Tabelle `district_units`
 --
 
 TRUNCATE TABLE `district_units`;
@@ -260,7 +272,7 @@ INSERT INTO `district_units` (`id`, `unit_id`, `district_id`, `count`) VALUES
 (2, 2, 2, 5);
 
 --
--- Daten fÃ¼r Tabelle `torm_info`
+-- Daten für Tabelle `torm_info`
 --
 
 TRUNCATE TABLE `torm_info`;
@@ -269,7 +281,7 @@ INSERT INTO `torm_info` (`id`) VALUES
 (1);
 
 --
--- Daten fÃ¼r Tabelle `units`
+-- Daten für Tabelle `units`
 --
 
 TRUNCATE TABLE `units`;
@@ -279,7 +291,7 @@ INSERT INTO `units` (`unit_id`, `unit_name`, `unit_class`, `unit_atk`, `unit_def
 (2, 'Knight', 'Offensiv', 15, 8, 20, 250);
 
 --
--- Daten fÃ¼r Tabelle `users`
+-- Daten für Tabelle `users`
 --
 
 TRUNCATE TABLE `users`;
@@ -289,7 +301,7 @@ INSERT INTO `users` (`user_id`, `username`, `age`, `mail`, `password`, `salt`) V
 (2, 'victim', 12, 'test@localhost', unhex('a421de3a817384f7d069b417197eebe01e0a6efc'), '93439');
 
 --
--- Daten fÃ¼r Tabelle `buildings`
+-- Daten für Tabelle `buildings`
 --
 
 TRUNCATE TABLE `buildings`;

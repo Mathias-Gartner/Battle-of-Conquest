@@ -21,7 +21,7 @@
 				"id": <?php echo $attack['targetDistrictId']; ?>,
 				"name": "<?php echo $attack['targetDistrictName']; ?>"
 			},
-			"startTime": new Date("<?php echo $attack['startTime']; ?>"),
+			"startTime": "<?php echo $attack['startTime']; ?>",
 			"incoming": <?php if ($attack['incoming']) echo 'true'; else echo 'false'; ?>,
 			"returning": <?php if ($attack['returning']) echo 'true'; else echo 'false'; ?>,
 			"completed": <?php if ($attack['completed']) echo 'true'; else echo 'false'; ?>,

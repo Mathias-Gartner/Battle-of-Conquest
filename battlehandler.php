@@ -6,7 +6,7 @@ class BattleHandler
 	{
 		$currentDate = new \DateTime();
 		$currentDate = $currentDate->format('Y-m-d H:i:s');
-	
+
 		$builder = \Classes\Attack::makeBuilder();
 		$builder->where = 'battle_state = 0 and battle_time < ?';
 		$builder->order = 'battle_time';
@@ -15,19 +15,21 @@ class BattleHandler
 		// early exit if no battles to handle
 		if ($pendingAttacks->count() < 1)
 			return;
-			
+
 		while (($attack = $pendingAttacks->next()) != NULL)
 		{
 			\TORM\Connection::getConnection()->beginTransaction();
-			
+
 			$attackUnits = $attack->attackUnits;
 			$sourceUnits = $attack->sourceDistrict->districtUnits;
 			$targetUnits = $attack->targetDistrict->districtUnits;
 			$attackUnitCount = $attackUnits->sum('count')+0;
 			$targetUnitCount = $targetUnits->sum('count')+0;
-			
+
 			//TODO: improve battle logic
-			$attackerWon = ($attackUnitCount > $targetUnitCount);
+			$report = new \Classes\Report($attack);
+			$report->battle(false);
+			$attackerWon = $report->attackerWon();
 
 			$attack->setAttackerWon($attackerWon);
 			$attack->setBattleOver();
@@ -36,7 +38,7 @@ class BattleHandler
 				\TORM\Connection::getConnection()->rollBack();
 				continue;
 			}
-			
+
 			// remove units that died in the battle
 			while (($unit = $targetUnits->next()) != NULL && $attackUnitCount > 0)
 			{
@@ -57,9 +59,9 @@ class BattleHandler
 					break;
 				}
 			}
-			
+
 			\TORM\Connection::getConnection()->commit();
-			
+
 			/*while (($unit = $sourceUnits->next()) != NULL && $targetUnitCount > 0)
 			{
 				$attackUnit = \Classes\AttackUnit::first(array('unit_id'=>$unit->getUnitId(), 'attack_id'=>$attack->getAttackId()));
@@ -87,12 +89,12 @@ class BattleHandler
 			}*/
 		}
 	}
-	
+
 	static function handleReturningAttacks()
 	{
 		$currentDate = new \DateTime();
 		$currentDate = $currentDate->format('Y-m-d H:i:s');
-		
+
 		$builder = \Classes\Attack::makeBuilder();
 		$builder->where = '(battle_state = 1 or battle_state = 2) and start_time + (battle_time - start_time)*2 < time(?)';
 		$builder->order = 'battle_time';
@@ -101,7 +103,7 @@ class BattleHandler
 		// early exit if no battles to handle
 		if ($pendingAttacks->count() < 1)
 			return;
-			
+
 		while (($attack = $pendingAttacks->next()) != NULL)
 		{
 			\TORM\Connection::getConnection()->beginTransaction();
@@ -112,10 +114,10 @@ class BattleHandler
 			  \TORM\Connection::getConnection()->rollBack();
 			  continue;
 			}
-			
+
 		  //TODO: use Report and add only surviving units to the district
 		  //$report = \Classes\Report::createForAttack(
-		  
+
 		  $district = $attack->sourceDistrict;
 		  $units = $attack->attackUnits;
 		  while (($unit = $units->next()) != NULL)
@@ -132,7 +134,7 @@ class BattleHandler
 		    	break;
 		    }
 		  }
-		  
+
 		  \TORM\Connection::getConnection()->commit();
 		}
 	}

@@ -38,17 +38,35 @@ CREATE TABLE IF NOT EXISTS `attacks` (
 -- --------------------------------------------------------
 
 --
--- Tabellenstruktur für Tabelle `attack_units`
+-- Tabellenstruktur für Tabelle `attacking_units`
 --
 
-DROP TABLE IF EXISTS `attack_units`;
-CREATE TABLE IF NOT EXISTS `attack_units` (
+DROP TABLE IF EXISTS `attacking_units`;
+CREATE TABLE IF NOT EXISTS `attacking_units` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `unit_id` int(11) NOT NULL,
   `attack_id` int(11) NOT NULL,
   `count` int(11) NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `unit_attack_unique_index` (`unit_id`,`attack_id`),
+  KEY `unit_id` (`unit_id`),
+  KEY `attack_id` (`attack_id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=2 ;
+
+-- --------------------------------------------------------
+
+--
+-- Tabellenstruktur für Tabelle `defending_units`
+--
+
+DROP TABLE IF EXISTS `defending_units`;
+CREATE TABLE IF NOT EXISTS `defending_units` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `unit_id` int(11) NOT NULL,
+  `attack_id` int(11) NOT NULL,
+  `count` int(11) NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `unit_defend_unique_index` (`unit_id`,`attack_id`),
   KEY `unit_id` (`unit_id`),
   KEY `attack_id` (`attack_id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=2 ;
@@ -121,23 +139,26 @@ DROP TABLE IF EXISTS `districts`;
 CREATE TABLE IF NOT EXISTS `districts` (
   `district_id` int(11) NOT NULL AUTO_INCREMENT,
   `owner_id` int(11) NOT NULL,
+  `terrain_id` int(11) NOT NULL,
   `district_name` varchar(32) NOT NULL,
   `position_x` int(11) NOT NULL,
   `position_y` int(11) NOT NULL,
   `district_threat` tinyint(4) NOT NULL,
   PRIMARY KEY (`district_id`),
-  KEY `owner_id` (`owner_id`)
+  KEY `owner_id` (`owner_id`),
+  KEY `terrain_id` (`terrain_id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=3 ;
 
 -- --------------------------------------------------------
 
 --
--- Tabellenstruktur für Tabelle `district_status`
+-- Tabellenstruktur für Tabelle `terrain`
 --
 
-DROP TABLE IF EXISTS `district_status`;
-CREATE TABLE IF NOT EXISTS `district_status` (
-  `district_id` int(11) NOT NULL AUTO_INCREMENT,
+DROP TABLE IF EXISTS `terrain`;
+CREATE TABLE IF NOT EXISTS `terrain` (
+  `terrain_id` int(11) NOT NULL AUTO_INCREMENT,
+  `terrain_name` varchar(50) NOT NULL,
   `resources` int(11) NOT NULL,
   `moral` float NOT NULL,
   `people` int(11) NOT NULL,
@@ -148,10 +169,7 @@ CREATE TABLE IF NOT EXISTS `district_status` (
   `move_speed` float NOT NULL,
   `build_speed` float NOT NULL,
   `resource_speed` float NOT NULL,
-  `attacker_units` int(11) NOT NULL,
-  `defender_units` int(11) NOT NULL,
-  `supporter_units` int(11) NOT NULL,
-  PRIMARY KEY (`district_id`)
+  PRIMARY KEY (`terrain_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
@@ -230,11 +248,18 @@ ALTER TABLE `attacks`
   ADD CONSTRAINT `attacks_ibfk_1` FOREIGN KEY (`source_district_id`) REFERENCES `districts` (`district_id`);
 
 --
--- Constraints der Tabelle `attack_units`
+-- Constraints der Tabelle `attacking_units`
 --
-ALTER TABLE `attack_units`
-  ADD CONSTRAINT `attack_units_ibfk_2` FOREIGN KEY (`attack_id`) REFERENCES `attacks` (`attack_id`),
-  ADD CONSTRAINT `attack_units_ibfk_1` FOREIGN KEY (`unit_id`) REFERENCES `units` (`unit_id`);
+ALTER TABLE `attacking_units`
+  ADD CONSTRAINT `attacking_units_ibfk_2` FOREIGN KEY (`attack_id`) REFERENCES `attacks` (`attack_id`),
+  ADD CONSTRAINT `attacking_units_ibfk_1` FOREIGN KEY (`unit_id`) REFERENCES `units` (`unit_id`);
+
+--
+-- Constraints der Tabelle `defending_units`
+--
+ALTER TABLE `defending_units`
+  ADD CONSTRAINT `defending_units_ibfk_2` FOREIGN KEY (`attack_id`) REFERENCES `attacks` (`attack_id`),
+  ADD CONSTRAINT `defending_units_ibfk_1` FOREIGN KEY (`unit_id`) REFERENCES `units` (`unit_id`);
 
 --
 -- Constraints der Tabelle `buildings_level`
@@ -255,12 +280,8 @@ ALTER TABLE `distances`
 --
 ALTER TABLE `districts`
   ADD CONSTRAINT `fk_owner` FOREIGN KEY (`owner_id`) REFERENCES `users` (`user_id`);
-
---
--- Constraints der Tabelle `district_status`
---
-ALTER TABLE `district_status`
-  ADD CONSTRAINT `fk_district` FOREIGN KEY (`district_id`) REFERENCES `districts` (`district_id`) ON DELETE CASCADE;
+ALTER TABLE `districts`
+ ADD CONSTRAINT `fk_terrain` FOREIGN KEY (`terrain_id`) REFERENCES `terrain`(`terrain_id`)
 
 --
 -- Constraints der Tabelle `district_units`
