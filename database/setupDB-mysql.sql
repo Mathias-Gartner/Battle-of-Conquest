@@ -281,7 +281,7 @@ ALTER TABLE `distances`
 ALTER TABLE `districts`
   ADD CONSTRAINT `fk_owner` FOREIGN KEY (`owner_id`) REFERENCES `users` (`user_id`);
 ALTER TABLE `districts`
- ADD CONSTRAINT `fk_terrain` FOREIGN KEY (`terrain_id`) REFERENCES `terrain`(`terrain_id`)
+ ADD CONSTRAINT `fk_terrain` FOREIGN KEY (`terrain_id`) REFERENCES `terrain`(`terrain_id`);
 
 --
 -- Constraints der Tabelle `district_units`
