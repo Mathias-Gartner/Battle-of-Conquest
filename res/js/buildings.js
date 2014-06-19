@@ -33,7 +33,6 @@
     });
 
     $("#buildingsList").change(function(event) {
-//      event.preventDefault();
       var buildingID = $(this).val();
       addStatsTable(buildingID);
     });
@@ -133,7 +132,9 @@
           }
         }
         var buildingID = $(buildingsList).val();
-        addStatsTable(buildingID);
+        if (null !== buildingID) {
+          addStatsTable(buildingID);
+        }
       },
       error: function(response) {
         console.log("Failed AJAX request (loadAvailableBuildings).");
