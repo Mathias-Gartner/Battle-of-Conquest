@@ -24,11 +24,6 @@ class BuildingsPageHandler extends PageHandler {
       $this->sendAllBuildings();
     } else if (isset($_POST['build']) && isset($_POST['buildingID'])) {
       $this->build($_POST['districtID']);
-//    } else if (isset($_POST['getName'])) {
-//      $this->setAjaxTemplate('string');
-//      $this->setPageData('value', $this->getBuildingName($_POST['buildingID']));
-//    } else {
-//      $this->getBuildingName();
     }
     return $this;
   }
