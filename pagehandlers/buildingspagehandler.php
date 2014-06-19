@@ -37,7 +37,11 @@ class BuildingsPageHandler extends PageHandler {
       while (null != ($building = $buildings->next())) {
         array_push($result, array(
             'buildingID' => $building->getBuildingID(),
-            'buildingName' => $building->getBuildingName()));
+            'buildingName' => $building->getBuildingName(),
+            'buildingCost' => $building->getResources(),
+            'attackModifier' => $building->getUnitsAtk(),
+            'defenseModifier' => $building->getUnitsDef(),
+            'moraleModifier' => $building->getMoral()));
       }
     }
 

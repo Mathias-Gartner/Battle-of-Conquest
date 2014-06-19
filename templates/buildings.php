@@ -32,7 +32,12 @@
     <div id="building3" class="building_image"></div>
 
     <div id="buildMenu" class="mapBoxShadow">
-      <select id=buildingsList></select>
+      <p>
+        <select id=buildingsList></select>
+      </p>
+      <p id="buildingStats">
+      </p>
+      <span class="box_bottom" id="cancelButton">Cancel</span>
       <span class="box_bottom" id="buildButton">Build</span>
     </div>
   </div>

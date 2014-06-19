@@ -1,5 +1,6 @@
 (function($) {
   var builtBuildings = new Array();
+  var allBuildings = new Array();
   var currentDistrict = $('#map').data('districtid');
 
   init();
@@ -26,11 +27,21 @@
     $('#buildButton').click(function(event) {
       buildBuilding();
     });
+
+    $('#cancelButton').click(function(event) {
+      hideBuildMenu();
+    });
+
+    $("#buildingsList").change(function(event) {
+//      event.preventDefault();
+      var buildingID = $(this).val();
+      addStatsTable(buildingID);
+    });
   }
 
   function setBoxPosition(area) {
     var position = $(area).attr('coords').split(',');
-    var x = parseInt(position[0]) - 100;
+    var x = parseInt(position[0]) - 110;
     var y = parseInt(position[1]) + 70;
     document.getElementById('buildMenu').style.top = y + "px";
     document.getElementById('buildMenu').style.left = x + "px";
@@ -65,14 +76,14 @@
       },
       success: function(response) {
         builtBuildings = new Array();
-        
+
         var builtBuildingsArray = JSON.parse(response);
         for (var i = 0; i < builtBuildingsArray.length; i += 1) {
           builtBuildings.push(builtBuildingsArray[i].buildingID);
-          
+
           var image = document.getElementById('building' + builtBuildingsArray[i].buildingID);
           showBuilding(image, builtBuildingsArray[i].buildingName);
-          
+
           $('#' + builtBuildingsArray[i].buildingID).unbind('click.build');
         }
         loadAvailbleBuildings();
@@ -105,19 +116,52 @@
       data: {getAllBuildings: true, districtID: currentDistrict},
       success: function(response) {
         var buildingsList = $('#buildingsList');
+        allBuildings = new Array();
         buildingsList.empty();
         var allBuildingsArray = JSON.parse(response);
         for (var i = 0; i < allBuildingsArray.length; i += 1) {
+          allBuildings[allBuildingsArray[i].buildingID] = {
+            'buildingName': allBuildingsArray[i].buildingName,
+            'buildingCost': allBuildingsArray[i].buildingCost,
+            'attackModifier': allBuildingsArray[i].attackModifier,
+            'defenseModifier': allBuildingsArray[i].defenseModifier,
+            'moraleModifier': allBuildingsArray[i].moraleModifier
+          };
           if (-1 === $.inArray(allBuildingsArray[i].buildingID, builtBuildings)) {
             var option = new Option(allBuildingsArray[i].buildingName, allBuildingsArray[i].buildingID);
             buildingsList.append(option);
           }
         }
+        var buildingID = $(buildingsList).val();
+        addStatsTable(buildingID);
       },
       error: function(response) {
         console.log("Failed AJAX request (loadAvailableBuildings).");
       }
     });
+  }
+
+  function addStatsTable(buildingID) {
+    var building = allBuildings[buildingID];
+    $("#buildingStats").empty();
+    $("#buildingStats").append($('<table>')
+            .append($('<tr>')
+                    .append($('<td>').text('Name').addClass('firstColumn'))
+                    .append($('<td>').text(building.buildingName)))
+            .append($('<tr>')
+                    .append($('<td>').text('Ressources').addClass('firstColumn'))
+                    .append($('<td>').text(building.buildingCost)))
+            .append($('<tr>')
+                    .append($('<td>').text('Attack').addClass('firstColumn'))
+                    .append($('<td>').text(building.attackModifier)))
+            .append($('<tr>')
+                    .append($('<td>').text('Defense').addClass('firstColumn'))
+                    .append($('<td>').text(building.defenseModifier)))
+            .append($('<tr>')
+                    .append($('<td>').text('Morale').addClass('firstColumn'))
+                    .append($('<td>').text(building.moraleModifier)))
+            );
+    $('#buildingStats table').addClass("statsTable");
   }
 
   function buildBuilding() {

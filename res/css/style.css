@@ -79,25 +79,38 @@ div#building3 {
 
 div#buildMenu {
   position: absolute;
-  height: 62px;
-  width: 260px;
   float: left;
-  top: 200px;
-  left: 200px;
   visibility: hidden;
   background-color: white;
   border-radius: 15px;
   z-index: 10;
+  width: 320px;
+}
+div#buildMenu > p {
+  margin: 10px;
 }
 
-div#buildMenu > select, span#buildButton {
+div#buildMenu > span {
   position: relative;
-  left: 30px;
-  top: 10px;
+  left: 80px;
+  margin-bottom: 10px;
 }
 
 div#buildMenu > span#buildButton {
-  left: 60px;
+  margin-left: 20px;
+}
+
+.statsTable {
+  font: 0.7em Arial;
+}
+
+.statsTable td {
+  border: 1px solid #aaa;
+}
+
+.statsTable .firstColumn {
+  background: #eee;
+  width: 40%;
 }
 
 div.building_image {
@@ -105,12 +118,6 @@ div.building_image {
 	width: 70px;
 	background-image: url(../rocks.png);
 	background-position: center;
-	/* multiple transition properties breaks image hover? */
-	/*
-	-webkit-transition-property: -webkit-transform, opacity;
-	-webkit-transition-duration: 0.15s;
-	-webkit-transition-timing-function: ease-in;
-	*/
 	background-size: contain;
 	background-repeat: no-repeat;
 	z-index: 9;
