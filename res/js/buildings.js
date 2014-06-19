@@ -64,12 +64,15 @@
         loadBuildings: true
       },
       success: function(response) {
-        var builtBuildingsArray = JSON.parse(response);
         builtBuildings = new Array();
+        
+        var builtBuildingsArray = JSON.parse(response);
         for (var i = 0; i < builtBuildingsArray.length; i += 1) {
           builtBuildings.push(builtBuildingsArray[i].buildingID);
+          
           var image = document.getElementById('building' + builtBuildingsArray[i].buildingID);
           showBuilding(image, builtBuildingsArray[i].buildingName);
+          
           $('#' + builtBuildingsArray[i].buildingID).unbind('click.build');
         }
         loadAvailbleBuildings();
@@ -83,17 +86,17 @@
   function showBuilding(e, name) {
     var path = 'url(res/' + name + '.png)';
     e.style.backgroundImage = path;
-    //e.style.visibility = 'visible';
-    //e.style.opacity = '1';
-    //e.style.webkitTransform = 'scale(1,1)';
+//    e.style.visibility = 'visible';
+//    e.style.opacity = '1';
+//    e.style.webkitTransform = 'scale(1,1)';
   }
 
-  function hideBuilding(e) {
-    e.style.backgroundImage = 'url(res/rocks.png)';
-    e.style.visibility = "hidden";
-    e.style.opacity = "0";
-    e.style.webkitTransform = 'scale(4,4)';
-  }
+//  function hideBuilding(e) {
+//    e.style.backgroundImage = 'url(res/rocks.png)';
+//    e.style.visibility = "hidden";
+//    e.style.opacity = "0";
+//    e.style.webkitTransform = 'scale(4,4)';
+//  }
 
   function loadAvailbleBuildings() {
     $.ajax({
