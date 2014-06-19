@@ -307,11 +307,11 @@ INSERT INTO `users` (`user_id`, `username`, `age`, `mail`, `password`, `salt`) V
 TRUNCATE TABLE `buildings`;
 
 INSERT INTO `buildings` (`building_id`, `building`, `resources`, `moral`, `people`, `diseases`, `luck`, `units_atk`, `units_def`, `move_speed`, `build_speed`, `resource_speed`)
-VALUES (1, 'Armory', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1');
+VALUES (1, 'Armory', '35', '1', '1', '1', '1', '1.6', '1', '1', '1', '1');
 INSERT INTO `buildings` (`building_id`, `building`, `resources`, `moral`, `people`, `diseases`, `luck`, `units_atk`, `units_def`, `move_speed`, `build_speed`, `resource_speed`)
-VALUES (2, 'Hospital', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1');
+VALUES (2, 'Hospital', '40', '1', '1', '1', '1', '1', '1.5', '1', '1', '1');
 INSERT INTO `buildings` (`building_id`, `building`, `resources`, `moral`, `people`, `diseases`, `luck`, `units_atk`, `units_def`, `move_speed`, `build_speed`, `resource_speed`)
-VALUES (3, 'Brothel', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1');
+VALUES (3, 'Brothel', '50', '1.4', '1', '1', '1', '1', '1', '1', '1', '1');
 
 SET FOREIGN_KEY_CHECKS=1;
 COMMIT;
