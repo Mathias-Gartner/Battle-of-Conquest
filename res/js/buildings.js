@@ -42,7 +42,7 @@
       type: 'post',
       data: {
         districtID: currentDistrict,
-        loadCityName: true
+        loadDistrictName: true
       },
       success: function(response) {
         var districtName = response;

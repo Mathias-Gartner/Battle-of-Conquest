@@ -18,7 +18,7 @@ class BuildingsPageHandler extends PageHandler {
   private function ajaxRequest() {
     if (isset($_POST['loadBuildings'])) {
       $this->sendBuiltBuildings($_POST['districtID']);
-    } else if (isset($_POST['loadCityName'])) {
+    } else if (isset($_POST['loadDistrictName'])) {
       $this->sendDistrictName($_POST['districtID']);
     } else if (isset($_POST['getAllBuildings'])) {
       $this->sendAllBuildings();
