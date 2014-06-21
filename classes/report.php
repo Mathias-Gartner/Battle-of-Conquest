@@ -44,11 +44,11 @@ class Report
     if ($this->attack->getBattleState() < 1)
       return false;
 
-		$this->attackUnits = $this->attack->attackUnits;
-		$this->attackUnitCount = $this->attackUnits->sum('count')+0;
+    $this->attackUnits = $this->attack->attackUnits;
+    $this->attackUnitCount = $this->attackUnits->sum('count')+0;
 
-	  $this->defendUnits = $this->attack->defendUnits;
-	  $this->defendUnitCount = $this->defendUnits->sum('count')+0;
+    $this->defendUnits = $this->attack->defendUnits;
+    $this->defendUnitCount = $this->defendUnits->sum('count')+0;
 
     if ($this->attackUnitCount < 1 || $this->defendUnitCount < 0)
       return false;
@@ -71,8 +71,8 @@ class Report
     // not all units will die
   	if ($attackerWon)
   	  $actualDefendUnitCount *= 0.8;
-	  else
-	    $actualAttackUnitCount *= 0.8;
+    else
+      $actualAttackUnitCount *= 0.8;
 
   	$this->killedAttackersPercent = $actualDefendUnitCount / $actualAttackUnitCount;
     if ($this->killedAttackersPercent > 1)
@@ -104,7 +104,21 @@ class Report
     if ($this->attack->getBattleState() < 1)
       return false;
 
-    return $this->attackUnitCount * 1;
+    $attackingDistrict = $this->attack->getSourceDistrictId();
+    $buildingLevel = \Classes\BuildingLevel::where(array('district_id' => $attackingDistrict));
+    $attackModifierSum = 0;
+    $buildingCount = 0;
+    if (null != $buildingLevel) {
+      while (null != ($building = $buildingLevel->next())) {
+        $buildingID = $building->getBuildingID();
+        $building = \Classes\Building::find($buildingID);
+        $attackModifier = $building->getUnitsAtk();
+        $attackModifierSum += $attackModifier;
+        $buildingCount += 1;
+      }
+    }
+    $averageAttackModifier = $attackModifierSum / $buildingCount;
+    return $this->attackUnitCount * $averageAttackModifier;
   }
 
   public function getModifiedDefendUnitCount()
@@ -112,7 +126,21 @@ class Report
     if ($this->attack->getBattleState() < 1)
       return false;
 
-    return $this->defendUnitCount * 1;
+    $defendingDistrict = $this->attack->getTargetDistrictId();
+    $buildingLevel = \Classes\BuildingLevel::where(array('district_id' => $defendingDistrict));
+    $defenseModifierSum = 0;
+    $buildingCount = 0;
+    if (null != $buildingLevel) {
+      while (null != ($building = $buildingLevel->next())) {
+        $buildingID = $building->getBuildingID();
+        $building = \Classes\Building::find($buildingID);
+        $defenseModifier = $building->getUnitsDef();
+        $defenseModifierSum += $defenseModifier;
+        $buildingCount += 1;
+      }
+    }
+    $averageDefenseModifier = $defenseModifierSum / $buildingCount;
+    return $this->defendUnitCount * $averageDefenseModifier;
   }
 
   public function getAttack()
