@@ -110,8 +110,6 @@ class Report
     $buildingCount = 0;
     if (null != $buildingLevel) {
       while (null != ($building = $buildingLevel->next())) {
-        $buildingID = $building->getBuildingID();
-        $building = \Classes\Building::find($buildingID);
         $attackModifier = $building->getUnitsAtk();
         $attackModifierSum += $attackModifier;
         $buildingCount += 1;
@@ -132,8 +130,6 @@ class Report
     $buildingCount = 0;
     if (null != $buildingLevel) {
       while (null != ($building = $buildingLevel->next())) {
-        $buildingID = $building->getBuildingID();
-        $building = \Classes\Building::find($buildingID);
         $defenseModifier = $building->getUnitsDef();
         $defenseModifierSum += $defenseModifier;
         $buildingCount += 1;
