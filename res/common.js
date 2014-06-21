@@ -23,7 +23,8 @@ function readyStateChangeProxy(ajaxObject, resultFunction)
         }
         else if (ajaxObject.readyState == 4 && ajaxObject.status != 200)
         {
-            alert("HTTP error " + ajaxObject.status + ": " + ajaxObject.responseText);
+//            alert("HTTP error " + ajaxObject.status + ": " + ajaxObject.responseText);
+            console.log("HTTP error " + ajaxObject.status + ": " + ajaxObject.responseText);
         }
     }
 }
