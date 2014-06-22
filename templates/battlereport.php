@@ -5,7 +5,7 @@
 		<h2 class='flex_centered'>Battle Report</h2>
 	</header>
 
-  <div>
+  <div class="reportHeader">
     <?php
     if ($PAGEDATA['isSpy'])
       echo "Espoinage attempt";
@@ -19,7 +19,7 @@
   </div>
 
 	<section id="formationsSection">
-	  <div>Formations</div>
+	  <div class="sectionHeader">Formations</div>
 
 	  <div class="attacker">
 	    <?php
@@ -58,14 +58,14 @@
   </section>
 
 	<section id="killsSection">
-		<div>Kills</div>
+		<div class="sectionHeader">Kills</div>
 
 		<div class="attacker"><?php echo $PAGEDATA['killedAttackers']; ?></div>
 		<div class="defender"><?php echo $PAGEDATA['killedDefenders']; ?></div>
 	</section>
 
 	<section id="resultSection">
-		<div>Result</div>
+		<div class="sectionHeader">Result</div>
 
 		<div class="attacker">
 			<?php

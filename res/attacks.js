@@ -151,7 +151,7 @@ function resultFunction(response)
 				cancelButton.innerHTML = "Cancel";
 				cancelButton.href = "#";
 				cancelButton.onclick = cancelAttack;
-				cancelButton.onmouseover = showMouseOverPopup;
+				//cancelButton.onmouseover = showMouseOverPopup;
 				lineDiv.appendChild(cancelButton);
 				lineDiv.appendChild(secondsLeftSpan);
 
@@ -171,18 +171,23 @@ function resultFunction(response)
 			var attackerWonSpan = document.createElement("span");
 			if (response.attacks[i].attackerWon)
 				attackerWonSpan.innerHTML = "The attacker won";
+			else if (response.attacks[i].cancelled)
+				attackerWonSpan.innerHTML = "Attack cancelled";
 			else
 				attackerWonSpan.innerHTML = "The attacker lost";
 
 			lineDiv.appendChild(attackerWonSpan);
 
-			var cancelButton = document.createElement("a");
-			cancelButton.className = "cancelButton bigbutton";
-			cancelButton.id = "reportButton_" + response.attacks[i].id;
-			cancelButton.innerHTML = "Report";
-			cancelButton.href = "#";
-			cancelButton.onclick = showReport;
-			lineDiv.appendChild(cancelButton);
+			if (!response.attacks[i].cancelled)
+			{
+				var cancelButton = document.createElement("a");
+				cancelButton.className = "cancelButton bigbutton";
+				cancelButton.id = "reportButton_" + response.attacks[i].id;
+				cancelButton.innerHTML = "Report";
+				cancelButton.href = "#";
+				cancelButton.onclick = showReport;
+				lineDiv.appendChild(cancelButton);
+			}
 		}
 
 	  displayedAttacks++;
@@ -203,7 +208,7 @@ function resultFunction(response)
 	loadingDiv.style.display = "none";
 	attackListDiv.innerHTML = "";
 	attackListDiv.appendChild(listDiv);
-	document.getElementById("main").style.height = (360+130*displayedAttacks)+"px";
+	document.getElementById("main").style.height = (345+55*displayedAttacks+70)+"px";
 }
 
 function updateSecondsLeft(id)

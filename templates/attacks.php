@@ -5,10 +5,10 @@
 	<article id="home" class="panel">
 		<header>
 			<h2 class='flex_centered'>Overview of your attacks</h2>
-		</header>	
-	    
+		</header>
+
 		<div id="attacksListContainer">
-		
+
 			<div class='flex_hor linkbar'>
 				<div class='flex_centered'>
 					<a href='javascript:showCurrent();' class='bigbutton'><span>Ongoing</span></a>
@@ -17,12 +17,12 @@
 					<a href='javascript:showPast();' class='bigbutton'><span>Recent</span></a>
 				</div>
 			</div>
-		
-			<div id='headerLine'>
+
+			<!--<div id='headerLine'>
 				<span>Base</span>
 				<span>Target</span>
 				<span></span>
-			</div>
+			</div>-->
 
 			<div id='noAttacksDiv' style='display:none;'>No attacks.</div>
 			<div id='loadingDiv'>Loading...</div>

@@ -10,6 +10,7 @@
 		?>
 		{
 			"id": <?php echo $attack['id']; ?>,
+			"state": "<?php echo $attack['battleState']; ?>",
 			"time": "<?php echo $attack['battleTime']; ?>",
 			"source":
 			{
@@ -25,10 +26,11 @@
 			"incoming": <?php if ($attack['incoming']) echo 'true'; else echo 'false'; ?>,
 			"returning": <?php if ($attack['returning']) echo 'true'; else echo 'false'; ?>,
 			"completed": <?php if ($attack['completed']) echo 'true'; else echo 'false'; ?>,
+			"cancelled": <?php if ($attack['cancelled']) echo 'true'; else echo 'false'; ?>,
 			<?php if ($PAGEDATA['current']) { ?>
 			"secondsLeft": <?php echo $attack['secondsLeft']; ?>
 			<?php } else { ?>
-			"attackerWon": <?php if ($attack['attackerWon']) echo 'true'; else echo 'false'; ?>
+			"attackerWon": <?php if ($attack['attackerWon'] === true) echo 'true'; else echo 'false'; ?>
 			<?php } ?>
 		}
 		<?php } ?>

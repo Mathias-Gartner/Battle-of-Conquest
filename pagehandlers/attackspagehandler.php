@@ -14,11 +14,11 @@ class AttacksPageHandler extends PageHandler
 		{
 		  return $this->cancelAttack($_GET['cancelId']);
 		}
-		
+
 		$this->setPhpTemplate('attacks');
 	  return $this;
 	}
-	
+
 	private function ajaxRequest()
 	{
 		$this->setAjaxTemplate('attacks');
@@ -33,24 +33,24 @@ class AttacksPageHandler extends PageHandler
 		$attacks = new \Torm\Collection($builder, array($_SESSION['userid']), '\Classes\Attack');
 
 		$attackData = $this->addAttacks(null, $attacks, false);
-		
+
 		// inbound attacks
 		$builder->joins = 'JOIN districts ON districts.district_id = attacks.target_district_id';
 		$attacks = new \Torm\Collection($builder, array($_SESSION['userid']), '\Classes\Attack');
 		$attackData = $this->addAttacks($attackData, $attacks, true);
-				
+
 		$this->setPageData('attacks', $attackData);
 		$this->setPageData('current', $current);
 		return $this;
 	}
-	
+
 	private function addAttacks($array, $collection, $incoming)
 	{
 		if ($array == null)
 			$array = array();
-			
+
 		$currentDate = new \DateTime();
-		
+
 		while (($attack = $collection->next()) != NULL)
 		{
 			$battleTime = new \DateTime($attack->getBattleTime());
@@ -63,13 +63,14 @@ class AttacksPageHandler extends PageHandler
 			{
 				$secondsLeft = abs($battleTime->getTimestamp() - $currentDate->getTimestamp());
 			}
-			
+
 			// TODO: eager fetching of districts
 			$targetDistrict = $attack->targetDistrict;
 			$sourceDistrict = $attack->sourceDistrict;
 
 			array_push($array, array(
 				'id'=>$attack->getAttackId(),
+				'battleState'=>$attack->getBattleState(),
 				'startTime'=>str_replace(' ', 'T', $attack->getStartTime()),
 				'battleTime'=>$attack->getBattleTime(),
 				'targetDistrictId'=>$targetDistrict->getDistrictId(),
@@ -80,13 +81,14 @@ class AttacksPageHandler extends PageHandler
 				'secondsLeft'=>$secondsLeft,
 				'returning'=>$attack->isReturning(),
 				'completed'=>$attack->isCompleted(),
+				'cancelled'=>$attack->isCancelled(),
 				'attackerWon'=>($attack->getAttackerWon() == NULL ? "null" : $attack->getAttackerWon())
 				));
 		}
-		
+
 		return $array;
 	}
-	
+
 	private function cancelAttack($id)
 	{
 	  $attack = \Classes\Attack::find($id);
@@ -100,14 +102,14 @@ class AttacksPageHandler extends PageHandler
     $district = \Classes\District::find($attack->getSourceDistrictId());
     if ($district == null)
       return;
-      
+
 	  if ($district->getOwnerId() != $_SESSION['userid'])
 	  {
 	    $this->setMessage('Attack cannot be cancelled (access denied)');
 	    $this->setReturnCode(500);
 	    return $this;
 	  }
-	  
+
 	  if (!$attack->cancel())
 	  {
 	    $this->setMessage('Attack cannot be saved');
