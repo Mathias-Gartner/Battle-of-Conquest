@@ -31,7 +31,7 @@ INSERT INTO `attacks` (`attack_id`, `source_district_id`, `target_district_id`, 
 
 TRUNCATE TABLE `terrain`;
 
-INSERT INTO `boc`.`terrain` (`terrain_id`, `terrain_name`, `resources`, `moral`, `people`, `diseases`, `luck`, `units_atk`, `units_def`, `move_speed`, `build_speed`, `resource_speed`) VALUES
+INSERT INTO `terrain` (`terrain_id`, `terrain_name`, `resources`, `moral`, `people`, `diseases`, `luck`, `units_atk`, `units_def`, `move_speed`, `build_speed`, `resource_speed`) VALUES
  ('1', 'Open Docks', '0', '20', '5', '0', '10', '10', '5', '-5', '0', '0'),
  ('2', 'Great Canyons', '-10', '-10', '-10', '10', '20', '10', '25', '-15', '10', '0'),
  ('3', 'High Cities', '15', '10', '10', '-10', '10', '10', '10', '15', '-10', '0');
