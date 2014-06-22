@@ -9,9 +9,19 @@ class DistrictUnit extends \TORM\Model
 		$this->set("unit_id", $unitId);
 	}
 
+	public function getUnitId()
+	{
+		return $this->get("unit_id");
+	}
+
 	public function setDistrictId($districtId)
 	{
 		$this->set("district_id", $districtId);
+	}
+
+	public function getDistrictId()
+	{
+		return $this->get("district_id");
 	}
 
 	public function getCount()

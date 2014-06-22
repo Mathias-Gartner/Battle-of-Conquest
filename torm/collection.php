@@ -36,17 +36,19 @@ class Collection implements \Iterator {
          return $this->next();
       return new $this->cls($this->curval);
    }
-   
+
    public function key() {
       return $this->count;
    }
-      
+
    public function valid() {
       return $this->valid;
-   }    
-   
+   }
+
    public function rewind() {
       $this->count = 0;
+      $this->data = null;
+      $this->curval = null;
    }
 
    public function count() {
@@ -153,7 +155,7 @@ class Collection implements \Iterator {
          array_push($ar,$data);
       return $ar;
    }
-   
+
    public function next() {
       $cls = $this->cls;
 

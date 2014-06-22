@@ -125,7 +125,38 @@ class StartAttackPageHandler extends PageHandler
 			  \TORM\Connection::getConnection()->rollBack();
 			  $this->setReturnCode(500);
 			  $this->setMessage('cannot save AttackingUnit');
-			  return;
+			  return $this;
+			}
+
+			$districtUnit = \Classes\DistrictUnit::where(array('district_id'=>$sourceId, 'unit_id'=>$unit['id']))->next();
+			if ($districtUnit == null)
+			{
+				\TORM\Connection::getConnection()->rollBack();
+				$this->setReturnCode(500);
+				$this->setMessage('Posted data invalid. This district has no such unit.');
+				return $this;
+			}
+			$districtUnit->setCount($districtUnit->getCount() - $unit['count']);
+
+			if ($districtUnit->getCount() < 1)
+			{
+				if (!$districtUnit->destroy())
+				{
+					\TORM\Connection::getConnection()->rollBack();
+					$this->setReturnCode(500);
+					$this->setMessage('cannot destroy DistrictUnit');
+					return $this;
+				}
+			}
+			else
+			{
+				if (!$districtUnit->save())
+				{
+					\TORM\Connection::getConnection();
+					$this->setReturnCode(500);
+					$this->setMessage('cannot save DistrictUnit');
+					return $this;
+				}
 			}
 		}
 

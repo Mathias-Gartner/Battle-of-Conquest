@@ -18,17 +18,37 @@ class BattleHandler
 
 		while (($attack = $pendingAttacks->next()) != NULL)
 		{
+			// delete old values (if any)
+			$sql = 'DELETE FROM `defending_units` WHERE attack_id=?';
+			$stmt = \TORM\Connection::getConnection()->prepare($sql);
+			if (!$stmt->execute(array($attack->getAttackId())))
+			{
+				continue;
+			}
+
+			// set current units of targetDistrict as DefendUnits
+			$defendUnits = \Classes\DistrictUnit::where(array('district_id'=>$attack->getTargetDistrictId()));
+			while (($unit = $defendUnits->next()) != NULL)
+			{
+				$defendUnit = new \Classes\DefendingUnit();
+				$defendUnit->setAttackId($attack->getAttackId());
+				$defendUnit->setUnitId($unit->getUnitId());
+				$defendUnit->setCount($unit->getCount());
+				if (!$defendUnit->save())
+				{
+					\TORM\Connection::getConnection()->rollBack();
+					return;
+				}
+			}
+
 			\TORM\Connection::getConnection()->beginTransaction();
 
-			$attackUnits = $attack->attackUnits;
-			$sourceUnits = $attack->sourceDistrict->districtUnits;
-			$targetUnits = $attack->targetDistrict->districtUnits;
-			$attackUnitCount = $attackUnits->sum('count')+0;
-			$targetUnitCount = $targetUnits->sum('count')+0;
-
-			//TODO: improve battle logic
 			$report = new \Classes\Report($attack);
-			$report->battle(false);
+			if (!$report->battle())
+			{
+				\TORM\Connection::getConnection()->rollBack();
+				continue;
+			}
 			$attackerWon = $report->attackerWon();
 
 			$attack->setAttackerWon($attackerWon);
@@ -39,54 +59,47 @@ class BattleHandler
 				continue;
 			}
 
-			// remove units that died in the battle
-			while (($unit = $targetUnits->next()) != NULL && $attackUnitCount > 0)
+			// sync DistrictUnits with fight result
+			$resultDefendUnits = $report->getResultDefendUnits();
+			foreach ($resultDefendUnits as $unit)
 			{
-				if ($unit->getCount() <= $attackUnitCount)
+				$districtUnit = \Classes\DistrictUnit::where(array('district_id'=>$attack->getTargetDistrictId(), 'unit_id'=>$unit['id']))->next();
+				if ($districtUnit == null)
 				{
-					$attackUnitCount = $attackUnitCount - $unit->getCount();
-					$unit->destroy();
+					$districtUnit = new \Classes\DefendingUnit();
+					$districtUnit->setDistrictId($attack->getTargetDistrictId());
+					$districtUnit->setUnitId($unit['id']);
+					$districtUnit->setCount($unit['count']);
 				}
-				else
+				$districtUnit->setCount($unit['count']);
+
+				if (!$districtUnit->save())
 				{
-					$newCount = $unit->getCount() - $attackUnitCount;
-					$attackUnitCount = $attackUnitCount - $unit->getCount();
-					$unit->setCount($newCount);
-					if (!$unit->save())
-					{
-						\TORM\Connection::getConnection()->rollBack();
-					}
-					break;
+					\TORM\Connection::getConnection()->rollBack();
+					return;
 				}
 			}
 
-			\TORM\Connection::getConnection()->commit();
+			if (count($resultDefendUnits) > 0)
+				$sql = 'DELETE FROM `district_units` WHERE `district_id` = ? and `unit_id` not in ('.str_repeat('?, ', count($resultDefendUnits) - 1).'?)';
+			else
+				$sql = 'DELETE FROM `district_units` WHERE `district_id` = ?';
 
-			/*while (($unit = $sourceUnits->next()) != NULL && $targetUnitCount > 0)
+			$stmt = \TORM\Connection::getConnection()->prepare($sql);
+			$params = array();
+			array_push($params, $attack->getTargetDistrictId());
+			foreach ($resultDefendUnits as $unit)
 			{
-				$attackUnit = \Classes\AttackUnit::first(array('unit_id'=>$unit->getUnitId(), 'attack_id'=>$attack->getAttackId()));
-				$maxFallen = $targetUnitCount;
+				array_push($params, $unit['id']);
+			}
+var_dump($sql);var_dump($params);
+			if (!$stmt->execute($params))
+			{
+				\TORM\Connection::getConnection()->rollBack();
+				continue;
+			}
 
-				if ($maxFallen == null)
-					$maxFallen = 0;
-
-				if ($maxFallen > $attackUnitCount) // units that weren't attacking cannot die
-					$maxFallen = $attackUnitCount;
-
-				if ($unit->getCount() <= $maxFallen)
-				{
-					$targetUnitCount = $targetUnitCount - $unit->getCount();
-					$unit->destroy();
-				}
-				else
-				{
-					$newCount = $unit->getCount() - $maxFallen;
-					$targetUnitCount = $targetUnitCount - $maxFallen;
-					$unit->setCount($newCount);
-					$unit->save();
-					break;
-				}
-			}*/
+			\TORM\Connection::getConnection()->commit();
 		}
 	}
 
@@ -107,6 +120,14 @@ class BattleHandler
 		while (($attack = $pendingAttacks->next()) != NULL)
 		{
 			\TORM\Connection::getConnection()->beginTransaction();
+
+			$report = new \Classes\Report($attack);
+			if (!$report->battle())
+			{
+				\TORM\Connection::getConnection()->rollBack();
+				continue;
+			}
+
 		  // set to appropriate state for returned attack
 			$attack->setBattleState($attack->getBattleState() + 2);
 			if (!$attack->save())
@@ -115,25 +136,24 @@ class BattleHandler
 			  continue;
 			}
 
-		  //TODO: use Report and add only surviving units to the district
-		  //$report = \Classes\Report::createForAttack(
-
-		  $district = $attack->sourceDistrict;
-		  $units = $attack->attackUnits;
-		  while (($unit = $units->next()) != NULL)
-		  {
-		    $districtUnit = \Classes\DistrictUnit::first(array('unit_id'=>$unit->getUnitId()));
-		    if ($districtUnit == null)
-		    {
-		    	$districtUnit = new \Classes\DistrictUnit();
-		    }
-		    $districtUnit->setCount($unit->getCount() + $districtUnit->getCount());
-		    if (!$districtUnit->save())
-		    {
-		    	\TORM\Connection::getConnection()->rollBack();
-		    	break;
-		    }
-		  }
+			// re-add DistrictUnits
+			$resultAttackUnits = $report->getResultAttackUnits();
+			foreach ($resultAttackUnits as $unit)
+			{
+				$districtUnit = \Classes\DistrictUnit::where(array('district_id'=>$attack->getSourceDistrictId(), 'unit_id'=>$unit['id']))->next();
+				if ($districtUnit == null)
+				{
+					$districtUnit = new \Classes\DistrictUnit();
+					$districtUnit->setDistrictId($attack->getSourceDistrictId());
+					$districtUnit->setUnitId($unit['id']);
+				}
+				$districtUnit->setCount($districtUnit->getCount() + $unit['count']);
+				if (!$districtUnit->save())
+				{
+					\TORM\Connection::getConnection()->rollBack();
+					break;
+				}
+			}
 
 		  \TORM\Connection::getConnection()->commit();
 		}

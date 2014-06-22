@@ -7,6 +7,10 @@ class Report
   public static function createForAttack($attackId)
   {
     $attack = \Classes\Attack::find($attackId);
+
+    if ($attack == null || $attack->getBattleState() < 1)
+      return false;
+
     $report = new Report($attack);
 
     if ($report->battle())
@@ -41,11 +45,11 @@ class Report
 	// 20% of the loosing troops are hiding/fleeing, so they won't get killed
   public function battle()
   {
-    if ($this->attack->getBattleState() < 1)
-      return false;
-
     $this->attackUnits = $this->attack->attackUnits;
     $this->attackUnitCount = $this->attackUnits->sum('count')+0;
+
+    if ($this->attackUnitCount < 1)
+      return false;
 
     $this->defendUnits = $this->attack->defendUnits;
     $this->defendUnitCount = $this->defendUnits->sum('count')+0;
@@ -101,9 +105,6 @@ class Report
 
   public function getModifiedAttackUnitCount()
   {
-    if ($this->attack->getBattleState() < 1)
-      return false;
-
     $attackingDistrict = $this->attack->getSourceDistrictId();
     $buildingLevel = \Classes\BuildingLevel::where(array('district_id' => $attackingDistrict));
     $attackModifierSum = 0;
@@ -121,9 +122,6 @@ class Report
 
   public function getModifiedDefendUnitCount()
   {
-    if ($this->attack->getBattleState() < 1)
-      return false;
-
     $defendingDistrict = $this->attack->getTargetDistrictId();
     $buildingLevel = \Classes\BuildingLevel::where(array('district_id' => $defendingDistrict));
     $defenseModifierSum = 0;
@@ -182,5 +180,48 @@ class Report
   public function getKilledDefendersCount()
   {
     return $this->killedDefendersCount;
+  }
+
+  public function getResultAttackUnits()
+  {
+    $resultAttackUnits = array();
+    $killedAttackers = $this->killedAttackersCount;
+    $attackUnits = $this->getAttackUnits();
+    $attackUnits->rewind();
+    while (($attackUnit = $attackUnits->next()) != NULL)
+    {
+      if ($killedAttackers < $attackUnit->getCount())
+      {
+        $unit = \Classes\Unit::find($attackUnit->getUnitId());
+        array_push($resultAttackUnits, array('id'=>$unit->getUnitId(), 'name'=>$unit->getUnitName(), 'count'=>$attackUnit->getCount() - $killedAttackers));
+      }
+
+      $killedAttackers -= $attackUnit->getCount();
+      if ($killedAttackers < 0)
+        $killedAttackers = 0;
+    }
+    return $resultAttackUnits;
+  }
+
+  public function getResultDefendUnits()
+  {
+    $resultDefendUnits = array();
+    $killedDefenders = $this->killedDefendersCount;
+    $defendUnits = $this->getDefendUnits();
+    $defendUnits->rewind();
+    while(($defendUnit = $defendUnits->next()) != NULL)
+    {
+      if ($killedDefenders < $defendUnit->getCount())
+      {
+        $unit = \Classes\Unit::find($defendUnit->getUnitId());
+        array_push($resultDefendUnits, array('id'=>$unit->getUnitId(), 'name'=>$unit->getUnitName(), 'count'=>$defendUnit->getCount() - $killedDefenders));
+      }
+
+      $killedDefenders -= $defendUnit->getCount();
+      if ($killedDefenders < 0)
+        $killedDefenders = 0;
+    }
+
+    return $resultDefendUnits;
   }
 }

@@ -43,6 +43,7 @@ function showLoading()
   noAttacksDiv.style.display = "none";
   attackListDiv.innerHTML = "";
   loadingDiv.style.display = "block";
+	document.getElementById("main").style.height = "461px";
 }
 
 function showReport(event)
@@ -188,6 +189,8 @@ function resultFunction(response)
 		listDiv.appendChild(lineDiv);
 	}
 
+	document.getElementById("main").style.height = "461px";
+
   if (displayedAttacks < 1)
   {
   	noAttacksDiv.style.display = "block";
@@ -195,12 +198,12 @@ function resultFunction(response)
   	loadingDiv.style.display = "none";
   	return;
   }
-  else
-  	noAttacksDiv.style.display = "none";
 
+	noAttacksDiv.style.display = "none";
 	loadingDiv.style.display = "none";
 	attackListDiv.innerHTML = "";
 	attackListDiv.appendChild(listDiv);
+	document.getElementById("main").style.height = (360+130*displayedAttacks)+"px";
 }
 
 function updateSecondsLeft(id)
