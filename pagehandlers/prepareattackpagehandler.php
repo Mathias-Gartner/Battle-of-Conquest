@@ -30,7 +30,7 @@ class PrepareAttackPageHandler extends PageHandler
 		  $this->setMessage('sourceId not found');
 		  return $this;
 		}
-		
+
 		$targetDistrict = \Classes\District::find($targetId);
 		if ($targetDistrict == null)
 		{
@@ -62,10 +62,10 @@ class PrepareAttackPageHandler extends PageHandler
 			$builder = \Classes\AttackingUnit::makeBuilder();
 			$builder->where = 'attacks.battle_over=0 and attacks.source_district_id = ? and attack_units.unit_id = ?';
 			$builder->joins = 'JOIN attacks ON attacks.attack_id = attack_units.attack_id';
-			$active = new \Torm\Collection($builder, array($sourceId, $unit->getUnitId()), '\Classes\AttackingUnit');
+			/*$active = new \Torm\Collection($builder, array($sourceId, $unit->getUnitId()), '\Classes\AttackingUnit');
 			$active = $active->sum('count');
-			if ($active == null) $active = 0;
-			$available = $max - $active;
+			if ($active == null) $active = 0;*/
+			$available = $max;
 
 			if ($available < 1)
 				continue;

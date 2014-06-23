@@ -106,34 +106,45 @@ class Report
   public function getModifiedAttackUnitCount()
   {
     $attackingDistrict = $this->attack->getSourceDistrictId();
-    $buildingLevel = \Classes\BuildingLevel::where(array('district_id' => $attackingDistrict));
+    $buildingLevels = \Classes\BuildingLevel::where(array('district_id' => $attackingDistrict));
     $attackModifierSum = 0;
     $buildingCount = 0;
-    if (null != $buildingLevel) {
-      while (null != ($building = $buildingLevel->next())) {
+    if (null != $buildingLevels) {
+      while (null != ($buildingLevel = $buildingLevels->next())) {
+        $building = $buildingLevel->building;
         $attackModifier = $building->getUnitsAtk();
         $attackModifierSum += $attackModifier;
         $buildingCount += 1;
       }
     }
-    $averageAttackModifier = $attackModifierSum / $buildingCount;
+
+    if ($buildingCount < 1)
+      $averageAttackModifier = 1;
+    else
+      $averageAttackModifier = $attackModifierSum / $buildingCount;
+
     return $this->attackUnitCount * $averageAttackModifier;
   }
 
   public function getModifiedDefendUnitCount()
   {
     $defendingDistrict = $this->attack->getTargetDistrictId();
-    $buildingLevel = \Classes\BuildingLevel::where(array('district_id' => $defendingDistrict));
+    $buildingLevels = \Classes\BuildingLevel::where(array('district_id' => $defendingDistrict));
     $defenseModifierSum = 0;
     $buildingCount = 0;
-    if (null != $buildingLevel) {
-      while (null != ($building = $buildingLevel->next())) {
+    if (null != $buildingLevels) {
+      while (null != ($buildingLevel = $buildingLevels->next())) {
+        $building = $buildingLevel->building;
         $defenseModifier = $building->getUnitsDef();
         $defenseModifierSum += $defenseModifier;
         $buildingCount += 1;
       }
     }
-    $averageDefenseModifier = $defenseModifierSum / $buildingCount;
+    if ($buildingCount < 1)
+      $averageDefenseModifier = 1;
+    else
+      $averageDefenseModifier = $defenseModifierSum / $buildingCount;
+
     return $this->defendUnitCount * $averageDefenseModifier;
   }
 
