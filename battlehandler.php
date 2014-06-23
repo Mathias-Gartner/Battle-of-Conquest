@@ -92,11 +92,27 @@ class BattleHandler
 			{
 				array_push($params, $unit['id']);
 			}
-var_dump($sql);var_dump($params);
 			if (!$stmt->execute($params))
 			{
 				\TORM\Connection::getConnection()->rollBack();
 				continue;
+			}
+
+			// take district if all defenders died
+			$count = \Classes\DistrictUnit::where(array('district_id'=>$attack->getTargetDistrictId))->sum('count');
+			if ($count == null || $count < 1)
+			{
+				$sourceDistrict = \Classes\District::find($attack->getSourceDistrictId());
+				$district = \Classes\District::find($attack->getTargetDistrictId());
+				if ($district->getOwnerId() > 1) // district of admin user cannot be taken as this would break registration
+				{
+					$district->setOwnerId($sourceDistrict->getOwnerId());
+					if (!$district->save())
+					{
+						\TORM\Connection::getConnection()->rollBack();
+						continue;
+					}
+				}
 			}
 
 			\TORM\Connection::getConnection()->commit();
