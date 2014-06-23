@@ -91,8 +91,26 @@ class Report
 
     $this->resultingAttackUnitCount = $this->attackUnitCount - $this->killedAttackersCount;
     $this->resultingDefendUnitCount = $this->defendUnitCount - $this->killedDefendersCount;
+    
+    if (0 >= $this->resultingDefendUnitCount)
+      $this->changeTargetDistrictOwner();
 
   	return true;
+  }
+  
+  private function changeTargetDistrictOwner()
+  {
+    
+    $attackerID = NULL;
+    $attackerDistrict = \Classes\District::where(array('district_id' => $this->attack->getSourceDistrictId()));
+    if (null != $attackerDistrict) {
+      while (null != ($singleResult = $attackerDistrict->next())) {
+        $attackerID = $singleResult->getOwnerId();
+      }
+    }
+
+    if (NULL != $attackerID)
+      \Classes\District::where(array('district_id' => $this->attack->getTargetDistrictId()))->updateAttributes(array("owner_id" => $attackerID));
   }
 
   public function attackerWon()
