@@ -23,6 +23,10 @@ class UnitsPageHandler extends PageHandler
 		{
 			$districtId = $_GET['districtId'];
 		}
+		elseif (isset($_SESSION['currentdistrict']))
+		{
+			$districtId = $_SESSION['currentdistrict'];
+		}
 		else
 		{
 			$districtId = $this->getMainDistrictForCurrentPlayer();

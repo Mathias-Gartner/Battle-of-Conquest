@@ -10,6 +10,19 @@ class BuildingsPageHandler extends PageHandler {
     if (isset($_POST['districtID'])) {
       $this->ajaxRequest();
     } else {
+      if (isset($_GET['mapid']) && is_numeric($_GET['mapid'])) {
+        $district = \Classes\District::find($_GET['mapid']);
+        if ($district != null)
+        {
+          if ($district->getOwnerId() != $_SESSION['userid'])
+          {
+            $this->setReturnCode(403);
+            $this->setMessage('You can only view your own districts');
+            return $this;
+          }
+          $_SESSION['currentdistrict'] = $_GET['mapid'];
+        }
+      }
       $this->setPhpTemplate('buildings');
     }
     return $this;

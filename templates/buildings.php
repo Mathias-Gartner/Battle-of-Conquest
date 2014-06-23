@@ -17,7 +17,7 @@
     if (isset($_GET['mapid'])) {
       $districtID = $_GET['mapid'];
     } else {
-      $districtID = 1;
+      $districtID = $_SESSION['currentdistrict'];
     }
     echo (' data-districtid="' . $districtID . '" ');
     ?>

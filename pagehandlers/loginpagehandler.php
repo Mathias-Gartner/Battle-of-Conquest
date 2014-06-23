@@ -15,27 +15,32 @@ class LoginPageHandler extends PageHandler
         {
           $_SESSION['username'] = $user->getUsername();
           $_SESSION['userid'] = $user->getUserId();
+
+          $district = \Classes\District::first(array('owner_id'=>$user->getUserId()));
+          if ($district != null)
+            $_SESSION['currentdistrict'] = $district->getDistrictId();
+
           // redirect internally
           $overviewPageHandler = new OverviewPageHandler();
           $overviewPageHandler->handle();
           return $overviewPageHandler;
         }
       }
-      
+
       // only reached in case of unsuccessful login
       $this->showLoginValidationError();
     }
-    
+
     $this->setPhpTemplate('login');
     return $this;
   }
-  
-  
+
+
   public function showLoginValidationError()
   {
     $this->setPageData('loginError', true);
   }
-  
+
 	public function loginRequired()
   {
     return false;

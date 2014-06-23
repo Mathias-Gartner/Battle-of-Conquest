@@ -10,17 +10,17 @@ function init(){
 			}else{
 				var targetId = this.id;
 				switch(document.getElementById("attack_button").innerHTML){ // TODO: id too specific
-				case 'Create': 
+				case 'Create':
 					$('#attack_button').click(function(event){
 						window.location.href = "?action=buildings&buildId=" +targetId;
 					});
 					console.log(this.id);
 					prepareCreateBuildingByID(this.id);
 					break;
-					
+
 				case 'Attack!':
 					$('#attack_button').click(function(event){
-						window.location.href = "?action=prepareAttack&sourceId=1&targetId=" + targetId;
+						window.location.href = "?action=prepareAttack&sourceId=" + sourceId + "&targetId=" + targetId;
 					});
 					setCityNameByID(targetId);
 					break;
