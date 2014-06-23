@@ -150,7 +150,7 @@
                     .append($('<td>').text('Name').addClass('firstColumn'))
                     .append($('<td>').text(building.buildingName)))
             .append($('<tr>')
-                    .append($('<td>').text('Ressources').addClass('firstColumn'))
+                    .append($('<td>').text('Resources').addClass('firstColumn'))
                     .append($('<td>').text(building.buildingCost)))
             .append($('<tr>')
                     .append($('<td>').text('Attack').addClass('firstColumn'))
@@ -160,8 +160,8 @@
                     .append($('<td>').text(building.defenseModifier)))
             .append($('<tr>')
                     .append($('<td>').text('Morale').addClass('firstColumn'))
-                    .append($('<td>').text(building.moraleModifier)))
-            );
+                    .append($('<td>').text(building.moraleModifier))));
+
     $('#buildingStats table').addClass("statsTable");
   }
 
