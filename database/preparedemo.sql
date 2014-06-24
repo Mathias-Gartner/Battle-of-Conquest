@@ -26,7 +26,7 @@ TRUNCATE TABLE `buildings_level`;
 TRUNCATE TABLE `attacks`;
 
 INSERT INTO `attacks` (`attack_id`, `source_district_id`, `target_district_id`, `start_time`, `battle_time`, `battle_state`, `attacker_won`) VALUES
-(1, 1, 2, '2014-06-22 15:43:11', '2014-06-22 15:57:41', 3, 1);
+(1, 4, 2, '2014-06-22 15:43:11', '2014-06-22 15:57:41', 3, 1);
 
 
 --

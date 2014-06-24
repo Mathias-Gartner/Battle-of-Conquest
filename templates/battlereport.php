@@ -58,7 +58,7 @@
   </section>
 
 	<section id="killsSection">
-		<div class="sectionHeader">Kills</div>
+		<div class="sectionHeader">Deaths</div>
 
 		<div class="attacker"><?php echo $PAGEDATA['killedAttackers']; ?></div>
 		<div class="defender"><?php echo $PAGEDATA['killedDefenders']; ?></div>

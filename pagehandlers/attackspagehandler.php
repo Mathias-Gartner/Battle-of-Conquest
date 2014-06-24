@@ -53,6 +53,15 @@ class AttacksPageHandler extends PageHandler
 
 		while (($attack = $collection->next()) != NULL)
 		{
+			$duplicate = false;
+			foreach($array as $atk)
+			{
+				if ($attack->getAttackId() == $atk['id'])
+					$duplicate = true;
+			}
+			if ($duplicate)
+				continue;
+
 			$battleTime = new \DateTime($attack->getBattleTime());
 			$secondsLeft = 0;
 			if ($attack->isReturning())

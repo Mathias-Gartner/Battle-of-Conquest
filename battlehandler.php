@@ -99,7 +99,7 @@ class BattleHandler
 			}
 
 			// take district if all defenders died
-			$count = \Classes\DistrictUnit::where(array('district_id'=>$attack->getTargetDistrictId))->sum('count');
+			$count = \Classes\DistrictUnit::where(array('district_id'=>$attack->getTargetDistrictId()))->sum('count');
 			if ($count == null || $count < 1)
 			{
 				$sourceDistrict = \Classes\District::find($attack->getSourceDistrictId());

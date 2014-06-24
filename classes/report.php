@@ -97,9 +97,6 @@ class Report
 
   public function attackerWon()
   {
-    if ($this->attack->getBattleState() < 1)
-      return false;
-
     return ($this->getModifiedAttackUnitCount() > $this->getModifiedDefendUnitCount());
   }
 
